@@ -17,13 +17,13 @@ define rbenv::install($version = $name) {
 
   exec { "install ruby ${version}":
     command => "rbenv install ${version}",
-    creates => "${rbenv_root}/versions/${version}"
+    creates => "${rbenv::rbenv_root}/versions/${version}/bin/ruby",
   }
 
   # Never, ever have I needed Ruby without bundler installed.
   exec { "install bundler for ruby ${version}":
     command     => "gem install bundler",
-    creates     => "${rbenv_root}/versions/${version}/bin/bundle",
+    creates     => "${rbenv::rbenv_root}/versions/${version}/bin/bundler",
     environment => "RBENV_VERSION=${version}",
     require     => Exec["install ruby ${version}"]
   }
