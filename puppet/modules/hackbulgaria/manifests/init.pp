@@ -1,4 +1,6 @@
 class hackbulgaria {
+  include hackbulgaria::auth
+
   File {
     owner   => 'hack',
     group   => 'hack',
