@@ -1,5 +1,6 @@
 class hackbulgaria {
   include hackbulgaria::auth
+  include hackbulgaria::motd
 
   File {
     owner   => 'hack',
