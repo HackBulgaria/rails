@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/puppetlabs/puppetlabs-apt.git
+  ref: master
+  sha: 0e3220711ba9ce05715c39c22771e34b81b41382
+  specs:
+    puppetlabs-apt (1.7.0)
+      puppetlabs-stdlib (>= 2.2.1)
+
+GIT
   remote: git://github.com/puppetlabs/puppetlabs-stdlib.git
   ref: master
   sha: 6d07a6a8095961ad58c155a62bcfea26136549bd
@@ -6,5 +14,6 @@ GIT
     puppetlabs-stdlib (4.5.1)
 
 DEPENDENCIES
+  puppetlabs-apt (>= 0)
   puppetlabs-stdlib (>= 0)
 
