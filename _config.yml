@@ -1,0 +1,24 @@
+exclude:
+  - puppet
+  - Puppetfile
+  - Puppetfile.lock
+  - Gemfile
+  - Gemfile.lock
+  - Vagrantfile
+  - LICENSE
+  - README.md
+
+permalink: /posts/:title
+
+markdown: rdiscount
+rdiscount:
+  extensions: [smart]
+
+gems:
+  - jekyll-sitemap
+  - jekyll-slim
+
+name: Ruby Rails
+url: http://rails.hackbulgaria.com
+description: Your super friendly Ruby on Rails class.
+twitter: hackbulgaria

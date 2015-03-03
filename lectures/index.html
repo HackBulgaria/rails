@@ -1,0 +1,17 @@
+---
+layout: layout
+title: "Lectures"
+---
+
+<section class="content">
+  <ul class="listing">
+    {% for lecture in site.data.lectures %}
+      {% if lecture.done %}
+      <li>
+        <span>{{ lecture.date }}</span> <a href="{{ lecture.link }}">{{ lecture.title }}</a>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
