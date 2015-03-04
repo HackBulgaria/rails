@@ -9,7 +9,8 @@ class rbenv(
 
   Exec {
     path => ['/usr/sbin', '/usr/bin', '/sbin', '/bin'],
-    user => $user
+    user => $user,
+    cwd  => "/home/${user}"
   }
 
   $rbenv_root = "${home}/.rbenv"

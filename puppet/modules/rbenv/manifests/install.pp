@@ -13,6 +13,8 @@ define rbenv::install($version = $name) {
       '/sbin',
       '/bin'
     ],
+    cwd     => "/home/${rbenv::user}",
+    timeout => "3600"
   }
 
   exec { "install ruby ${version}":
