@@ -1,0 +1,74 @@
+---
+layout: lecture
+title: Database Introduction
+---
+
+section.center data-background="#FF0000"
+  h2.white What is a protocol?
+
+section.center data-background="#FF0000"
+  h2.white What are the essentials of HTTP?
+
+section.center data-background="#FF0000"
+  h2.white How can you serve content at a specific URL using Sinatra?
+
+section.center
+  h2 The right weapon
+  p relational, object, graph, document
+
+section.center
+  h2 Relational databases
+  p PostgreSQL, MySQL, Microsoft SQL Server, SQLite, ...
+
+section.center
+  h2 SQL
+
+section.center
+  h2 Creating a database
+  pre: code.sql
+  '
+    CREATE DATABASE school;
+
+section.center
+  h2 Table (relation)
+
+section.center
+  h2 Creating a table
+  pre: code.ruby contenteditable="true"
+  '
+    CREATE TABLE Students(
+      PersonID int,
+      FirstName varchar(255),
+      LastName varchar(255),
+      Address varchar(255)
+    );
+
+section.center
+  h2 Column (attribute)
+
+section.center
+  h2 Altering a table
+  pre: code.ruby contenteditable="true"
+  '
+    ALTER TABLE Students
+    ADD Grade int
+
+section.center
+  h2 Row (record)
+
+section.center
+  h2 Inserting a record
+  pre: code.ruby contenteditable="true"
+  '
+    INSERT INTO Students
+    VALUES ("John", "Jones", "Some Str.", 10);
+
+section.center
+  h2 Relating tables
+  p primary & foreign keys
+
+section.center
+  h2 Indexes
+
+section.center
+  h2 Transactions
