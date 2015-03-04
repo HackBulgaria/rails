@@ -4,6 +4,7 @@ exclude:
   - Puppetfile.lock
   - Gemfile
   - Gemfile.lock
+  - Capfile
   - Vagrantfile
   - LICENSE
   - README.md
