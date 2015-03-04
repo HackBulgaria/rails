@@ -10,9 +10,9 @@ Vagrant.configure('2') do |config|
     v.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
   end
 
-  # The 80 port may be taken by an already running application server on the
-  # host. Run it on 8080 or something different.
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  # The 80 port may be taken by an already running application, you can
+  # override it by specifying the PORT environment variable
+  config.vm.network :forwarded_port, guest: 80, host: ENV.fetch('PORT', 80)
 
   # Mount the shared folder with rsync, so we get a faster performance for the
   # applications.
