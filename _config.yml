@@ -7,6 +7,7 @@ exclude:
   - Vagrantfile
   - LICENSE
   - README.md
+  - config.ru
 
 permalink: /posts/:title
 
