@@ -4,7 +4,7 @@
 
 . /etc/lsb-release
 
-PUPPET_VERSION=3.7.1-1puppetlabs1
+PUPPET_VERSION=3.6.1-1ubuntu1
 PUPPET_REPO_URL="http://apt.puppetlabs.com/puppetlabs-release-${DISTRIB_CODENAME}.deb"
 
 download_path=$(mktemp)
