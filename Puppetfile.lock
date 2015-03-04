@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/gsamokovarov/puppet-softlink.git
+  ref: master
+  sha: d2aef08b07b4461e3f3a6656a933b5a23d5ebc28
+  specs:
+    gsamokovarov-softlink (0.1.0)
+
+GIT
   remote: git://github.com/puppetlabs/puppetlabs-apt.git
   ref: master
   sha: 0e3220711ba9ce05715c39c22771e34b81b41382
@@ -14,6 +21,7 @@ GIT
     puppetlabs-stdlib (4.5.1)
 
 DEPENDENCIES
+  gsamokovarov-softlink (>= 0)
   puppetlabs-apt (>= 0)
   puppetlabs-stdlib (>= 0)
 

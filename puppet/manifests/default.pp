@@ -15,7 +15,7 @@ node default {
 
   class { 'nginx':
     server_name => 'rails',
-    www_root    => '/hack/rails',
+    www_root    => '/hack/rails/current',
     require     => Class['rails']
   }
 
