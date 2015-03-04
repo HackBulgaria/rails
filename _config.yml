@@ -21,7 +21,7 @@ gems:
   - jekyll-sitemap
   - jekyll-slim
 
-name: Ruby Rails
+name: Ruby on Rails
 url: http://rails.hackbulgaria.com
 description: Your super friendly Ruby on Rails class.
 twitter: hackbulgaria
