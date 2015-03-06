@@ -14,14 +14,41 @@ section.center data-background="#FF0000"
 
 section.center
   h2 The right weapon
-  p relational, object, graph, document
+  p (relational|object|graph|document) database
 
 section.center
   h2 Relational databases
   p PostgreSQL, MySQL, Microsoft SQL Server, SQLite, ...
 
 section.center
-  h2 SQL
+  h2 Table (relation)
+
+section.center
+  h2 Column (attribute)
+
+section.center
+  h2 Row (record)
+
+section.center
+  h2 Relating tables
+  p primary & foreign keys
+
+section.center
+  h2 Indexes
+
+section.center
+  h2 Transactions
+
+section.center
+  h2 Structured Query Language
+  p is how you communicate with relational databases
+
+section.center
+  h2 SQL = DDL + DML
+
+section.center
+  h2 Data Definiton Language
+  p for defining data models and relations
 
 section.center
   h2 Creating a database
@@ -30,7 +57,10 @@ section.center
     CREATE DATABASE school;
 
 section.center
-  h2 Table (relation)
+  h2 Droping a database
+  pre: code.ruby contenteditable="true"
+  '
+    DROP DATABASE school;
 
 section.center
   h2 Creating a table
@@ -44,17 +74,26 @@ section.center
     );
 
 section.center
-  h2 Column (attribute)
-
-section.center
   h2 Altering a table
   pre: code.ruby contenteditable="true"
   '
-    ALTER TABLE Students
-    ADD Grade int
+    ALTER TABLE Students ADD Grade int;
 
 section.center
-  h2 Row (record)
+  h2 Renaming a table
+  pre: code.ruby contenteditable="true"
+  '
+    RENAME TABLE Students TO GraduatedStudents;
+
+section.center
+  h2 Droping a table
+  pre: code.ruby contenteditable="true"
+  '
+    DROP TABLE Students;
+
+section.center
+  h2 Data Manipulation Language
+  p for inserting, retrieving and altering data
 
 section.center
   h2 Inserting a record
@@ -63,12 +102,8 @@ section.center
     INSERT INTO Students
     VALUES ("John", "Jones", "Some Str.", 10);
 
-section.center
-  h2 Relating tables
-  p primary & foreign keys
+section.center data-background="#000"
+  h2.white Questions
 
 section.center
-  h2 Indexes
-
-section.center
-  h2 Transactions
+  img.inline(src="/images/hack_bulgaria.png")
