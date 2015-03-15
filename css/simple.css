@@ -189,6 +189,9 @@ body {
 .reveal .white {
   color: #FFFFFF; }
 
+.reveal .gray {
+  color: #777; }
+
 .reveal .big {
   font-size: 1.9em; }
 
@@ -203,3 +206,9 @@ body {
 
 .reveal a:hover img.inline {
   background: transparent; border: 0; box-shadow: none; }
+
+.reveal .left {
+  float: left; }
+
+.reveal .right {
+  float: right; }

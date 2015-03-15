@@ -6,25 +6,441 @@ title: Kumbayah Rails
 section.center data-background="#000"
   h1.white Kumbayah Rails
 
-section.center data-background="/images/pixelparty.gif"
+section.center
+  h1.gray Welcome to
+  img.inline src="/images/hack_bulgaria.png"
 
-section.center data-background="#000"
-  h2.white Agenda
+section data-background="/images/pixelparty.gif"
+
+section data-background="/images/epileptic.gif"
+
+section.center data-background="#AED6FF"
+  p.white We don't take ourselves too seriously
+
+section.center data-background="#D6EEAE"
+  p.white We don't really like the web
+
+section.center data-background="#FFAED6"
+  p.white We <3 Ruby
 
 section.center
-  h2 Administrative Intro
+  img.inline src="/images/troll.png"
+
+section.center
+  p You're gonna see this image a lot during this class
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center data-background="#000"
+  h1.white Why
+
+section.center
+  p The web is here to stay
+
+section.center
+  p Its really convenient for the users
+
+section.center
+  p You pick up the work on your laptop
+
+section.center
+  p You finish it at your tablet
+
+section.center
+  p One platform to rule them all
+
+section.center
+  blockquote
+    '
+      Pretty soon, <a href="http://blog.codinghorror.com/all-programming-is-web-programming/">
+      all programming will be web programming.</a>
+
+section.center
+  blockquote
+    '
+      <a href=http://blog.codinghorror.com/the-principle-of-least-power/>Atwood's
+      Law</a>: any application that can be written in JavaScript, will
+      eventually be written in JavaScript.
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p We <3 JavaScript
+
+section.center data-background="#000"
+  h2.white TL;DR
+
+section.center
+  p The web is dead
+
+section.center
+  p Long live the web
+
+section data-background="/images/what.gif"
+
+section.center data-background="/images/david.jpg"
+  h2.right History
+
+section.center
+  p dhh authored on <a href="https://github.com/rails/rails/commit/db045dbbf60b53dbe013ef25554fd013baf88134">Nov 24, 2004</a>
+
+section.center
+  blockquote
+    '
+      Actual development for Rails started in the summer of 2003, but back then
+      I was on CVS, and we didn't carry that history over when we switched to
+      SVN.
+
+section.center
+  p Built out of frustration
+
+section.center
+  h2 Struts
+  p.fragment Got the MVC right, but had too many configurations
+
+section.center
+  h2 PHP
+  p.fragment At the time, it was just injected in the HTML
+
+section.center
+  p We have never done Struts or PHP
+  img.inline.fragment src="/images/troll.png"
+
+section.center
+  p Its all bullshit
+  img.inline src="/images/troll.png"
+
+section.center
+  p We have no idea what happened then
+  img.inline src="/images/troll.png"
+
+section.center
+  p But, we do know this
+  img.inline src="/images/troll.png"
+
+section.center data-background="/images/david.jpg"
+  a.right(href="http://martinfowler.com/eaaCatalog/") PoEEA
+
+section.center data-background="/images/david.jpg"
+  blockquote.right The nice diagrams were redrawn for me by David Heinemeier Hansson
+
+section.center
+  p Model View Controller
+
+section.center
+  p Structure and empty folders
+
+section.center
+  p Convention over configuration
+
+section.center
+  p Separation of concerns
+
+section.center
+  p Optimized for happiness
+
+section.center
+  p Built on Ruby
+
+section.center data-background="#000"
+  p.white.fragment Got a lot of stuff right from the start
+
+section.center data-background="#CCC"
+  h2 Whoops, It Works Days 0.5
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      ├── actionpack
+      │   ├── action_controller
+      │   └── action_view
+      ├── activerecord
+      └── railties
+
+section
+  pre: code.ruby
+    '
+      class CustomersController < ActionController::Base
+        def display
+          @customer = find_customer
+        end
+
+        def update
+          @customer = find_customer
+          @customer.attributes = @params["customer"]
+          @customer.save ?
+            redirect_to(:action => "display") :
+            render("customer/edit")
+        end
+
+        private
+          def find_customer() Customer.find(@params["id"]) end
+      end
+
+section
+  pre: code.ruby
+    '
+      class CustomersController < ActionController::Base
+        def show
+          @customer = find_customer
+        end
+
+        def update
+          @customer = find_customer
+          @customer.update_attributes(params[:customer]) ?
+            redirect_to(@customer) :
+            render("customer/edit")
+        end
+
+        private
+          def find_customer() Customer.find(params[:id]) end
+      end
+
+section.center
+  p Nothing's changed that much, because it didn't need to
+
+section.center data-background="#BBB"
+  h2 Party Like Its 1.0.0
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      │   ├── action_controller
+      │   └── action_view
+      ├── actionwebservice
+      ├── activerecord
+      ├── activesupport
+      └── railties
+
+section
+  pre: code.ruby
+    '
+      class CustomersController < ActionController::Base
+        def display
+          @customer = find_customer
+        end
+
+        def update
+          @customer = find_customer
+          @customer.attributes = params[:customer]
+          @customer.save ?
+            redirect_to(:action => "display") :
+            render(:action => "edit")
+        end
+
+        private
+          def find_customer() Customer.find(params[:id]) end
+      end
+
+section.center data-background="#AAA"
+  h2 Fuck You Real World 2.0.0
+
+section data-background="/images/fuck_you.jpg"
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      │   ├── action_controller
+      │   └── action_view
+      ├── activemodel
+      ├── activerecord
+      ├── activeresource
+      ├── activesupport
+      └── railties
+
+section
+  pre: code.ruby
+    '
+      class CustomersController < ActionController::Base
+        def display
+          @customer = find_customer
+        end
+
+        def update
+          @customer = find_customer
+          @customer.attributes = params[:customer]
+          @customer.save ?
+            redirect_to(:action => "display") :
+            render(:action => "edit")
+        end
+
+        private
+          def find_customer() Customer.find(params[:id]) end
+      end
+
+section.center data-background="#999"
+  h2 Merb and REST Transition 3.0.0
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      │   ├── abstract_controller
+      │   ├── action_dispatch
+      │   ├── action_controller
+      │   └── action_view
+      ├── activemodel
+      ├── activerecord
+      ├── activeresource
+      ├── activesupport
+      └── railties
+
+section.center
+  pre: code.ruby
+    class CustomersController < ActionController::Base
+      def show
+        @customer = find_customer
+      end
+
+      def update
+        @customer = find_customer
+        if @customer.update_attributes(params[:customer])
+          redirect_to action: "show"
+        else
+          render action: "edit"
+        end
+      end
+
+      private
+        def find_customer
+          Customer.find params[:id]
+        end
+    end
+
+section.center data-background="#888"
+  h2 Assets: 3.1.0
+
+section data-background="/images/assets.png"
+
+section.center data-background="#777"
+  h2 Russian-Doll Caching, Turbolinks, Strong Params 4.0.0
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      │   ├── abstract_controller
+      │   ├── action_dispatch
+      │   ├── action_controller
+      │   └── action_view
+      ├── activemodel
+      ├── activerecord
+      ├── activesupport
+      └── railties
+
+section.center data-background="#666"
+  h2 Spring, Variants, Enums 4.1.0
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      │   ├── abstract_controller
+      │   ├── action_dispatch
+      │   └── action_controller
+      ├── actionview
+      ├── activemodel
+      ├── activerecord
+      ├── activesupport
+      └── railties
+
+section.center data-background="#555"
+  h2 Active Job, Adequate Record, Web Console, FK 4.2.0
+
+section.center
+  pre
+    '
+      .
+      ├── actionmailer
+      ├── actionpack
+      │   ├── abstract_controller
+      │   ├── action_dispatch
+      │   └── action_controller
+      ├── actionview
+      ├── activejob
+      ├── activemodel
+      ├── activerecord
+      ├── activesupport
+      └── railties
+
+/! What's this? A terrible Fifty (8) shades of gray joke :D
+section.center data-background="#CCC"
+  p.white See what I did there?
+section.center data-background="#BBB"
+  p.white See what I did there?
+section.center data-background="#AAA"
+  p.white See what I did there?
+section.center data-background="#999"
+  p.white See what I did there?
+section.center data-background="#888"
+  p.white See what I did there?
+section.center data-background="#777"
+  p.white See what I did there?
+section.center data-background="#666"
+  p.white See what I did there?
+section.center data-background="#555"
+  p.white See what I did there?
+
+section.center data-background="#000"
+  h2.white Now
+
+section.center
+  p No longer a one-man show
+
+section.center
+  p A healthy open-source project
+
+section.center
+  p Over 2,632 contributors
+
+section.center
+  p 163 authors have pushed 332 commits to master and 612 commits to all branches
+
+section.center
+  p On master, 501 files have changed and there have been 5,470 additions and 2,335 deletions
+
+section.center data-background="#F00"
+  p.white That's just last month
+
+section.center data-background="https://avatars0.githubusercontent.com/u/3124?v=3&s=400"
+section.center data-background="https://avatars3.githubusercontent.com/u/47848?v=3&s=400"
+section.center data-background="https://avatars1.githubusercontent.com/u/5402?v=3&s=400"
+section.center data-background="https://avatars0.githubusercontent.com/u/55829?v=3&s=400"
+section.center data-background="https://avatars0.githubusercontent.com/u/1529387?v=3&s=400"
+section.center data-background="https://avatars3.githubusercontent.com/u/3387?v=3&s=400"
+
+section.center data-background="#000"
+  h2.white Epilogue
+
+section.center
+  p We have a website at <a href="http://rails.hackbulgaria.com">rails.hackbulgaria.com</a>
+
+section.center
+  h2 Schedule
 
   ul
-    li How long would a lecture be
-    li How often will we meet
-    li Register at hackbulgaria.com
-    li Don't miss lectures
-
-section.center data-background="#000"
-  h2.white Lectures
-
-section.center data-background="#000"
-  h2.white Questions
+    li Thrudsays from 18:15
+    li Saturdays from a time of your choosing
 
 section.center
-  img.inline(src="/images/hack_bulgaria.png")
+  p Register at <a href="https://hackbulgaria.com">hackbulgaria.com</a>
+
+section.center
+  img.inline src="/images/hackman.png"
