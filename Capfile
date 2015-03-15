@@ -12,6 +12,8 @@ set :copy_exclude, ".vagrant/*"
 
 set :public_children, []
 
+set :keep_releases, 5
+
 task :site do
   set :application, "rails"
 
