@@ -1,2 +1,4 @@
 puppet/vendor
 _site
+.tmp
+.vagrant
