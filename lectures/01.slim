@@ -1,446 +1,1256 @@
 ---
 layout: lecture
-title: Kumbayah Rails
+title: Ruby, Have We Met
 ---
 
 section.center data-background="#000"
-  h1.white Kumbayah Rails
+  h1.white Ruby, Have We Met?
 
 section.center
-  h1.gray Welcome to
-  img.inline src="/images/hack_bulgaria.png"
-
-section data-background="/images/pixelparty.gif"
-
-section data-background="/images/epileptic.gif"
-
-section.center data-background="#AED6FF"
-  p.white We don't take ourselves too seriously
-
-section.center data-background="#D6EEAE"
-  p.white We don't really like the web
-
-section.center data-background="#FFAED6"
-  p.white We <3 Ruby
+  p This is an over-the-top Ruby refresher
 
 section.center
-  img.inline src="/images/troll.png"
+  p We'll assume you have some Ruby knowledge
 
 section.center
-  p You're gonna see this image a lot during this class
+  p We'll go turbo fast
 
 section.center
-  img.inline src="/images/troll.png"
+  p Click <a href="/posts/hello-rails/">here</a> for extra resources
 
 section.center data-background="#000"
-  h1.white Why
+  h2.white Questions
 
 section.center
-  p The web is here to stay
+  p What is a statically typed language?
 
 section.center
-  p Its really convenient for the users
+  p What is a dynamically typed language?
 
 section.center
-  p You pick up the work on your laptop
+  p Is Ruby statically typed?
 
 section.center
-  p You finish it at your tablet
+  p Does Ruby have interfaces?
 
 section.center
-  p One platform to rule them all
+  p What is an object oriented language?
 
 section.center
-  blockquote
-    '
-      Pretty soon, <a href="http://blog.codinghorror.com/all-programming-is-web-programming/">
-      all programming will be web programming.</a>
-
-section.center
-  blockquote
-    '
-      <a href=http://blog.codinghorror.com/the-principle-of-least-power/>Atwood's
-      Law</a>: any application that can be written in JavaScript, will
-      eventually be written in JavaScript.
-
-section.center
-  img.inline src="/images/troll.png"
-
-section.center
-  p We <3 JavaScript
+  p What kind of object oriented languages you know?
 
 section.center data-background="#000"
-  h2.white TL;DR
-
-section.center
-  p The web is dead
-
-section.center
-  p Long live the web
-
-section data-background="/images/what.gif"
-
-section.center data-background="/images/david.jpg"
-  h2.right History
-
-section.center
-  p dhh authored on <a href="https://github.com/rails/rails/commit/db045dbbf60b53dbe013ef25554fd013baf88134">Nov 24, 2004</a>
-
-section.center
-  blockquote
-    '
-      Actual development for Rails started in the summer of 2003, but back then
-      I was on CVS, and we didn't carry that history over when we switched to
-      SVN.
-
-section.center
-  p Built out of frustration
-
-section.center
-  h2 Struts
-  p.fragment Got the MVC right, but had too many configurations
-
-section.center
-  h2 PHP
-  p.fragment At the time, it was just injected in the HTML
-
-section.center
-  p We have never done Struts or PHP
-  img.inline.fragment src="/images/troll.png"
-
-section.center
-  p Its all bullshit
-  img.inline src="/images/troll.png"
-
-section.center
-  p We have no idea what happened then
-  img.inline src="/images/troll.png"
-
-section.center
-  p But, we do know this
-  img.inline src="/images/troll.png"
-
-section.center data-background="/images/david.jpg"
-  a.right(href="http://martinfowler.com/eaaCatalog/") PoEEA
-
-section.center data-background="/images/david.jpg"
-  blockquote.right The nice diagrams were redrawn for me by David Heinemeier Hansson
-
-section.center
-  p Model View Controller
-
-section.center
-  p Structure and empty folders
-
-section.center
-  p Convention over configuration
-
-section.center
-  p Separation of concerns
-
-section.center
-  p Optimized for happiness
-
-section.center
-  p Built on Ruby
-
-section.center data-background="#000"
-  p.white.fragment Got a lot of stuff right from the start
-
-section.center data-background="#CCC"
-  h2 Whoops, It Works Days 0.5
-
-section.center
-  pre
-    '
-      .
-      ├── actionmailer
-      ├── actionpack
-      ├── actionpack
-      │   ├── action_controller
-      │   └── action_view
-      ├── activerecord
-      └── railties
+  h2.white ♪ RUBY, RUBY, RUBY ♪
 
 section
-  pre: code.ruby
+  h2 Variables
+  p The variables assign a name to something
+  pre: code
     '
-      class CustomersController < ActionController::Base
-        def display
-          @customer = find_customer
-        end
-
-        def update
-          @customer = find_customer
-          @customer.attributes = @params["customer"]
-          @customer.save ?
-            redirect_to(:action => "display") :
-            render("customer/edit")
-        end
-
-        private
-          def find_customer() Customer.find(@params["id"]) end
-      end
+      munchies = "chunky bacon" # No need for declaration
+      name = something          # The basic form
 
 section
+  h2 Variables
+  p A name can point to any type
   pre: code.ruby
     '
-      class CustomersController < ActionController::Base
-        def show
-          @customer = find_customer
-        end
-
-        def update
-          @customer = find_customer
-          @customer.update_attributes(params[:customer]) ?
-            redirect_to(@customer) :
-            render("customer/edit")
-        end
-
-        private
-          def find_customer() Customer.find(params[:id]) end
-      end
-
-section.center
-  p Nothing's changed that much, because it didn't need to
-
-section.center data-background="#BBB"
-  h2 Party Like Its 1.0.0
-
-section.center
-  pre
-    '
-      .
-      ├── actionmailer
-      ├── actionpack
-      │   ├── action_controller
-      │   └── action_view
-      ├── actionwebservice
-      ├── activerecord
-      ├── activesupport
-      └── railties
+      an_integer = 42
+      a_float = 3.14
+      a_string = "this is a string literal"
+      an_object = Object.new
 
 section
+  h2 Variables
+  p Nothing is copied, everything is referential
   pre: code.ruby
     '
-      class CustomersController < ActionController::Base
-        def display
-          @customer = find_customer
-        end
-
-        def update
-          @customer = find_customer
-          @customer.attributes = params[:customer]
-          @customer.save ?
-            redirect_to(:action => "display") :
-            render(:action => "edit")
-        end
-
-        private
-          def find_customer() Customer.find(params[:id]) end
-      end
-
-section.center data-background="#AAA"
-  h2 Fuck You Real World 2.0.0
-
-section data-background="/images/fuck_you.jpg"
-
-section.center
-  pre
-    '
-      .
-      ├── actionmailer
-      ├── actionpack
-      │   ├── action_controller
-      │   └── action_view
-      ├── activemodel
-      ├── activerecord
-      ├── activeresource
-      ├── activesupport
-      └── railties
+      mood = "Impossible"
+      downer = mood
+      downer["Im"] = "I'm "
+      mood # "I'm possible"
 
 section
+  h2 Variables
+  p And the type can be changed midway
   pre: code.ruby
     '
-      class CustomersController < ActionController::Base
-        def display
-          @customer = find_customer
-        end
+      a_string = 42         # Whether that is a good idea
+      a_string = Object.new # is left as an excersice ;)
 
-        def update
-          @customer = find_customer
-          @customer.attributes = params[:customer]
-          @customer.save ?
-            redirect_to(:action => "display") :
-            render(:action => "edit")
-        end
-
-        private
-          def find_customer() Customer.find(params[:id]) end
-      end
-
-section.center data-background="#999"
-  h2 Merb and REST Transition 3.0.0
-
-section.center
-  pre
-    '
-      .
-      ├── actionmailer
-      ├── actionpack
-      │   ├── abstract_controller
-      │   ├── action_dispatch
-      │   ├── action_controller
-      │   └── action_view
-      ├── activemodel
-      ├── activerecord
-      ├── activeresource
-      ├── activesupport
-      └── railties
-
-section.center
+section
+  h2 Global Variables
+  p Global variables are visible from everywhere
   pre: code.ruby
-    class CustomersController < ActionController::Base
-      def show
-        @customer = find_customer
-      end
-
-      def update
-        @customer = find_customer
-        if @customer.update_attributes(params[:customer])
-          redirect_to action: "show"
-        else
-          render action: "edit"
-        end
-      end
-
-      private
-        def find_customer
-          Customer.find params[:id]
-        end
-    end
-
-section.center data-background="#888"
-  h2 Assets: 3.1.0
-
-section data-background="/images/assets.png"
-
-section.center data-background="#777"
-  h2 Russian-Doll Caching, Turbolinks, Strong Params 4.0.0
-
-section.center
-  pre
     '
-      .
-      ├── actionmailer
-      ├── actionpack
-      │   ├── abstract_controller
-      │   ├── action_dispatch
-      │   ├── action_controller
-      │   └── action_view
-      ├── activemodel
-      ├── activerecord
-      ├── activesupport
-      └── railties
+      $do_you_really_need_that = "no"
 
-section.center data-background="#666"
-  h2 Spring, Variants, Enums 4.1.0
-
-section.center
-  pre
+section
+  h2 Constants
+  p Constants start with a capital letter
+  pre: code.ruby
     '
-      .
-      ├── actionmailer
-      ├── actionpack
-      │   ├── abstract_controller
-      │   ├── action_dispatch
-      │   └── action_controller
-      ├── actionview
-      ├── activemodel
-      ├── activerecord
-      ├── activesupport
-      └── railties
+      ANSWER = 42            # This is a constant!
+      Europe = Continent.new # So is this!
 
-section.center data-background="#555"
-  h2 Active Job, Adequate Record, Web Console, FK 4.2.0
-
-section.center
-  pre
+section
+  h2 Constants
+  p Constants are not strictly enforced
+  pre: code.ruby
     '
-      .
-      ├── actionmailer
-      ├── actionpack
-      │   ├── abstract_controller
-      │   ├── action_dispatch
-      │   └── action_controller
-      ├── actionview
-      ├── activejob
-      ├── activemodel
-      ├── activerecord
-      ├── activesupport
-      └── railties
-
-/! What's this? A terrible Fifty (8) shades of gray joke :D
-section.center data-background="#CCC"
-  p.white See what I did there?
-section.center data-background="#BBB"
-  p.white See what I did there?
-section.center data-background="#AAA"
-  p.white See what I did there?
-section.center data-background="#999"
-  p.white See what I did there?
-section.center data-background="#888"
-  p.white See what I did there?
-section.center data-background="#777"
-  p.white See what I did there?
-section.center data-background="#666"
-  p.white See what I did there?
-section.center data-background="#555"
-  p.white See what I did there?
+      >> Foo = 42
+      => 42
+      >> Foo = 43
+      (irb):40: warning: already initialized constant Foo
+      (irb):39: warning: previous definition of Foo was here
+      => 43
 
 section.center data-background="#000"
-  h2.white Now
-
-section.center
-  p No longer a one-man show
-
-section.center
-  p A healthy open-source project
-
-section.center
-  p Over 2,632 contributors
-
-section.center
-  p 163 authors have pushed 332 commits to master and 612 commits to all branches
-
-section.center
-  p On master, 501 files have changed and there have been 5,470 additions and 2,335 deletions
-
-section.center data-background="#F00"
-  p.white That's just last month
-
-section.center data-background="https://avatars0.githubusercontent.com/u/3124?v=3&s=400"
-section.center data-background="https://avatars3.githubusercontent.com/u/47848?v=3&s=400"
-section.center data-background="https://avatars1.githubusercontent.com/u/5402?v=3&s=400"
-section.center data-background="https://avatars0.githubusercontent.com/u/55829?v=3&s=400"
-section.center data-background="https://avatars0.githubusercontent.com/u/1529387?v=3&s=400"
-section.center data-background="https://avatars3.githubusercontent.com/u/3387?v=3&s=400"
+  p.white Naming is important
 
 section.center data-background="#000"
-  h2.white Epilogue
+  p.white Don't be sloppy with it
+
+section.center data-background="#000"
+  p.white We'll complain about it
+
+section.center data-background="#000"
+  p.white A lot
 
 section.center
-  p We have a website at <a href="http://rails.hackbulgaria.com">rails.hackbulgaria.com</a>
+  img.inline src="/images/troll.png"
+
+section.center data-background="#000"
+  p.white No, really, do it
+
+section.center data-background="#000"
+  p.white I don't mind wasting slides on that
+
+section.center data-background="#000"
+  p.white Its a good message
 
 section.center
-  h2 Schedule
+  pre: code.ruby
+    '
+      everything = 42
+      pi = 3.14
 
+section
+  h2 Identifiers
   ul
-    li Thrudsays from 18:15
-    li Saturdays from a time of your choosing
+    li alphanumeric characters (A-Za-z0-9)
+    li.fragment underscores (_)
+    li.fragment may not begin with a digit (0-9)
+
+section
+  h2 Identifiers
+  ul
+    li identifiers that are method names may
+    li.fragment end with a question mark (?)
+    li.fragment end with a exclamation point (!)
+    li.fragment end with equals sign (=)
+
+section
+  h2 Reserved Words
+  pre: code.ruby
+    '
+      __FILE__  and    def       end     in      or      self   unless
+      __LINE__  begin  defined?  ensure  module  redo    super  until
+      BEGIN     break  do        false   next    rescue  then   when
+      END       case   else      for     nil     retry   true   while
+      alias     class  elsif     if      not     return  undef  yield
+
+section
+  h2 Integer
+  p You can represent integers with the following literals
+  pre: code.ruby
+   '
+     123456  # Fixnum
+     123_456 # Fixnum (underscore ignored)
+     -543    # Negative Fixnum
+
+section
+  h2 Integer
+  p If the integer literal is too big, it will switch to a big number type
+  pre: code.ruby
+   '
+     123456                  # Fixnum
+     123_456_789_123_345_789 # Bignum (2 ** 62 onwards)
+
+section
+  h2 Integer
+  p You can represent integers in hexadecimal, octal and binary forms
+  pre: code.ruby
+    '
+      0xaabb     # Hexadecimal (Fixnum)
+      0377       # Octal (Fixnum)
+      -0b101_010 # Binary (Fixnum)
+
+section
+  h2 Integer
+  p Fixnum and Bignum have Integer as a base class
+  pre: code.ruby
+    '
+      >> Integer > Fixnum
+      => true
+      >> Integer > Bignum
+      => true
+
+section.center data-background="#000"
+  p.white Everything in Ruby is an object
+
+section.center data-background="#000"
+  p.white Objects have actions
+
+section.center data-background="#000"
+  p.white universe.expand
+
+section.center data-background="#000"
+  p.white universe.kill_them_all_eventually
+
+section.center data-background="#000"
+  p.white We call those actions methods
+
+section
+  h2 Integer
+  p As every object, integers respond to methods
+  pre: code.ruby
+    '
+      >> 3.times { puts "♪ ruby ♪" }
+      ♪ ruby ♪
+      ♪ ruby ♪
+      ♪ ruby ♪
+      => 3
+
+section
+  h2 Integer
+  p As every object, integers respond to methods
+  pre: code.ruby
+    '
+      >> 16.even?
+      => true
+
+section
+  h2 Floats
+  p Floats can be expressed by scientific notation
+  pre: code.ruby
+    '
+      3.1415926 # Float
+      6.022e23  # Float
+
+section
+  h2 Floats
+  p Floats will be floats
+  pre: code.ruby
+    '
+      >> 0.1 + 0.2
+      => 0.30000000000000004
+      >> 0.1 + 0.2 == 0.3
+      => false
+
+section
+  h2 Rational
+  p A nice little addition
+  pre: code.ruby
+    '
+      1/2r # Rational
+
+section
+  h2 Numbers
+  p There are complex and big decimal implementations
+  pre: code.ruby
+    '
+      >> require 'complex'
+      => true
+      >> Complex '1i'
+      => (0+1i)
+
+section
+  h2 Numbers
+  p There are complex and big decimal implementations
+  pre: code.ruby
+    '
+      >> require 'bigdecimal'
+      => true
+      >> BigDecimal('125') / BigDecimal('100000')
+      => #<BigDecimal:7f9c2b070610,'0.125E-2',9(36)>
+
+section.center data-background="#000"
+  p.white If you need to store money, do that in BigDecimal
+
+section
+  h2 TrueClass
+  p The boolean truth
+  pre: code.ruby
+    '
+      'He said "Hello, mister"...'
+      "He said, \"There are miltiline\nstrings\"..."
+
+section
+  h2 String
+  p Can be written with single and double quotes
+  pre: code.ruby
+    '
+      'He said "Hello, mister"...'
+      "He said, \"There are miltiline\nstrings\"..."
+
+section
+  h2 String
+  p The two notations are not the same (unlike Python)
+  pre: code.ruby
+    '
+      >> '\n' == "\n"
+      => false
+      >> "#{42}" == '#{42}'
+      => false
+
+section
+  h2 String
+  p Are mutable, which may surprise you
+  pre: code.ruby
+    '
+      >> weather = "raining"
+      => "raining"
+      >> weather["rain"] = "snow"
+      => "snow"
+      >> weather
+      => "snowing"
+
+section
+  h2 Symbols
+  p Symbols are like lightweight strings
+  pre: code.ruby
+    '
+      :a_symbol
+      :symbols_literals_should_be_valid_identifiers!
+      :"if not, they have to be written like this"
+      :'which looks kinda funny'
+
+section
+  h2 Symbols
+  p Interned, meaning they always yield the same object
+  pre: code.ruby
+    '
+      >> :chunky.object_id == :chunky.object_id
+      => true
+      >> "chunky".object_id == "chunky".object_id
+      => false
+
+section
+  h2 Symbols
+  p Memory leaks, once defined they are never garbage collected
+  pre: code.ruby
+    '
+      >> :chunky.object_id == :chunky.object_id
+      => true
+      >> "chunky".object_id == "chunky".object_id
+      => false
+
+section
+  h2 Symbols
+  p Memory leaks, once defined they are never garbage collected
+  pre: code.ruby
+    '
+      File.open('war_and_peace.txt').each do |line|
+        p line.to_sym
+      end
+
+section
+  h2 Symbols
+  p Not exactly true in Ruby 2.2
+  pre: code.ruby
+    '
+      File.open('war_and_peace.txt').each do |line|
+        p line.to_sym
+      end
+
+section
+  h2 Symbols
+  p You'll use them for internal representations
+
+section
+  h2 Symbols
+  p You'll use them for enumerations
 
 section.center
-  p Register at <a href="https://hackbulgaria.com">hackbulgaria.com</a>
+  pre: code.ruby
+    '
+      :east
+      :west
+      :south
+      :north
+
+section.center
+  pre: code.ruby
+    '
+      :yellow
+      :black
+      :blue
+
+section
+  h2 The Truth
+  p
+    | Everything is true
+    span.fragment, except nil and false
+
+section
+  h2 TrueClass
+  ul
+    li There is no strict Boolean class in Ruby
+    li The boolean truth is represented by true, the single instance of TrueClass
+  pre: code.ruby
+    '
+      >> true.class.ancestors
+      => [TrueClass, Object, Kernerl, BasicObject]
+
+section
+  h2 FalseClass
+  ul
+    li There is no strict Boolean class in Ruby
+    li The boolean false is represented by false, the single instance of FalseClass
+  pre: code.ruby
+    '
+      >> false.class.ancestors
+      => [FalseClass, Object, Kernerl, BasicObject]
+
+section.center data-background="#000"
+  blockquote.white I call it my billion-dollar mistake.
+  p.white Tony Hoare
+
+section
+  h2 NilClass
+  ul
+    li Used when there is nothing to return
+    li nil is represented by nil, the single instance of NilClass
+  pre: code.ruby
+    '
+      >> def foo; end
+      => :foo
+      >> foo
+      => nil
+
+section
+  h2 Operators
+  pre
+    '
+      Method  Operator
+      Y       [ ] [ ]=
+      Y       **
+      Y       ! ~
+      Y       * / %
+      Y       + -
+      Y       >> <<
+      Y       &
+      Y       ^ |
+      Y       <= < > >=
+      Y       <=> == === != =~ !~	
+              &&	
+              ||
+              .. ...
+              ? :
+              = %= { /= -= += |= &= >>= <<= *= &&= ||= **=
+              defined?
+              not
+              or and
+              if unless while until
+              begin/end
+
+section
+  h2 Operators
+  p Operators don't return a strict Boolean
+  pre: code.ruby
+    '
+      >> nil || 42
+      => 42
+      >> nil && 42
+      => nil
+
+section
+  h2 Operators
+  p Evaluate as long as necessary
+  pre: code.ruby
+    '
+      >> 42 || fail "Shh't, our lectures aren't topologically sorted anymore"
+      => 42
+
+section
+  h2 If
+  p The if statement executes a block of code if its condition is truthy
+  pre: code.ruby
+    '
+      if bear.hungry?
+        bear.eat
+      elsif bear.thirsty?
+        bear.drink
+      else
+        bear.dance
+      end
+
+section
+  h2 If
+  p The if statement executes a block of code if its condition is truthy
+  pre: code.ruby
+    '
+      if bear.hungry? then
+        bear.eat
+      elsif bear.thirsty? then
+        bear.drink
+      else
+        bear.dance
+      end
+
+section
+  h2 If
+  p The last executed code in an if statement is its return value
+  pre: code.ruby
+    '
+      consequence = if bear.hungry?
+                      bear.eat
+                    elsif bear.thirsty?
+                      bear.drink
+                    else
+                      bear.dance
+                    end
+
+section
+  h2 If
+  p Its actually an expression
+  pre: code.ruby
+    '
+      consequence = if bear.hungry?
+                      bear.eat
+                    elsif bear.thirsty?
+                      bear.drink
+                    else
+                      bear.dance
+                    end
+
+section
+  h2 If
+  p It returns nil if no condition matches
+  pre: code.ruby
+    '
+      this_can_be_nil = if bear.hungry?
+                          bear.eat
+                        elsif bear.thirsty?
+                          bear.drink
+                        end
+
+
+section.center data-background="#000"
+  p.white Everything is an expression in Ruby
+
+section
+  h2 Postfix If
+  p You can use if as an expression modifier
+  pre: code.ruby
+    '
+      sleep if tired?
+
+section
+  h2 Unless
+  p The unless statement executes a block of code if its condition is falsy
+  pre: code.ruby
+    '
+      unless response.redirect?
+        process response.body
+      else
+        follow response['location']
+      end
+
+section
+  h2 Unless
+  p There is no elsif clause
+  pre: code.ruby
+    '
+      unless response.redirect?
+        process response.body
+      # There is no such thing as unlessif :)
+      else
+        follow response['location']
+      end
+
+section
+  h2 Unless
+  p Is an expression modifier
+  pre: code.ruby
+    '
+      eat unless hungry?
+
+section.center data-background="#000"
+  p.white Unless else is hard to mentally process
+
+section.center data-background="#000"
+  p.white Use with caution
+
+section
+  h2 Case
+  p A multi-way if on steroids
+  pre: code.ruby
+    '
+      case year
+      when 1850..1889
+        :blues
+      when 1890..1909
+        :ragtime
+      when 1910..1929
+        :new_orlean_jazz
+      when 1930..1939
+        :swing
+      when 1940..1950
+        :bebop
+      else
+        :jazz
+      end
+
+section
+  h2 Case
+  p A multi-way if on steroids
+  pre: code.ruby
+    '
+      case year
+      when 1850..1889 then :blues
+      when 1890..1909 then :ragtime
+      when 1910..1929 then :new_orlean_jazz
+      when 1930..1939 then :swing
+      when 1940..1950 then :bebop
+      else                 :jazz
+      end
+
+section
+  h2 Case
+  p A multi-way if on steroids
+  pre: code.ruby
+    '
+      genre = case year
+              when 1850..1889 then :blues
+              when 1890..1909 then :ragtime
+              when 1910..1929 then :new_orlean_jazz
+              when 1930..1939 then :swing
+              when 1940..1950 then :bebop
+              else                 :jazz
+              end
+
+section
+  h2 Case
+  p The case subject can be skipped
+  pre: code.ruby
+    '
+      case
+      when (1850..1889) === year
+        :blues
+      when (1890..1909) === year
+        :ragtime
+      when (1910..1929) === year
+        :new_orlean_jazz
+      when (1930..1939) === year
+        :swing
+      when (1940..1950) === year
+        :bebop
+      else
+        :jazz
+      end
+
+section
+  h2 Case
+  p It will become true, implicitly
+  pre: code.ruby
+    '
+      case true
+      when (1850..1889) === year
+        :blues
+      when (1890..1909) === year
+        :ragtime
+      when (1910..1929) === year
+        :new_orlean_jazz
+      when (1930..1939) === year
+        :swing
+      when (1940..1950) === year
+        :bebop
+      else
+        :jazz
+      end
+
+section
+  h2 Case
+  p Objects responding to #=== can be used in when
+  pre: code.ruby
+    '
+      case
+      when (1850..1889) === year
+        :blues
+      when (1890..1909) === year
+        :ragtime
+      when (1910..1929) === year
+        :new_orlean_jazz
+      when (1930..1939) === year
+        :swing
+      when (1940..1950) === year
+        :bebop
+      else
+        :jazz
+      end
+
+section
+  h2 While
+  p Iterates while a condition is truthy
+  pre: code.ruby
+    '
+      while hungry?
+        eat
+      end
+
+section
+  h2 While
+  p Is an expression modifier
+  pre: code.ruby
+    '
+      eat while hungry?
+
+section
+  h2 Until
+  p Iterates while a condition is falsy
+  pre: code.ruby
+    '
+      untill full?
+        eat
+      end
+
+section
+  h2 Until
+  p Is an expression modifier
+  pre: code.ruby
+    '
+      eat until full?
+
+section
+  h2 For
+  p Don't use for in Ruby
+  pre: code.ruby
+    '
+      for color in spectrum
+        color.inverse
+      end
+
+section
+  h2 For
+  p An anti-pattern
+  pre: code.ruby
+    '
+      for color in spectrum
+        color.inverse
+      end
+
+section
+  h2 For
+  p Calls #each under the hood
+  pre: code.ruby
+    '
+      >> for letter in "abcdefg..."
+      >>   say letter
+      >> end
+      NoMethodError: undefined method `each' for "abcdefg...":String
+
+section
+  h2 For
+  p Doesn't create a closure the names leak out
+  pre: code.ruby
+    '
+      >> for letter in "abcdefg..."
+      >>   say letter
+      >> end
+      NoMethodError: undefined method `each' for "abcdefg...":String
+
+section
+  h2 Method
+  p Defined by the keyword def
+  pre: code.ruby
+    '
+      def eat(food)
+        3.times { nom }
+      end
+
+section
+  h2 Method
+  p Can hold local variables
+  pre: code.ruby
+    '
+      def just_hanging_around_creating_local_variables
+        a_local_variable = 42
+      end
+
+      >> just_hanging_around_creating_local_variables
+      => 42
+
+section
+  h2 Method
+  p Local variables aren't visible outside the method
+  pre: code.ruby
+    '
+      def just_hanging_around_creating_local_variables
+        a_local_variable = 42
+      end
+
+      >> just_hanging_around_creating_local_variables
+      => 42
+      >> a_local_variable
+      NameError: undefined local variable or method `a_local_variable' for main:Object
+
+section
+  h2 Method
+  p Returns a value
+  pre: code.ruby
+    '
+      def eat(food)
+        3.times { nom }
+        return :delicious
+      end
+
+      >> eat(:stake)
+      => :delicious
+
+section
+  h2 Method
+  p Returns a value early
+  pre: code.ruby
+    '
+      def eat(food)
+        return :oh_well if food == :potato
+
+        3.times { nom }
+        return :delicious
+      end
+
+      >> eat(:stake)
+      => :delicious
+
+section
+  h2 Method
+  p Returns a value implicitly
+  pre: code.ruby
+    '
+      def eat(food)
+        3.times { nom }
+        :delicious
+      end
+
+      >> eat(:stake)
+      => :delicious
+
+section
+  h2 Method
+  p Always returns a value
+  pre: code.ruby
+    '
+      def nothing
+      end
+
+      >> nothing
+      => nil
+
+section
+  h2 Method
+  p Can take no arguments
+  pre: code.ruby
+    '
+      def make_some_noise
+        scream
+        shout
+        let_it_all_out
+      end
+
+      >> make_some_noise
+      => :it_sounds_like_a_cheesy_pop_song_broski
+
+section
+  h2 Method
+  p Can take many arguments
+  pre: code.ruby
+    '
+      def eat(first, second, third)
+        nom first
+        nom second
+        nom third
+      end
+
+section
+  h2 Method
+  p Can take any arguments
+  pre: code.ruby
+    '
+      def eat(*meals)
+        meals.each { |meal| nom meal }
+      end
+
+      >> eat(:breakfast, :lunch, :dunner)
+      => [:breakfast, :lunch, :dinner]
+
+      >> eat(:breakfast)
+      => [:breakfast]
+
+section
+  h2 Method
+  p meals is an Array of the given arguments
+  pre: code.ruby
+    '
+      def eat(*meals)
+        meals.each { |meal| nom meal }
+      end
+
+      >> eat(:breakfast, :lunch, :dunner)
+      => [:breakfast, :lunch, :dinner]
+
+      >> eat(:breakfast)
+      => [:breakfast]
+
+section.center data-background="#000"
+  p.white The name comes from the squashed-bug appearance on many early line printers
+
+section.center data-background="#000"
+  p.white True story
+
+section
+  h2 Method
+  p The splat operator can get a little weird
+  pre: code.ruby
+    '
+      def eat(first, *rest)
+        nom first
+        rest.each { |meal| nom meal }
+      end
+
+section
+  h2 Method
+  p Well, that's not so weird
+  pre: code.ruby
+    '
+      def eat(first, *rest)
+        nom first
+        rest.each { |meal| nom meal }
+      end
+
+      >> eat(:breakfast)
+      => [:breakfast]
+
+      >> eat(:breakfast, :lunch)
+      => [:breakfast, :lunch]
+
+section
+  h2 Method
+  p Well, look at this
+  pre.fragment: code.ruby
+    '
+      def eat(*everything_but, the_last_one)
+        everything_but.each { |meal| nom meal }
+        squash_with_your_face the_last_one
+      end
+
+      >> eat(:potatoes, :chicken, :meatballs, :ice_cream)
+      => 0xDEADBEEF
+
+      >> eat(:кифтета)
+      => 0xDEADBEEF
+
+section
+  h2 Method
+  p Not so weird?
+  pre: code.ruby
+    '
+      def eat(*everything_but, the_last_one)
+        everything_but.each { |meal| nom meal }
+        squash_with_your_face the_last_one
+      end
+
+      >> eat(:potatoes, :chicken, :meatballs, :ice_cream)
+      => 0xDEADBEEF
+
+      >> eat(:кифтета)
+      => 0xDEADBEEF
+
+section
+  h2 Method
+  p Okay, okay, okay
+  pre: code.ruby
+    '
+      def eat(*everything_but, the_last_one)
+        everything_but.each { |meal| nom meal }
+        squash_with_your_face the_last_one
+      end
+
+      >> eat(:potatoes, :chicken, :meatballs, :ice_cream)
+      => 0xDEADBEEF
+
+      >> eat(:кифтета)
+      => 0xDEADBEEF
+
+section
+  h2 Method
+  p You asked for it
+  pre: code.ruby
+    '
+      def eat(first, *in_between, last)
+        gently_taste first
+        in_between.each { |meal| nom meal }
+        squash_with_your_face last
+      end
+
+      >> eat(:potatoes, :ice_cream)
+      => ???
+
+section
+  h2 Method
+  p Can provide default values for arguments
+  pre: code.ruby
+    '
+      def eat(meal = :bread)
+        nom meal
+      end
+
+      >> eat
+      => :bread
+
+      >> eat :salad
+      => :salad
+
+section
+  h2 Method
+  p Can yield a block
+  pre: code.ruby
+    '
+      def log(level)
+        if level > 0
+          message = yield
+          puts message
+        end
+      end
+
+      >> log(1) { 'FIRE!' }
+      FIRE!
+      => nil
+
+      >> log(0) { 'Wha?' }
+      => nil
+
+section
+  h2 Method
+  p Can yield a block
+  pre: code.ruby
+    '
+      def log(level)
+        if level > 0
+          message = yield
+          puts message
+        end
+      end
+
+      >> log(1) { 'FIRE!' }
+      FIRE!
+      => nil
+
+      >> log(0) { 'Wha?' }
+      => nil
+
+section
+  h2 Method
+  p Can ask if a block is given
+  pre: code.ruby
+    '
+      def log(level, message = nil)
+        if level > 0
+          puts block_given? ? yield : message
+        end
+      end
+
+      >> log(1) do
+      ..   'FIRE!'
+      .. end
+      FIRE!
+      => nil
+
+      >> log(1, 'FIRE!')
+      FIRE!
+      => nil
+
+section
+  h2 Method
+  p Can yield arguments into a block
+  pre: code.ruby
+    '
+      def create(klass)
+        yield klass.new
+      end
+
+      >> create Array do |a|
+      ..   a << 42
+      ..   a.include? 42
+      .. end
+      => true
+
+section
+  h2 Method
+  p Can yield many arguments into a block
+  pre: code.ruby
+    '
+      def create(*classes)
+        yield classes.map(&:new)
+      end
+
+      >> create Array, Hash do |array, hash|
+      ..   puts array.class, hash.class
+      .. end
+      Array
+      Hash
+      => true
+
+section
+  h2 Method
+  p Can yield many arguments into a block
+  pre: code.ruby
+    '
+      def create(*classes)
+        yield classes.map(&:new)
+      end
+
+      >> create Array, Hash do |array, hash|
+      ..   puts array.class, hash.class
+      .. end
+      Array
+      Hash
+      => true
+
+      >> create Array, Hash do |array|
+      ..   puts array.class
+      .. end
+      Array
+      => true
+
+section.center data-background="#000"
+  p.white Everything in Ruby is an object
+
+section
+  h2 Method
+  p Can yield many arguments into a block
+  pre: code.ruby
+    '
+      def create(*classes, &block)
+        block.call(*classes.map(&:new))
+      end
+
+      >> create Array, Hash do |array, hash|
+      ..   puts array.class, hash.class
+      .. end
+      Array
+      Hash
+      => true
+
+      >> create Array, Hash do |array|
+      ..   puts array.class
+      .. end
+      Array
+      => true
+
+section
+  h2 Proc
+  p Block are an instance of the class Proc
+  pre: code.ruby
+    '
+      def create_block(&new_block)
+        new_block.class
+      end
+
+      >> create_block { nil }.class
+      => Proc
+
+section
+  h2 Proc
+  p Can be created manually
+  pre: code.ruby
+    '
+      p = proc { |*args| nil }
+
+      >> p.call
+      => nil
+
+section
+  h2 Proc
+  p Can be created manually
+  pre: code.ruby
+    '
+      p = proc do |*args|
+        nil
+      end
+
+      >> p.call
+      => nil
+
+section
+  h2 Proc
+  p Can be called with #call #[] and #.()
+  pre: code.ruby
+    '
+      p = proc { |*args| nil }
+
+      >> p.call
+      => nil
+
+      >> p[]
+      => nil
+
+      >> p.()
+      => nil
+
+section.center data-background="#000"
+  p.white #call
+
+section
+  h2 Proc#lambda?
+  p There is a special proc called lambda
+
+section
+  h2 Proc#lambda?
+  p There is a special proc called lambda
+  pre: code.ruby
+    '
+      callable = lambda { |arg| arg }
+
+      >> callable.call(arg)
+      => nil
+
+section
+  h2 Proc#lambda?
+  p There is a special proc called lambda
+  pre: code.ruby
+    '
+      callable = -> arg { arg }
+
+      >> callable.call(arg)
+      => nil
+
+section
+  h2 Proc#lambda?
+  p There is a special proc called lambda
+  pre: code.ruby
+    '
+      callable = -> (arg) { arg }
+
+      >> callable.call(arg)
+      => nil
+
+section
+  h2 Proc#lambda?
+  pre: code.ruby
+    '
+      >> p = proc { |a, b, c| p a, b, c }
+      => #<Proc:0x007fd891a9ff30@(irb):6>
+      >> p.call 1
+      1
+      nil
+      nil
+      => [1, nil, nil]
+      >> l = lambda { |a, b, c| p a, b, c }
+      => #<Proc:0x007fd891a86238@(irb):8 (lambda)>
+      >> l.call 1
+      ArgumentError: wrong number of arguments (1 for 3)
 
 section.center
   img.inline src="/images/hackman.png"
