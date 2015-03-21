@@ -16,10 +16,10 @@ section.center data-background="#F7F"
   h2.white Spoiler Alert
 
 section.center data-background="#F7F"
-  p.white Its not about teaching you Ruby
+  p.white It's not about teaching you Ruby
 
 section.center data-background="#F7F"
-  p.white Its about <strong>refreshing</strong> your Ruby
+  p.white It's about <strong>refreshing</strong> your Ruby
 
 section.center data-background="#000"
   h2.white Questions
@@ -55,7 +55,7 @@ section.center
   p.fragment There is a great definition of an <a href="http://c2.com/cgi/wiki?ObjectOriented">Object Oriented</a> system over <a href="http://c2.com/cgi/wiki?ObjectOriented">C2</a>.
 
 section.center
-  p Did I say how awesome <a href="http://c2.com">C2</a> is?
+  p Did I mention how awesome <a href="http://c2.com">C2</a> is?
 
 section
   h2 Encapsulation
@@ -79,7 +79,7 @@ section
 
 section
   h2 Polymorphism
-  p.fragment The provision of a single interface to entities of different types
+  p.fragment The provision of a single interface to entities of different types.
 
 section
   h2 Polymorphism
@@ -429,7 +429,7 @@ section
 
 section
   h2 Class
-  p Communicate with other classes only with methods
+  p Communicates with other classes only with methods
   pre: code.ruby
     '
       class Vector3D < Object
@@ -704,7 +704,7 @@ section.center
   p A method that can be called with an explicit receiver only inside its class or a derived class opening
 
 section.center
-  p The usual private method you see in other languages
+  p The usual protected method you see in other languages
 
 section.center
   p Can be inherited by subclasses, can be invoked by subclasses
@@ -839,7 +839,7 @@ section
         end
       end
 
-      Secret.new.send(:shh) #=> "Shh, its a secret" 
+      Secret.new.send(:shh) #=> "Shh, its a secret"
 
 section
   h2 Object#send
@@ -852,7 +852,7 @@ section
         end
       end
 
-      Secret.new.send(:shh) #=> "Shh, its a secret" 
+      Secret.new.send(:shh) #=> "Shh, its a secret"
 
 section
   h2 Object#public_send
@@ -865,7 +865,7 @@ section
         end
       end
 
-      Secret.new.send(:shh) #=> NoMethodError
+      Secret.new.public_send(:shh) #=> NoMethodError
 
 section
   h2 super
@@ -925,7 +925,7 @@ section
       end
 
       queen = PolitePerson.new
-      queen.introduction_to('Smith') # error: ArgumentError 
+      queen.introduction_to('Smith') # error: ArgumentError
 
 section
   h2 super
@@ -952,7 +952,7 @@ section.center data-background="#000"
 
 section
   h2 Object#is_a?
-  p Returns true if class is the class of obj, or if class is one of the superclasses of obj or modules included in obj.
+  p Returns true if class is the class of object, one of the its superclasses or modules included in it.
   pre: code.ruby
     '
       module M;    end
@@ -970,7 +970,7 @@ section
 
 section
   h2 Object#kind_of?
-  p Returns true if class is the class of obj, or if class is one of the superclasses of obj or modules included in obj.
+  p Returns true if class is the class of object, one of the its superclasses or modules included in it.
   pre: code.ruby
     '
       module M;    end
@@ -988,7 +988,7 @@ section
 
 section
   h2 Object#instance_of?
-  p Returns true if obj is an instance of the given class.
+  p Returns true if object is an instance of the given class.
   pre: code.ruby
     '
       class A;     end
@@ -998,15 +998,15 @@ section
       b = B.new
       b.instance_of? A   #=> false
       b.instance_of? B   #=> true
-      b.instance_of? C   #=> false 
+      b.instance_of? C   #=> false
 
 section
   h2 Object#respond_to?
-  p Returns true if obj responds to the given method.
+  p Returns true if object responds to the specified method.
 
 section
   h2 Object#respond_to?
-  p Protected methods are included in the search only if the optional second parameter evaluates to true.
+  p Private methods are included in the search only if the optional second parameter evaluates to true.
 
 section
   h2 Object#respond_to?
@@ -1021,7 +1021,7 @@ section
 
 section
   h2 Duck Typing
-  p Not its inheritance from a particular class or implementation of an explicit interface.
+  p Not its inheritance of a particular class or implementation of an explicit interface.
 
 section.center data-background="#000"
   blockquote.white
@@ -1081,7 +1081,6 @@ section.center
 section
   h2 SOLID
   ul
-    li SOLID
     li Single responsibility principle
     li Open/closed principle
     li Liskov substitution principle
@@ -1090,7 +1089,7 @@ section
 
 section
   h2 Single responsibility principle
-  p A class should have only a single responsibility
+  p A class should have a single responsibility
 
 section
   h2 Single responsibility principle
@@ -1110,7 +1109,7 @@ section
 
 section
   h2 Dependency inversion principle
-  p Depend upon Abstractions, not concretions
+  p Depend upon abstractions, not concrete implementations
 
 section.center data-background="#000"
   h2.white Exceptions
@@ -1254,15 +1253,15 @@ section.center
       end
 
 section.center
-  img.inline src="img/troll.png"
+  img.inline src="/images/troll.png"
 
 section
   h2 Object#singleton_class
-  p Returns the singleton class of obj
+  p Returns the singleton class of an object
 
 section
   h2 Object#singleton_class
-  p This method creates a new singleton class if obj does not have it
+  p This method creates a new singleton class if object does not have one
 
 section
   h2 Object#singleton_class
@@ -1270,7 +1269,7 @@ section
 
 section
   h2 Object#singleton_class
-  p If obj is a Fixnum or a Symbol, it raises a TypeError
+  p If object is a Fixnum or a Symbol, it raises a TypeError
 
 section.center
   pre: code.ruby contenteditable="true"
@@ -1294,7 +1293,7 @@ section data-background="http://replygif.net/i/541.gif"
 
 section
   h2 Current Class
-  p At the top level of your program, the current class is Object, the class of main
+  p At the top level of your program, the current class is Object
 
 section
   h2 Current Class
@@ -1302,7 +1301,7 @@ section
 
 section
   h2 Current Class
-  p In a method, the current class is the class of the current object.
+  p In the context of a method, the current class is the class of the current object
 
 section
   h2 Current Class
@@ -1314,11 +1313,11 @@ section
 
 section
   h2 BasicObject#instance_eval
-  p Evaluates a string containing Ruby source code, or the given block, within the context of the receiver (obj)
+  p Evaluates a string containing Ruby source code, or the given block, within the context of the receiver (object)
 
 section
   h2 BasicObject#instance_eval
-  p In order to set the context, the variable self is set to obj while the code is executing, giving the code access to obj’s instance variables
+  p In order to set the context, the variable self is set to object while the code is executing, giving the code access to object’s instance variables
 
 section
   h2 BasicObject#instance_eval
@@ -1367,7 +1366,7 @@ section.center data-background="#000"
   p.white Okay, so what's the difference?
 
 section.center data-background="#000"
-  p.white instance_eval sets the current class to the singleton class of the receiver
+  p.white instance_eval sets the current class to the singleton class of its receiver
 
 section.center data-background="#000"
   p.white class_eval sets the current class to its receiver
@@ -1389,7 +1388,7 @@ section.center data-background="#000"
 
 section
   h2 Class#superclass
-  p Returns the superclass of class
+  p Returns the superclass of a class
 
 section
   h2 Class#superclass
@@ -1432,6 +1431,23 @@ section.center data-background="#000"
 
 section.center data-background="#000"
   p.white Huge reputation boost, guaranteed
+
+section.center
+  p We didn't go through
+  ul
+    li ancestors chain
+    li requiring and loading files
+    li parallel assignment
+    li scope gates
+    li enumerators
+    li exceptions
+    li regular expressions
+    li standard library
+    li testing
+    li ...
+
+section.center
+  p Make sure you do!
 
 section.center
   img.inline src="/images/hackman.png"
