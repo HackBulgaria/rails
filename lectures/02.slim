@@ -704,7 +704,7 @@ section.center
   p A method that can be called with an explicit receiver only inside its class or a derived class opening
 
 section.center
-  p The usual private method you see in other languages
+  p The usual protected method you see in other languages
 
 section.center
   p Can be inherited by subclasses, can be invoked by subclasses
@@ -839,7 +839,7 @@ section
         end
       end
 
-      Secret.new.send(:shh) #=> "Shh, its a secret" 
+      Secret.new.send(:shh) #=> "Shh, its a secret"
 
 section
   h2 Object#send
@@ -852,7 +852,7 @@ section
         end
       end
 
-      Secret.new.send(:shh) #=> "Shh, its a secret" 
+      Secret.new.send(:shh) #=> "Shh, its a secret"
 
 section
   h2 Object#public_send
@@ -865,7 +865,7 @@ section
         end
       end
 
-      Secret.new.send(:shh) #=> NoMethodError
+      Secret.new.public_send(:shh) #=> NoMethodError
 
 section
   h2 super
@@ -925,7 +925,7 @@ section
       end
 
       queen = PolitePerson.new
-      queen.introduction_to('Smith') # error: ArgumentError 
+      queen.introduction_to('Smith') # error: ArgumentError
 
 section
   h2 super
@@ -998,7 +998,7 @@ section
       b = B.new
       b.instance_of? A   #=> false
       b.instance_of? B   #=> true
-      b.instance_of? C   #=> false 
+      b.instance_of? C   #=> false
 
 section
   h2 Object#respond_to?
@@ -1006,7 +1006,7 @@ section
 
 section
   h2 Object#respond_to?
-  p Protected methods are included in the search only if the optional second parameter evaluates to true.
+  p Private methods are included in the search only if the optional second parameter evaluates to true.
 
 section
   h2 Object#respond_to?
@@ -1081,7 +1081,6 @@ section.center
 section
   h2 SOLID
   ul
-    li SOLID
     li Single responsibility principle
     li Open/closed principle
     li Liskov substitution principle
@@ -1090,7 +1089,7 @@ section
 
 section
   h2 Single responsibility principle
-  p A class should have only a single responsibility
+  p A class should have a single responsibility
 
 section
   h2 Single responsibility principle
@@ -1254,7 +1253,7 @@ section.center
       end
 
 section.center
-  img.inline src="img/troll.png"
+  img.inline src="images/troll.png"
 
 section
   h2 Object#singleton_class
