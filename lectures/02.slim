@@ -445,9 +445,9 @@ section
 
         def +(other)
           if other.is_a? Numeric
-            Vector.new(@x + other, @y, + other, @z + other)
+            Vector.new(@x + other, @y + other, @z + other)
           else
-            Vextor.new(@x + other.x, @y + other.y, @z + other)
+            Vector.new(@x + other.x, @y + other.y, @z + other.z)
           end
         end
       end
@@ -753,7 +753,7 @@ section
 
 section
   h2 Module
-  p Methods with the same name in class take priority over methods in modules
+  p Methods with the same name in class takes priority over methods in modules
   pre: code.ruby
     '
       module Nameless
@@ -952,7 +952,7 @@ section.center data-background="#000"
 
 section
   h2 Object#is_a?
-  p Returns true if class is the class of object, one of the its superclasses or modules included in it.
+  p Returns true if class is the class of object, one of it's superclasses or modules included in it.
   pre: code.ruby
     '
       module M;    end
@@ -1204,7 +1204,7 @@ section.center
   pre: code.ruby contenteditable="true"
     '
       pi = 3.14     # 3.14
-      def f.f() end #=> TypeError: can't define singleton
+      def pi.f() end #=> TypeError: can't define singleton
 
 section.center
   pre: code.ruby contenteditable="true"
@@ -1403,7 +1403,7 @@ section.center
     '
       File.superclass          #=> IO
       IO.superclass            #=> Object
-      Object.su.perclass       #=> BasicObject
+      Object.superclass       #=> BasicObject
       class Foo; end
       class Bar < Foo; end
       Bar.superclass           a=> Foo
