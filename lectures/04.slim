@@ -1,6 +1,6 @@
 ---
 layout: lecture
-title: Database Introduction
+title: Databases
 ---
 
 section.center data-background="#000"
@@ -196,7 +196,9 @@ section.center
   h2 Summer of '86
 
 section.center
-  h2 SQL = DDL + DML
+  h2
+    '
+      SQL = DDL + DML
 
 section.center
   h2 Data Definiton Language
@@ -210,13 +212,13 @@ section.center
 
 section.center
   h2 Droping a database
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     DROP DATABASE school;
 
 section.center
   h2 Creating a table
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     CREATE TABLE Students(
       PersonID int,
@@ -227,25 +229,25 @@ section.center
 
 section.center
   h2 Altering a table
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     ALTER TABLE Students ADD Grade int;
 
 section.center
   h2 Truncating a table
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     TRUNCATE TABLE Students;
 
 section.center
   h2 Renaming a table
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     RENAME TABLE Students TO GraduatedStudents;
 
 section.center
   h2 Droping a table
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     DROP TABLE Students;
 
@@ -255,7 +257,7 @@ section.center
 
 section.center
   h2 Inserting a record
-  pre: code.ruby contenteditable="true"
+  pre: code.ruby
   '
     INSERT INTO Students
     VALUES ("John", "Jones", "Some Str.", 10);
