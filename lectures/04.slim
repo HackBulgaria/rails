@@ -3,6 +3,12 @@ layout: lecture
 title: Database Introduction
 ---
 
+section.center
+  h2.white Databases
+
+section.center data-background="#000"
+  h2.white Questions
+
 section.center data-background="#FF0000"
   h2.white What is a protocol?
 
@@ -77,6 +83,9 @@ section.center
   p is how you communicate with relational databases
 
 section.center
+  h2 Summer of '86
+
+section.center
   h2 SQL = DDL + DML
 
 section.center
@@ -113,6 +122,12 @@ section.center
     ALTER TABLE Students ADD Grade int;
 
 section.center
+  h2 Truncating a table
+  pre: code.ruby contenteditable="true"
+  '
+    TRUNCATE TABLE Students;
+
+section.center
   h2 Renaming a table
   pre: code.ruby contenteditable="true"
   '
@@ -134,9 +149,6 @@ section.center
   '
     INSERT INTO Students
     VALUES ("John", "Jones", "Some Str.", 10);
-
-section.center data-background="#000"
-  h2.white Questions
 
 section.center
   img.inline(src="/images/hack_bulgaria.png")
