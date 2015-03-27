@@ -20,7 +20,9 @@ section.center data-background="#F00"
 
 section.center
   h2 The right weapon
-  p (relational|object|graph|document) database
+  p
+    '
+      (relational|object|graph|document) database
 
 section.center
   h2 Relational databases
@@ -48,10 +50,10 @@ section.center
   h2 Optimized for storing lots of data
 
 section.center
-  h2 Optimized for retrieving lots of data very, very fast
+  h2 Optimized for retrieving lots of data very very fast
 
 section.center
-  h2 Allows building inner connections between parts of the data
+  h2 Supports building inner connections between parts of the data
 
 section.center
   h2 Give me the thing that does something and is located somewhere along with its neighbours
@@ -199,13 +201,28 @@ section.center
 
 section.center
   h2 Normal forms
-  p <a href="http://edn.embarcadero.com/article/25209">Described here</a>
+  p <a href="http://en.wikipedia.org/wiki/First_normal_form">First</a>, <a href="http://en.wikipedia.org/wiki/Second_normal_form">Second</a>, <a href="http://en.wikipedia.org/wiki/Third_normal_form">Third</a>, <a href="http://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form">Boyce–Codd</a>, <a href="http://en.wikipedia.org/wiki/Fourth_normal_form">Fourth</a> and <a href="http://en.wikipedia.org/wiki/Fifth_normal_form">Fifth</a>
 
 section.center
   h2 Indexes
 
 section.center
+  h2 Additional data structure built on top of your data
+
+section.center
+  h2 Greatly improve speed of retrieve operations at the cost of slower write operations
+
+section.center
   h2 Transactions
+
+section.center
+  h2 You can define what an atomic operation is
+
+section.center
+  h2 Packing two write operations in a unit so that either both of them succeed or both of them fail
+
+section.center
+  h2 Bank transactions should not end in a invalid state no matter what.
 
 section.center
   h2 Structured Query Language
@@ -231,13 +248,13 @@ section.center
 
 section.center
   h2 Droping a database
-  pre: code.ruby
+  pre
   '
     DROP DATABASE school;
 
 section.center
   h2 Creating a table
-  pre: code.ruby
+  pre
   '
     CREATE TABLE Students(
       PersonID int,
@@ -248,27 +265,39 @@ section.center
 
 section.center
   h2 Altering a table
-  pre: code.ruby
+  pre
   '
     ALTER TABLE Students ADD Grade int;
 
 section.center
   h2 Truncating a table
-  pre: code.ruby
+  pre
   '
     TRUNCATE TABLE Students;
 
 section.center
   h2 Renaming a table
-  pre: code.ruby
+  pre
   '
     RENAME TABLE Students TO GraduatedStudents;
 
 section.center
   h2 Droping a table
-  pre: code.ruby
+  pre
   '
     DROP TABLE Students;
+
+section.center
+  h2 Create index on a column
+  pre
+  '
+    CREATE INDEX AgeIndex ON Students (Age);
+
+section.center
+  h2 Create index on a column
+  pre
+  '
+    CREATE UNIQUE INDEX UniqueIdIndex ON Students (id);
 
 section.center
   h2 Data Manipulation Language
@@ -276,10 +305,19 @@ section.center
 
 section.center
   h2 Inserting a record
-  pre: code.ruby
+  pre
   '
     INSERT INTO Students
     VALUES ("John", "Jones", "Some Str.", 10);
+
+section.center
+  h2 Back to our microblogs
+
+section.center
+  h2 gem install sqlite3
+
+section.center
+  h2 Experiment and have fun!
 
 section.center
   img.inline(src="/images/hack_bulgaria.png")
