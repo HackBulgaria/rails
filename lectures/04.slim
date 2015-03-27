@@ -73,6 +73,68 @@ section.center
 section.center
   h2 A table packs entities with common attributes
 
+section.center
+  h2 Attribute data types
+  p TEXT, INTEGER, NUMERIC, REAL, NONE
+
+section.center
+  h2 String data types
+  pre
+    '
+      +------------------+--------------------------------------+
+      | CHAR(size)       | Equivalent to TEXT (size is ignored) |
+      | VARCHAR(size)    | Equivalent to TEXT (size is ignored) |
+      | TINYTEXT(size)   | Equivalent to TEXT (size is ignored) |
+      | TEXT(size)       | Equivalent to TEXT (size is ignored) |
+      | MEDIUMTEXT(size) | Equivalent to TEXT (size is ignored) |
+      | LONGTEXT(size)   | Equivalent to TEXT (size is ignored) |
+      | NCHAR(size)      | Equivalent to TEXT (size is ignored) |
+      | NVARCHAR(size)   | Equivalent to TEXT (size is ignored) |
+      | CLOB(size)       | Equivalent to TEXT (size is ignored) |
+      +------------------+--------------------------------------+
+
+section.center
+  h2 Numeric data types
+  pre
+    '
+      +------------------+-----------------------+
+      | TINYINT          | Equivalent to INTEGER |
+      | SMALLINT         | Equivalent to INTEGER |
+      | MEDIUMINT        | Equivalent to INTEGER |
+      | INT              | Equivalent to INTEGER |
+      | INTEGER          | Equivalent to INTEGER |
+      | BIGINT           | Equivalent to INTEGER |
+      | INT2             | Equivalent to INTEGER |
+      | INT4             | Equivalent to INTEGER |
+      | INT8             | Equivalent to INTEGER |
+      | NUMERIC          | Equivalent to NUMERIC |
+      | DECIMAL          | Equivalent to NUMERIC |
+      | REAL             | Equivalent to REAL    |
+      | DOUBLE           | Equivalent to REAL    |
+      | DOUBLE PRECISION | Equivalent to REAL    |
+      | FLOAT            | Equivalent to REAL    |
+      | BOOLEAN          | Equivalent to NUMERIC |
+      +------------------+-----------------------+
+
+section.center
+  h2 Date/time data types
+  pre
+    '
+      +-----------+-----------------------+
+      | DATE      | Equivalent to NUMERIC |
+      | DATETIME  | Equivalent to NUMERIC |
+      | TIMESTAMP | Equivalent to NUMERIC |
+      | TIME      | Equivalent to NUMERIC |
+      +-----------+-----------------------+
+
+section.center
+  h2 Large object data types
+  pre
+    '
+      +-----------+-----------------------+
+      | BLOB      | Equivalent to NONE    |
+      +-----------+-----------------------+
+
 section
   pre
     '
@@ -124,7 +186,7 @@ section.center
       +-----------------------------------------------------+
       |                      Student                        |
       +----+------------+-----------+-----+-----------------+
-      | id | First name | Last name | Age | Address         |
+      | Id | First name | Last name | Age | Address         |
       +----+------------+-----------+-----+-----------------+
       | 1  | Joe        | Somebody  | 17  | Allen Street    |
       | 2  | Darrel     | Addington | 15  | Bleecker Street |
@@ -147,7 +209,7 @@ section.center
       +-----------------------------------------------------+
       |                      Student                        |
       +----+------------+-----------+-----+-----------------+
-      | id | First name | Last name | Age | Address         |
+      | Id | First name | Last name | Age | Address         |
       +----+------------+-----------+-----+-----------------+
       | 1  | Joe        | Somebody  | 17  | Allen Street    |
       | 2  | Darrel     | Addington | 15  | Bleecker Street |
@@ -170,7 +232,7 @@ section.center
       +-----------------------------------------------------+
       |                      Student                        |
       +----+------------+-----------+-----+-----------------+
-      | id | First name | Last name | Age | Address         |
+      | Id | First name | Last name | Age | Address         |
       +----+------------+-----------+-----+-----------------+
       | 1  | Joe        | Somebody  | 17  | Allen Street    |
       | 2  | Darrel     | Addington | 15  | Bleecker Street |
@@ -180,7 +242,7 @@ section.center
       +------------------------------------------------------+
       |                       School                         |
       +----+------------------+------------------+-----------+
-      | id | Name             | Address          | Type      |
+      | Id | Name             | Address          | Type      |
       +----+------------------+------------------+-----------+
       | 1  | Southview School | Ludlow Street    | Secondary |
       | 2  | Westview School  | Rivington Street | Primary   |
@@ -222,7 +284,7 @@ section.center
   h2 Packing two write operations in a unit so that either both of them succeed or both of them fail
 
 section.center
-  h2 Bank transactions should not end in a invalid state no matter what.
+  h2 Bank transactions should not end in an invalid state no matter what
 
 section.center
   h2 Structured Query Language
@@ -247,7 +309,7 @@ section.center
     CREATE DATABASE school;
 
 section.center
-  h2 Droping a database
+  h2 Dropping a database
   pre
   '
     DROP DATABASE school;
@@ -256,21 +318,16 @@ section.center
   h2 Creating a table
   pre
   '
-    CREATE TABLE Students(
-      PersonID int,
-      FirstName varchar(255),
-      LastName varchar(255),
-      Address varchar(255)
-    );
+    CREATE TABLE Students(PersonID int, FirstName varchar(255), LastName varchar(255), Address varchar(255));
 
 section.center
-  h2 Altering a table
+  h2 Changing a table
   pre
   '
     ALTER TABLE Students ADD Grade int;
 
 section.center
-  h2 Truncating a table
+  h2 Dropping the entries in a table
   pre
   '
     TRUNCATE TABLE Students;
@@ -282,7 +339,7 @@ section.center
     RENAME TABLE Students TO GraduatedStudents;
 
 section.center
-  h2 Droping a table
+  h2 Dropping a table
   pre
   '
     DROP TABLE Students;
@@ -307,8 +364,30 @@ section.center
   h2 Inserting a record
   pre
   '
-    INSERT INTO Students
-    VALUES ("John", "Jones", "Some Str.", 10);
+    INSERT INTO Students VALUES ('Ryan', 'Ramsey', 'Fulton Street', 22);
+
+section.center
+  h2 Updating records
+  pre
+  '
+    UPDATE Students
+    SET Address='Washington Street',Age=16
+    WHERE FirstName='Darrel' AND SecondName='Addington';
+
+section.center
+  h2 Deleting records
+  pre
+  '
+    DELETE FROM Students WHERE Id=3;
+
+section.center
+  h2 Retrieving records
+  pre
+  '
+    SELECT * FROM Students WHERE FirstName='Joe';
+
+section.center data-background="#FFAED6"
+  h2 So why relational?
 
 section.center
   h2 Back to our microblogs
