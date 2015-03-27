@@ -3,19 +3,19 @@ layout: lecture
 title: Database Introduction
 ---
 
-section.center
+section.center data-background="#000"
   h2.white Databases
 
-section.center data-background="#000"
+section.center data-background="#F00"
   h2.white Questions
 
-section.center data-background="#FF0000"
+section.center data-background="#F00"
   h2.white What is a protocol?
 
-section.center data-background="#FF0000"
+section.center data-background="#F00"
   h2.white What are the essentials of HTTP?
 
-section.center data-background="#FF0000"
+section.center data-background="#F00"
   h2.white How can you serve content at a specific URL using Sinatra?
 
 section.center
@@ -26,20 +26,20 @@ section.center
   h2 Relational databases
   p PostgreSQL, MySQL, Microsoft SQL Server, SQLite, ...
 
-section.center
-  h2 SQLite
+section.center data-background="#AED6FF"
+  h2.white SQLite
+
+section.center data-background="#000"
+  h2.white Databases
 
 section.center
-  h2 Databases
-
-section.center
-  h2 A place to keep data
+  h2 A home for your data
 
 section.center
   h2 Data structure
 
 section.center
-  h2 like arrays and hashes
+  h2 Kind of like arrays and hashes
 
 section.center
   h2 Much more complex
@@ -48,10 +48,13 @@ section.center
   h2 Optimized for storing lots of data
 
 section.center
-  h2 Optimized for retrieving data very fast
+  h2 Optimized for retrieving lots of data very, very fast
 
 section.center
   h2 Allows building inner connections between parts of the data
+
+section.center
+  h2 Give me the thing that does something and is located somewhere along with its neighbours
 
 section.center
   h2 Key components
@@ -68,9 +71,116 @@ section.center
 section.center
   h2 A table packs entities with common attributes
 
+section
+  pre
+    '
+      +----------------------------------------+
+      |               Student                  |
+      +------------+-----------+-----+---------+
+      | First name | Last name | Age | Address |
+      +------------+-----------+-----+---------+
+      | Joe        | Somebody  | 20  | Street  |
+      +------------+-----------+---------------+
+
 section.center
   h2 Relating tables
-  p primary & foreign keys
+
+section.center
+  h2 primary key -> foreign key
+
+section.center
+  pre
+    '
+      +---------------------------------------------+
+      |                  Student                    |
+      +----+------------+-----------+-----+---------+
+      | id | First name | Last name | Age | Address |
+      +----+------------+-----------+-----+---------+
+      | 1  | Joe        | Somebody  | 20  | Street  |
+      +----+------------+-----------+---------------+
+
+section.center
+  pre
+    '
+      +------------------------------------------------------+
+      |                       Student                        |
+      +----+------------+-----------+-----+---------+--------+
+      | id | First name | Last name | Age | Address | School |
+      +----+------------+-----------+-----+---------+--------+
+      | 1  | Joe        | Somebody  | 20  | Street  | Some   |
+      +----+------------+-----------+---------------+--------+
+
+section.center
+  pre
+    '
+      +---------------------------------------------+
+      |                  Student                    |
+      +----+------------+-----------+-----+---------+
+      | id | First name | Last name | Age | Address |
+      +----+------------+-----------+-----+---------+
+      | 1  | Joe        | Somebody  | 20  | Street  |
+      +----+------------+-----------+---------------+
+
+      +-------------------------+
+      |          School         |
+      +------------+------------+
+      | Student id | School     |
+      +------------+------------+
+      | 1          | Joe        |
+      +------------+------------+
+
+section.center
+  pre
+    '
+      +---------------------------------------------+
+      |                  Student                    |
+      +----+------------+-----------+-----+---------+
+      | id | First name | Last name | Age | Address |
+      +----+------------+-----------+-----+---------+
+      | 1  | Joe        | Somebody  | 20  | Street  |
+      +----+------------+-----------+---------------+
+
+      +---------------------------------------------+
+      |                   School                    |
+      +------------+------------+---------+---------+
+      | Student id | School     | Address | Type    |
+      +------------+------------+---------+---------+
+      | 1          | Joe        | Street  | Primary |
+      +------------+------------+---------+---------+
+
+section.center
+  pre
+    '
+      +---------------------------------------------+
+      |                  Student                    |
+      +----+------------+-----------+-----+---------+
+      | id | First name | Last name | Age | Address |
+      +----+------------+-----------+-----+---------+
+      | 1  | Joe        | Somebody  | 20  | Street  |
+      +----+------------+-----------+---------------+
+
+      +--------------------------------------------+
+      |                  School                    |
+      +-----------+------------+---------+---------+
+      | School id | Name       | Address | Type    |
+      +-----------+------------+---------+---------+
+      | 2         | Joe        | Street  | Primary |
+      +-----------+------------+---------+---------+
+
+      +-------------------------+
+      |    Student to School    |
+      +------------+------------+
+      | Student id | School id  |
+      +------------+------------+
+      | 1          | 2          |
+      +------------+------------+
+
+section.center
+  h2 Normalization and denormalization
+
+section.center
+  h2 Normal forms
+  p <a href="http://edn.embarcadero.com/article/25209">Described here</a>
 
 section.center
   h2 Indexes
