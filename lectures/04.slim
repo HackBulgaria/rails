@@ -4,19 +4,25 @@ title: Databases
 ---
 
 section.center data-background="#000"
-  h2.white Databases
+  h1.white Databases
+
+section.center
+  p Sayonara Sofia
+
+section.center
+  p Konnichiwa Tokyo
 
 section.center data-background="#F00"
   h2.white Questions
 
 section.center data-background="#F00"
-  h2.white What is a protocol?
+  p.white What is a protocol?
 
 section.center data-background="#F00"
-  h2.white What are the essentials of HTTP?
+  p.white What are the essentials of HTTP?
 
 section.center data-background="#F00"
-  h2.white How can you serve content at a specific URL using Sinatra?
+  p.white How can you serve content at a specific URL using Sinatra?
 
 section.center data-background="#FF0"
   h2 Warning
@@ -25,19 +31,22 @@ section.center data-background="#FF0"
   p Lots of tables in this lecture!
 
 section.center data-background="#FF0"
-  p And we don't even know
+  p We're Rails developers.
 
 section.center data-background="#FF0"
-  p what we are talking about.
+  p We know shit about SQL!
 
 section.center
-  h2 The right weapon
+  img.inline src="/images/troll.png"
+
+section.center
+  h2 Choose your weapon
   p
     '
-      (relational|object|graph|document) database
+      (Relational|Object|Graph|Document) Database
 
 section.center
-  h2 Relational databases
+  h2 Relational Databases
   p PostgreSQL, MySQL, Microsoft SQL Server, SQLite, ...
 
 section.center data-background="#AED6FF"
@@ -47,45 +56,45 @@ section.center data-background="#000"
   h2.white Databases
 
 section.center
-  h2 A home for your data
+  p A home for your data
 
 section.center
-  h2 Data structure
+  p Data structure
 
 section.center
-  h2 Kind of like arrays and hashes
+  p Kind of like arrays and hashes
 
 section.center
-  h2 Much more complex
+  p Much more complex
 
 section.center
-  h2 Optimized for storing lots of data
+  p Optimized for storing lots of data
 
 section.center
-  h2 Optimized for retrieving lots of data very very fast
+  p Optimized for retrieving lots of data very very fast
 
 section.center
-  h2 Supports building inner connections between parts of the data
+  p Supports building inner connections between parts of the data
 
 section.center
-  h2 Give me the thing that does something and is located somewhere along with its neighbours
+  p Give me the thing that does something and is located somewhere along with its neighbours
 
 section.center
-  h2 Key components
+  p Key components
+
+section.center data-background="#000"
+  p.white Table (relation)
+
+section.center data-background="#000"
+  p.white Column (attribute)
+
+section.center data-background="#000"
+  p.white Row (record)
 
 section.center
-  h2 Table (relation)
+  p A table packs entities with common attributes
 
 section.center
-  h2 Column (attribute)
-
-section.center
-  h2 Row (record)
-
-section.center
-  h2 A table packs entities with common attributes
-
-section
   pre
     '
       +------------------------------------------------+
@@ -99,7 +108,7 @@ section
       +------------+-----------+-----+-----------------+
 
 section.center
-  h2 Attribute data types
+  h2 Attribute Data Types
   p TEXT, INTEGER, NUMERIC, REAL, NONE
 
 section.center
@@ -119,7 +128,7 @@ section.center
       +------------------+--------------------------------------+
 
 section.center
-  h2 Numeric data types
+  h2 Numeric Data Types
   pre
     '
       +------------------+-----------------------+
@@ -142,7 +151,7 @@ section.center
       +------------------+-----------------------+
 
 section.center
-  h2 Date/time data types
+  h2 DateTime Data Types
   pre
     '
       +-----------+-----------------------+
@@ -153,7 +162,7 @@ section.center
       +-----------+-----------------------+
 
 section.center
-  h2 Large object data types
+  h2 Large Object Data Types
   pre
     '
       +-----------+-----------------------+
@@ -161,10 +170,10 @@ section.center
       +-----------+-----------------------+
 
 section.center
-  h2 Relating tables
+  h2 Relating Tables
 
 section.center
-  h2 primary key -> foreign key
+  p primary key -> foreign key
 
 section.center
   pre
@@ -271,42 +280,42 @@ section.center
       +------------+------------+
 
 section.center
-  h2 Normalization and denormalization
+  h2 Normalization and Denormalization
 
 section.center
-  h2 Normal forms
+  h2 Normal Forms
   p <a href="http://en.wikipedia.org/wiki/First_normal_form">First</a>, <a href="http://en.wikipedia.org/wiki/Second_normal_form">Second</a>, <a href="http://en.wikipedia.org/wiki/Third_normal_form">Third</a>, <a href="http://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form">Boyce–Codd</a>, <a href="http://en.wikipedia.org/wiki/Fourth_normal_form">Fourth</a> and <a href="http://en.wikipedia.org/wiki/Fifth_normal_form">Fifth</a>
 
 section.center
   h2 Indexes
 
-section.center
-  h2 Additional data structure built on top of your data
+section.center data-background="#000"
+  p.white Additional data structure built on top of your data
 
-section.center
-  h2 Greatly improve speed of retrieve operations at the cost of slower write operations
+section.center data-background="#000"
+  p.white Greatly improve speed of retrieve operations at the cost of slower write operations
 
 section.center
   h2 Transactions
 
 section.center
-  h2 You can define what an atomic operation is
+  p You can define what an atomic operation is.
 
 section.center
-  h2 Packing two write operations in a unit so that either both of them succeed or both of them fail
+  p Packing two write operations in a unit so that either both of them succeed or both of them fail
 
-section.center
-  h2 Bank transactions should not end in an invalid state no matter what
+section.center data-background="#000"
+  p.white Bank transactions should not end in an invalid state no matter what
 
 section.center
   h2 Structured Query Language
-  p is how you communicate with relational databases
+  p How you communicate with relational databases.
 
 section.center
-  h2 Summer of '86
+  p Summer of '86
 
 section.center
-  h2
+  p
     '
       SQL = DDL + DML
 
@@ -315,55 +324,55 @@ section.center
   p for defining data models and relations
 
 section.center
-  h2 Creating a database
+  h2 Creating a Database
   pre
   '
     CREATE DATABASE school;
 
 section.center
-  h2 Dropping a database
+  h2 Dropping a Database
   pre
   '
     DROP DATABASE school;
 
 section.center
-  h2 Creating a table
+  h2 Creating a Table
   pre
   '
     CREATE TABLE Student(Id INTEGER, FirstName VARCHAR(255), LastName VARCHAR(255), Address VARCHAR(255));
 
 section.center
-  h2 Changing a table
+  h2 Changing a Table
   pre
   '
     ALTER TABLE Student ADD Grade INTEGER;
 
 section.center
-  h2 Dropping the entries in a table
+  h2 Dropping Entries
   pre
   '
     TRUNCATE TABLE Student;
 
 section.center
-  h2 Renaming a table
+  h2 Renaming a Table
   pre
   '
     RENAME TABLE Student TO GraduatedStudent;
 
 section.center
-  h2 Dropping a table
+  h2 Dropping a Table
   pre
   '
     DROP TABLE Student;
 
 section.center
-  h2 Create index on a column
+  h2 Creating Indexes
   pre
   '
     CREATE INDEX AgeIndex ON Student (Age);
 
 section.center
-  h2 Create index on a column
+  h2 Creating Indexes
   pre
   '
     CREATE UNIQUE INDEX UniqueIdIndex ON Student (id);
@@ -388,7 +397,8 @@ section.center
   h2 Inserting a record
   pre
   '
-    INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+    INSERT INTO Student(FirstName, LastName, Age, Address)
+         VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
 
 section.center
   pre
@@ -408,8 +418,8 @@ section.center
   pre
   '
     UPDATE Student
-    SET Address='Washington Street',Age=16
-    WHERE FirstName='Darrel' AND SecondName='Addington';
+       SET Address='Washington Street',Age=16
+     WHERE FirstName='Darrel' AND SecondName='Addington';
 
 section.center
   pre
@@ -495,8 +505,10 @@ section.center
     '
       BEGIN TRANSACTION;
       CREATE TABLE Student(FirstName VARCHAR(255), LastName VARCHAR(255), Age INTEGER, Address VARCHAR(255));
-      INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Joe', 'Somebody', 17, 'Allen Street');
-      INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+       INSERT INTO Student(FirstName, LastName, Age, Address)
+            VALUES ('Joe', 'Somebody', 17, 'Allen Street');
+       INSERT INTO Student(FirstName, LastName, Age, Address)
+            VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
       COMMIT;
 
 section.center
@@ -553,11 +565,11 @@ section.center
       | 2  | Darrel     | Addington | 16  | Washington Street |
       +----+------------+-----------+-----+-------------------+
 
-section.center
-  h2 UNION ALL, INTERSECT ALL and EXCEPT ALL preserve duplicate rows
+section.center data-background="#000"
+  p.white UNION ALL, INTERSECT ALL and EXCEPT ALL preserve duplicate rows
 
 section.center data-background="#FFAED6"
-  h2 So why relational?
+  p So why relational?
 
 section.center
   pre
@@ -583,7 +595,7 @@ section.center
       +------------+------------------+------------------+------------+
 
 section.center
-  h2 Retrieve all student along with the school they go to
+  p Retrieve all student along with the school they go to
   pre
   '
     SELECT * FROM Student LEFT [OUTER] JOIN School ON Student.Id=School.StudentId
@@ -600,7 +612,7 @@ section.center
       +----+------------+-----------+-----+-----------------+----------+------------------+------------------+------------+
 
 section.center
-  h2 Retrieve all schools along with their students
+  p Retrieve all schools along with their students
   pre
   '
     SELECT * FROM Student RIGHT [OUTER] JOIN School ON Student.Id=School.StudentId
@@ -617,7 +629,7 @@ section.center
       +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
 
 section.center
-  h2 Retrieve all students and matching schools
+  p Retrieve all students and matching schools
   pre
   '
     SELECT * FROM Student JOIN School ON Student.Id=School.StudentId
@@ -633,7 +645,7 @@ section.center
       +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
 
 section.center
-  h2 Retrieve all schools and all students, keeping relations
+  p Retrieve all schools and all students, keeping relations
   pre
   '
     SELECT * FROM Student FULL [OUTER] JOIN School ON Student.Id=School.StudentId
@@ -651,7 +663,7 @@ section.center
       +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
 
 section.center
-  h2 Retrieve cartesian product of all schools and all students
+  p Retrieve Cartesian product of all schools and all students
   pre
   '
     SELECT * FROM Student CROSS JOIN School ON Student.Id=School.StudentId
@@ -677,7 +689,7 @@ section.center
   h2 Views
 
 section.center
-  h2 View are virtual tables
+  p Virtual tables
 
 section.center
   pre
@@ -726,7 +738,7 @@ section.center
     DROP VIEW LegalStudents;
 
 section.center
-  h2 Agregates
+  h2 Aggregates
 
 section.center
   h2 SUM, AVG, MIN, MAX, COUNT
@@ -833,10 +845,10 @@ section.center
   h2 We can use multiple attributes in the GROUP BY clause
 
 section.center
-  h2 We can select only columns that will be used in the GROUP BY clause and agregates
+  h2 We can select only columns that will be used in the GROUP BY clause and aggregates
 
 section.center
-  h2 We cannot use agregates in the WHERE clause, that's why we have HAVING
+  h2 We cannot use aggregates in the WHERE clause, that's why we have HAVING
 
 section.center
   pre
@@ -858,13 +870,13 @@ section.center
     SELECT ... FROM ... JOIN ... ON ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...
 
 section.center
-  h2 Back to our microblogs
+  p Back to our microblogs
 
 section.center
-  h2 gem install <a href="https://github.com/sparklemotion/sqlite3-ruby">sqlite3</a>
+  p gem install <a href="https://github.com/sparklemotion/sqlite3-ruby">sqlite3</a>
 
 section.center
-  h2 Experiment and have fun!
+  p Experiment and have fun!
 
 section.center
   img.inline(src="/images/hack_bulgaria.png")
