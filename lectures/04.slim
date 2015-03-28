@@ -499,6 +499,63 @@ section.center
       INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
       COMMIT;
 
+section.center
+  h2 Combining two queries
+
+section.center
+  pre
+    '
+      (SELECT * FROM Student WHERE Age > 15)
+      UNION
+      (SELECT * FROM Student WHERE Age < 18)
+
+section.center
+  pre
+    '
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue      |
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      | 2  | Darrel     | Addington | 16  | Washington Street |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
+  pre
+    '
+      (SELECT * FROM Student WHERE Age > 16)
+      INTERSECT
+      (SELECT * FROM Student WHERE Age < 18)
+
+section.center
+  pre
+    '
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
+  pre
+    '
+      (SELECT * FROM Student WHERE Age > 15)
+      EXCEPT
+      (SELECT * FROM Student WHERE Address='Lenox Avenue')
+
+section.center
+  pre
+    '
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      | 2  | Darrel     | Addington | 16  | Washington Street |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
+  h2 UNION ALL, INTERSECT ALL and EXCEPT ALL preserve duplicate rows
+
 section.center data-background="#FFAED6"
   h2 So why relational?
 
@@ -796,7 +853,7 @@ section.center
   h2 Back to our microblogs
 
 section.center
-  h2 gem install sqlite3
+  h2 gem install <a href="https://github.com/sparklemotion/sqlite3-ruby">sqlite3</a>
 
 section.center
   h2 Experiment and have fun!
