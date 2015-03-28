@@ -141,7 +141,7 @@ section
       +------------------------------------------------+
       |               Student                          |
       +------------+-----------+-----+-----------------+
-      | First name | Last name | Age | Address         |
+      | FirstName  | LastName  | Age | Address         |
       +------------+-----------+-----+-----------------+
       | Joe        | Somebody  | 17  | Allen Street    |
       | Darrel     | Addington | 15  | Bleecker Street |
@@ -160,7 +160,7 @@ section.center
       +------------------------------------------------+
       |                    Student                     |
       +------------+-----------+-----+-----------------+
-      | First name | Last name | Age | Address         |
+      | FirstName  | LastName  | Age | Address         |
       +------------+-----------+-----+-----------------+
       | Joe        | Somebody  | 17  | Allen Street    |
       | Darrel     | Addington | 15  | Bleecker Street |
@@ -173,7 +173,7 @@ section.center
       +-------------------------------------------------------------------+
       |                            Student                                |
       +------------+-----------+-----+-----------------+------------------+
-      | First name | Last name | Age | Address         | School name      |
+      | FirstName  | LastName  | Age | Address         | SchoolName       |
       +------------+-----------+-----+-----------------+------------------+
       | Joe        | Somebody  | 17  | Allen Street    | Southview School |
       | Darrel     | Addington | 15  | Bleecker Street | Westview School  |
@@ -186,7 +186,7 @@ section.center
       +-----------------------------------------------------+
       |                      Student                        |
       +----+------------+-----------+-----+-----------------+
-      | Id | First name | Last name | Age | Address         |
+      | Id | FirstName  | LastName  | Age | Address         |
       +----+------------+-----------+-----+-----------------+
       | 1  | Joe        | Somebody  | 17  | Allen Street    |
       | 2  | Darrel     | Addington | 15  | Bleecker Street |
@@ -196,7 +196,7 @@ section.center
       +-------------------------------+
       |            School             |
       +------------+------------------+
-      | Student id | School name      |
+      | StudentId  | SchoolName       |
       +------------+------------------+
       | 1          | Southview School |
       | 2          | Westview School  |
@@ -209,7 +209,7 @@ section.center
       +-----------------------------------------------------+
       |                      Student                        |
       +----+------------+-----------+-----+-----------------+
-      | Id | First name | Last name | Age | Address         |
+      | Id | FirstName  | LastName  | Age | Address         |
       +----+------------+-----------+-----+-----------------+
       | 1  | Joe        | Somebody  | 17  | Allen Street    |
       | 2  | Darrel     | Addington | 15  | Bleecker Street |
@@ -219,7 +219,7 @@ section.center
       +--------------------------------------------------------------+
       |                           School                             |
       +------------+------------------+------------------+-----------+
-      | Student id | School           | Address          | Type      |
+      | StudentId  | School           | Address          | Type      |
       +------------+------------------+------------------+-----------+
       | 1          | Southview School | Ludlow Street    | Secondary |
       | 2          | Westview School  | Rivington Street | Primary   |
@@ -232,7 +232,7 @@ section.center
       +-----------------------------------------------------+
       |                      Student                        |
       +----+------------+-----------+-----+-----------------+
-      | Id | First name | Last name | Age | Address         |
+      | Id | FirstName  | LastName  | Age | Address         |
       +----+------------+-----------+-----+-----------------+
       | 1  | Joe        | Somebody  | 17  | Allen Street    |
       | 2  | Darrel     | Addington | 15  | Bleecker Street |
@@ -251,7 +251,7 @@ section.center
       +-------------------------+
       |    Student to School    |
       +------------+------------+
-      | Student id | School id  |
+      | StudentId  | SchoolId   |
       +------------+------------+
       | 1          | 1          |
       | 2          | 2          |
@@ -318,43 +318,43 @@ section.center
   h2 Creating a table
   pree
   '
-    CREATE TABLE Students(Id INTEGER, FirstName VARCHAR(255), LastName VARCHAR(255), Address VARCHAR(255));
+    CREATE TABLE Student(Id INTEGER, FirstName VARCHAR(255), LastName VARCHAR(255), Address VARCHAR(255));
 
 section.center
   h2 Changing a table
   pre
   '
-    ALTER TABLE Students ADD Grade INTEGER;
+    ALTER TABLE Student ADD Grade INTEGER;
 
 section.center
   h2 Dropping the entries in a table
   pre
   '
-    TRUNCATE TABLE Students;
+    TRUNCATE TABLE Student;
 
 section.center
   h2 Renaming a table
   pre
   '
-    RENAME TABLE Students TO GraduatedStudents;
+    RENAME TABLE Student TO GraduatedStudent;
 
 section.center
   h2 Dropping a table
   pre
   '
-    DROP TABLE Students;
+    DROP TABLE Student;
 
 section.center
   h2 Create index on a column
   pre
   '
-    CREATE INDEX AgeIndex ON Students (Age);
+    CREATE INDEX AgeIndex ON Student (Age);
 
 section.center
   h2 Create index on a column
   pre
   '
-    CREATE UNIQUE INDEX UniqueIdIndex ON Students (id);
+    CREATE UNIQUE INDEX UniqueIdIndex ON Student (id);
 
 section.center
   h2 Data Manipulation Language
@@ -376,7 +376,7 @@ section.center
   h2 Inserting a record
   pre
   '
-    INSERT INTO Students(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+    INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
 
 section.center
   pre
@@ -395,7 +395,7 @@ section.center
   h2 Updating records
   pre
   '
-    UPDATE Students
+    UPDATE Student
     SET Address='Washington Street',Age=16
     WHERE FirstName='Darrel' AND SecondName='Addington';
 
@@ -416,7 +416,7 @@ section.center
   h2 Deleting records
   pre
   '
-    DELETE FROM Students WHERE Id=3;
+    DELETE FROM Student WHERE Id=3;
 
 section.center
   pre
@@ -434,7 +434,7 @@ section.center
   h2 Retrieving records
   pre
   '
-    SELECT * FROM Students WHERE FirstName='Joe';
+    SELECT * FROM Student WHERE FirstName='Joe';
 
 section.center
   pre
@@ -449,7 +449,7 @@ section.center
   h2 Retrieving records
   pre
   '
-    SELECT LastName, Age FROM Students WHERE FirstName='Joe';
+    SELECT LastName, Age FROM Student WHERE FirstName='Joe';
 
 section.center
   pre
@@ -462,6 +462,120 @@ section.center
 
 section.center data-background="#FFAED6"
   h2 So why relational?
+
+section.center
+  pre
+    '
+      +-----------------------------------------------------+
+      |                      Student                        |
+      +----+------------+-----------+-----+-----------------+
+      | Id | FirstName  | LastName  | Age | Address         |
+      +----+------------+-----------+-----+-----------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street    |
+      | 2  | Darrel     | Addington | 15  | Bleecker Street |
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue    |
+      +----+------------+-----------+-----+-----------------+
+
+      +---------------------------------------------------------------+
+      |                           School                              |
+      +------------+------------------+------------------+------------+
+      | StudentId  | SchoolName       | SchoolAddress    | SchoolType |
+      +------------+------------------+------------------+------------+
+      | 1          | Southview School | Ludlow Street    | Secondary  |
+      | 2          | Westview School  | Rivington Street | Primary    |
+      | 5          | Northview School | Fulton Street    | Primary    |
+      +------------+------------------+------------------+------------+
+
+section.center
+  h2 Retrieve all student along with the school they go to
+  pre
+    '
+      SELECT * FROM Student LEFT [OUTER] JOIN School ON Student.Id=School.StudentId
+
+section.center
+  pre
+    '
+      +----+------------+-----------+-----+-----------------+----------+------------------+------------------+------------+
+      | Id | FirstName  | LastName  | Age | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
+      +----+------------+-----------+-----+-----------------+----------+------------------+------------------+------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 2  | Darrel     | Addington | 15  | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue    | 3        | NULL             | NULL             | NULL       |
+      +----+------------+-----------+-----+-----------------+----------+------------------+------------------+------------+
+
+section.center
+  h2 Retrieve all schools along with their students
+  pre
+    '
+      SELECT * FROM Student RIGHT [OUTER] JOIN School ON Student.Id=School.StudentId
+
+section.center
+  pre
+    '
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
+      | NULL | NULL       | NULL      | NULL | NULL            | 5        | Northview School | Fulton Street    | Primary    |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+
+section.center
+  h2 Retrieve all students and matching schools
+  pre
+    '
+      SELECT * FROM Student JOIN School ON Student.Id=School.StudentId
+
+section.center
+  pre
+    '
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+
+section.center
+  h2 Retrieve all schools and all students, keeping relations
+  pre
+    '
+      SELECT * FROM Student FULL [OUTER] JOIN School ON Student.Id=School.StudentId
+
+section.center
+  pre
+    '
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 2        | Westview School  | Rivington Street | Primary    |
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 5        | Northview School | Fulton Street    | Primary    |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 5        | Northview School | Fulton Street    | Primary    |
+      | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 2        | Westview School  | Rivington Street | Primary    |
+      | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 5        | Northview School | Fulton Street    | Primary    |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+
+section.center
+  h2 Retrieve cartesian product of all schools and all students
+  pre
+    '
+      SELECT * FROM Student CROSS JOIN School ON Student.Id=School.StudentId
+
+section.center
+  pre
+    '
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
+      | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 3        | NULL             | NULL             | NULL       |
+      | NULL | NULL       | NULL      | NULL | NULL            | 5        | Northview School | Fulton Street    | Primary    |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
 
 section.center
   h2 Back to our microblogs
