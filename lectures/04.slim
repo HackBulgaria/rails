@@ -652,7 +652,7 @@ section.center
       DROP VIEW LegalStudents;
 
 section.center
-  h2 Agregating
+  h2 Agregates
 
 section.center
   h2 SUM, AVG, MIN, MAX, COUNT
@@ -721,6 +721,59 @@ section.center
       +---+
       | 2 |
       +---+
+
+section.center
+  h2 Grouping
+
+section.center
+  pre
+    '
+      +-----------------------------------------------------+
+      |                      Student                        |
+      +----+------------+-----------+-----+-----------------+
+      | Id | FirstName  | LastName  | Age | Address         |
+      +----+------------+-----------+-----+-----------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street    |
+      | 2  | Darrel     | Addington | 15  | Bleecker Street |
+      | 3  | Dwenn      | Charlton  | 18  | Allen Street    |
+      +----+------------+-----------+-----+-----------------+
+
+section.center
+  h2 SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address
+
+section.center
+  pre
+    '
+      +-----------------+--------------+
+      | Address         | CompositeAge |
+      +-----------------+--------------+
+      | Allen Street    | 35           |
+      | Bleecker Street | 15           |
+      +-----------------+--------------+
+
+section.center
+  h2 We can use multiple attributes in the GROUP BY clause
+
+section.center
+  h2 We can select only columns that will be used in the GROUP BY clause and agregates
+
+section.center
+  h2 We cannot use agregates in the WHERE clause, that's why we have HAVING
+
+section.center
+  h2 SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address HAVING CompositeAge > 30
+
+section.center
+  pre
+    '
+      +-----------------+--------------+
+      | Address         | CompositeAge |
+      +-----------------+--------------+
+      | Allen Street    | 35           |
+      +-----------------+--------------+
+
+section.center
+  h2 SELECT ... FROM ... JOIN ... ON ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...
 
 section.center
   h2 Back to our microblogs
