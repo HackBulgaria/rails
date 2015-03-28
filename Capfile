@@ -24,7 +24,7 @@ task :site do
   set :deploy_to, "/hack/#{application}"
 
   before "deploy:update_code" do
-    run_locally "jekyll build"
+    run_locally "bundle exec jekyll build"
   end
 
   server ENV.fetch("server", "188.226.232.4"), :app, primary: true
