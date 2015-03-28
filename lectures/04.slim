@@ -473,6 +473,23 @@ section.center
       +-----------------+-----+
 
 section.center
+  h2 Ordering results
+  pre
+    '
+      SELECT * FROM Student ORDER BY Age DESC;
+
+section.center
+  pre
+    '
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue      |
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      | 2  | Darrel     | Addington | 16  | Washington Street |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
   h2 Commit a transaction
   pre
     '
