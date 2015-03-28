@@ -41,9 +41,7 @@ section.center
 
 section.center
   h2 Choose your weapon
-  p
-    '
-      (Relational|Object|Graph|Document) Database
+  p (Relational|Object|Graph|Document) Database
 
 section.center
   h2 Relational Databases
@@ -315,9 +313,7 @@ section.center
   p Summer of '86
 
 section.center
-  p
-    '
-      SQL = DDL + DML
+  p SQL = DDL + DML
 
 section.center
   h2 Data Definiton Language
@@ -325,57 +321,62 @@ section.center
 
 section.center
   h2 Creating a Database
-  pre
-  '
-    CREATE DATABASE school;
+  pre: code.sql
+    '
+      CREATE DATABASE school;
 
 section.center
   h2 Dropping a Database
   pre
-  '
-    DROP DATABASE school;
+    '
+      DROP DATABASE school;
 
 section.center
   h2 Creating a Table
-  pre
-  '
-    CREATE TABLE Student(Id INTEGER, FirstName VARCHAR(255), LastName VARCHAR(255), Address VARCHAR(255));
+  pre: code.sql
+    '
+      CREATE TABLE Student(
+        Id INTEGER,
+        FirstName VARCHAR(255),
+        LastName VARCHAR(255),
+        Address VARCHAR(255)
+      );
 
 section.center
   h2 Changing a Table
-  pre
-  '
-    ALTER TABLE Student ADD Grade INTEGER;
+  pre: code.sql
+    '
+      ALTER TABLE Student ADD Grade INTEGER;
 
 section.center
   h2 Dropping Entries
-  pre
-  '
-    TRUNCATE TABLE Student;
+  pre: code.sql
+    '
+      TRUNCATE TABLE Student;
 
 section.center
   h2 Renaming a Table
-  pre
-  '
-    RENAME TABLE Student TO GraduatedStudent;
+  pre: code.sql
+    '
+      RENAME TABLE Student TO GraduatedStudent;
 
 section.center
   h2 Dropping a Table
-  pre
-  '
-    DROP TABLE Student;
+  pre: code.sql
+    '
+      DROP TABLE Student;
 
 section.center
   h2 Creating Indexes
-  pre
-  '
-    CREATE INDEX AgeIndex ON Student (Age);
+  pre: code.sql
+    '
+      CREATE INDEX AgeIndex ON Student (Age);
 
 section.center
   h2 Creating Indexes
-  pre
-  '
-    CREATE UNIQUE INDEX UniqueIdIndex ON Student (id);
+  pre: code.sql
+    '
+      CREATE UNIQUE INDEX UniqueIdIndex ON Student (id);
 
 section.center
   h2 Data Manipulation Language
@@ -395,10 +396,10 @@ section.center
 
 section.center
   h2 Inserting a record
-  pre
-  '
-    INSERT INTO Student(FirstName, LastName, Age, Address)
-         VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+  pre: code.sql
+    '
+      INSERT INTO Student(FirstName, LastName, Age, Address)
+           VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
 
 section.center
   pre
@@ -415,11 +416,11 @@ section.center
 
 section.center
   h2 Updating records
-  pre
-  '
-    UPDATE Student
-       SET Address='Washington Street',Age=16
-     WHERE FirstName='Darrel' AND SecondName='Addington';
+  pre: code.sql
+    '
+      UPDATE Student
+         SET Address='Washington Street', Age=16
+       WHERE FirstName='Darrel' AND SecondName='Addington';
 
 section.center
   pre
@@ -436,9 +437,9 @@ section.center
 
 section.center
   h2 Deleting records
-  pre
-  '
-    DELETE FROM Student WHERE Id=3;
+  pre: code.sql
+    '
+      DELETE FROM Student WHERE Id=3;
 
 section.center
   pre
@@ -454,9 +455,9 @@ section.center
 
 section.center
   h2 Retrieving records
-  pre
-  '
-    SELECT * FROM Student WHERE FirstName='Joe';
+  pre: code.sql
+    '
+      SELECT * FROM Student WHERE FirstName='Joe';
 
 section.center
   pre
@@ -469,9 +470,9 @@ section.center
 
 section.center
   h2 Retrieving records
-  pre
-  '
-    SELECT LastName, Age FROM Student WHERE FirstName='Joe';
+  pre: code.sql
+    '
+      SELECT LastName, Age FROM Student WHERE FirstName='Joe';
 
 section.center
   pre
@@ -484,9 +485,9 @@ section.center
 
 section.center
   h2 Ordering results
-  pre
-  '
-    SELECT * FROM Student ORDER BY Age DESC;
+  pre: code.sql
+    '
+      SELECT * FROM Student ORDER BY Age DESC;
 
 section.center
   pre
@@ -501,25 +502,23 @@ section.center
 
 section.center
   h2 Commit a transaction
-  pre
+  pre: code.sql
     '
       BEGIN TRANSACTION;
       CREATE TABLE Student(FirstName VARCHAR(255), LastName VARCHAR(255), Age INTEGER, Address VARCHAR(255));
-       INSERT INTO Student(FirstName, LastName, Age, Address)
-            VALUES ('Joe', 'Somebody', 17, 'Allen Street');
-       INSERT INTO Student(FirstName, LastName, Age, Address)
-            VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+      INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Joe', 'Somebody', 17, 'Allen Street');
+      INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
       COMMIT;
 
 section.center
   h2 Combining two queries
 
 section.center
-  pre
+  pre: code.sql
     '
       (SELECT * FROM Student WHERE Age > 15)
       UNION
-      (SELECT * FROM Student WHERE Age < 18)
+      (SELECT * FROM Student WHERE Age < 18);
 
 section.center
   pre
@@ -533,7 +532,7 @@ section.center
       +----+------------+-----------+-----+-------------------+
 
 section.center
-  pre
+  pre: code.sql
     '
       (SELECT * FROM Student WHERE Age > 16)
       INTERSECT
@@ -549,7 +548,7 @@ section.center
       +----+------------+-----------+-----+-------------------+
 
 section.center
-  pre
+  pre: code.sql
     '
       (SELECT * FROM Student WHERE Age > 15)
       EXCEPT
@@ -596,9 +595,9 @@ section.center
 
 section.center
   p Retrieve all student along with the school they go to
-  pre
-  '
-    SELECT * FROM Student LEFT [OUTER] JOIN School ON Student.Id=School.StudentId
+  pre: code.sql
+    '
+      SELECT * FROM Student LEFT [OUTER] JOIN School ON Student.Id=School.StudentId;
 
 section.center
   pre
@@ -613,9 +612,9 @@ section.center
 
 section.center
   p Retrieve all schools along with their students
-  pre
-  '
-    SELECT * FROM Student RIGHT [OUTER] JOIN School ON Student.Id=School.StudentId
+  pre: code.sql
+    '
+      SELECT * FROM Student RIGHT [OUTER] JOIN School ON Student.Id=School.StudentId;
 
 section.center
   pre
@@ -630,9 +629,9 @@ section.center
 
 section.center
   p Retrieve all students and matching schools
-  pre
-  '
-    SELECT * FROM Student JOIN School ON Student.Id=School.StudentId
+  pre: code.sql
+    '
+      SELECT * FROM Student JOIN School ON Student.Id=School.StudentId;
 
 section.center
   pre
@@ -646,12 +645,12 @@ section.center
 
 section.center
   p Retrieve all schools and all students, keeping relations
-  pre
-  '
-    SELECT * FROM Student FULL [OUTER] JOIN School ON Student.Id=School.StudentId
+  pre: code.sql
+    '
+      SELECT * FROM Student FULL [OUTER] JOIN School ON Student.Id=School.StudentId;
 
 section.center
-  pre
+  pre: code.sql
     '
       +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
       | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
@@ -664,9 +663,9 @@ section.center
 
 section.center
   p Retrieve Cartesian product of all schools and all students
-  pre
+  pre: code.sql
   '
-    SELECT * FROM Student CROSS JOIN School ON Student.Id=School.StudentId
+    SELECT * FROM Student CROSS JOIN School ON Student.Id=School.StudentId;
 
 section.center
   pre
@@ -692,7 +691,7 @@ section.center
   p Virtual tables
 
 section.center
-  pre
+  pre: code.sql
   '
     CREATE VIEW LegalStudents AS SELECT FirstName, LastName FROM Student WHERE Age > 18;
 
@@ -710,12 +709,12 @@ section.center
       +------------+-----------+
 
 section.center
-  pre
+  pre: code.sql
   '
     SELECT * FROM LegalStudents;
 
 section.center
-  pre
+  pre: code.sql
   '
     CREATE OR REPLACE VIEW LegalStudents AS SELECT FirstName, Address FROM Student WHERE Age > 18;
 
@@ -733,9 +732,9 @@ section.center
       +------------+-----------------+
 
 section.center
-  pre
-  '
-    DROP VIEW LegalStudents;
+  pre: code.sql
+    '
+      DROP VIEW LegalStudents;
 
 section.center
   h2 Aggregates
@@ -757,9 +756,9 @@ section.center
       +----+------------+-----------+-----+-----------------+
 
 section.center
-  pre
-  '
-    SELECT COUNT(*) FROM Student
+  pre: code.sql
+    '
+      SELECT COUNT(*) FROM Student;
 
 section.center
   pre
@@ -769,9 +768,9 @@ section.center
       +---+
 
 section.center
-  pre
-  '
-    SELECT AVG (Age) as Average FROM Student
+  pre: code.sql
+    '
+      SELECT AVG (Age) as Average FROM Student;
 
 section.center
   pre
@@ -799,9 +798,9 @@ section.center
       +------------+------------------+
 
 section.center
-  pre
-  '
-    SELECT COUNT(DISTINCT SchoolName) FROM School
+  pre: code.sql
+    '
+      SELECT COUNT(DISTINCT SchoolName) FROM School
 
 section.center
   pre
@@ -827,9 +826,9 @@ section.center
       +----+------------+-----------+-----+-----------------+
 
 section.center
-  pre
-  '
-    SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address
+  pre: code.sql
+    '
+      SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address
 
 section.center
   pre
@@ -851,9 +850,9 @@ section.center
   p We cannot use aggregates in the WHERE clause, that's why we have HAVING
 
 section.center
-  pre
-  '
-    SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address HAVING CompositeAge > 30
+  pre: code.sql
+    '
+      SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address HAVING CompositeAge > 30
 
 section.center
   pre
@@ -865,9 +864,9 @@ section.center
       +-----------------+--------------+
 
 section.center
-  pre
-  '
-    SELECT ... FROM ... JOIN ... ON ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...
+  pre: code.sql
+    '
+      SELECT ... FROM ... JOIN ... ON ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...
 
 section.center
   p Back to our microblogs
