@@ -18,6 +18,18 @@ section.center data-background="#F00"
 section.center data-background="#F00"
   h2.white How can you serve content at a specific URL using Sinatra?
 
+section.center data-background="#FF0"
+  h2 Warning
+
+section.center data-background="#FF0"
+  p Lots of tables in this lecture!
+
+section.center data-background="#FF0"
+  p And we don't even know
+
+section.center data-background="#FF0"
+  p what we are talking about.
+
 section.center
   h2 The right weapon
   p
@@ -460,6 +472,16 @@ section.center
       | Somebody        | 17  |
       +-----------------+-----+
 
+section.center
+  h2 Commit a transaction
+  pre
+    '
+      BEGIN TRANSACTION;
+      CREATE TABLE Student(FirstName VARCHAR(255), LastName VARCHAR(255), Age INTEGER, Address VARCHAR(255));
+      INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Joe', 'Somebody', 17, 'Allen Street');
+      INSERT INTO Student(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+      COMMIT;
+
 section.center data-background="#FFAED6"
   h2 So why relational?
 
@@ -576,6 +598,58 @@ section.center
       | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 3        | NULL             | NULL             | NULL       |
       | NULL | NULL       | NULL      | NULL | NULL            | 5        | Northview School | Fulton Street    | Primary    |
       +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+
+section.center
+  h2 Views
+
+section.center
+  h2 View are virtual tables
+
+section.center
+  pre
+    '
+      CREATE VIEW LegalStudents AS SELECT FirstName, LastName FROM Student WHERE Age > 18;
+
+section.center
+  pre
+    '
+      +------------------------+
+      |     LegalStudents      |
+      +------------+-----------+
+      | FirstName  | LastName  |
+      +------------+-----------+
+      | Joe        | Somebody  |
+      | Darrel     | Addington |
+      | Dwenn      | Charlton  |
+      +------------+-----------+
+
+section.center
+  pre
+    '
+      SELECT * FROM LegalStudents;
+
+section.center
+  pre
+    '
+      CREATE OR REPLACE VIEW LegalStudents AS SELECT FirstName, Address FROM Student WHERE Age > 18;
+
+section.center
+  pre
+    '
+      +------------------------------+
+      |        LegalStudents         |
+      +------------+-----------------+
+      | FirstName  | Address         |
+      +------------+-----------------+
+      | Joe        | Allen Street    |
+      | Darrel     | Bleecker Street |
+      | Dwenn      | Lenox Avenue    |
+      +------------+-----------------+
+
+section.center
+  pre
+    '
+      DROP VIEW LegalStudents;
 
 section.center
   h2 Back to our microblogs
