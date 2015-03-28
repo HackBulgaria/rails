@@ -316,15 +316,15 @@ section.center
 
 section.center
   h2 Creating a table
-  pre
+  pree
   '
-    CREATE TABLE Students(PersonID int, FirstName varchar(255), LastName varchar(255), Address varchar(255));
+    CREATE TABLE Students(Id INTEGER, FirstName VARCHAR(255), LastName VARCHAR(255), Address VARCHAR(255));
 
 section.center
   h2 Changing a table
   pre
   '
-    ALTER TABLE Students ADD Grade int;
+    ALTER TABLE Students ADD Grade INTEGER;
 
 section.center
   h2 Dropping the entries in a table
@@ -361,10 +361,35 @@ section.center
   p for inserting, retrieving and altering data
 
 section.center
+  pre
+    '
+      +-----------------------------------------------------+
+      |                      Student                        |
+      +----+------------+-----------+-----+-----------------+
+      | Id | FirstName  | LastName  | Age | Address         |
+      +----+------------+-----------+-----+-----------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street    |
+      | 2  | Darrel     | Addington | 15  | Bleecker Street |
+      +----+------------+-----------+-----+-----------------+
+
+section.center
   h2 Inserting a record
   pre
   '
-    INSERT INTO Students VALUES ('Ryan', 'Ramsey', 'Fulton Street', 22);
+    INSERT INTO Students(FirstName, LastName, Age, Address) VALUES ('Dwenn', 'Charlton', 18, 'Lenox Avenue');
+
+section.center
+  pre
+    '
+      +-----------------------------------------------------+
+      |                      Student                        |
+      +----+------------+-----------+-----+-----------------+
+      | Id | FirstName  | LastName  | Age | Address         |
+      +----+------------+-----------+-----+-----------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street    |
+      | 2  | Darrel     | Addington | 15  | Bleecker Street |
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue    |
+      +----+------------+-----------+-----+-----------------+
 
 section.center
   h2 Updating records
@@ -375,16 +400,65 @@ section.center
     WHERE FirstName='Darrel' AND SecondName='Addington';
 
 section.center
+  pre
+    '
+      +-------------------------------------------------------+
+      |                        Student                        |
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      | 2  | Darrel     | Addington | 16  | Washington Street |
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue      |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
   h2 Deleting records
   pre
   '
     DELETE FROM Students WHERE Id=3;
 
 section.center
+  pre
+    '
+      +-------------------------------------------------------+
+      |                        Student                        |
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      | 2  | Darrel     | Addington | 16  | Washington Street |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
   h2 Retrieving records
   pre
   '
     SELECT * FROM Students WHERE FirstName='Joe';
+
+section.center
+  pre
+    '
+      +----+------------+-----------+-----+-------------------+
+      | Id | FirstName  | LastName  | Age | Address           |
+      +----+------------+-----------+-----+-------------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street      |
+      +----+------------+-----------+-----+-------------------+
+
+section.center
+  h2 Retrieving records
+  pre
+  '
+    SELECT LastName, Age FROM Students WHERE FirstName='Joe';
+
+section.center
+  pre
+    '
+      +-----------------+-----+
+      | LastName        | Age |
+      +-----------------+-----+
+      | Somebody        | 17  |
+      +-----------------+-----+
 
 section.center data-background="#FFAED6"
   h2 So why relational?
