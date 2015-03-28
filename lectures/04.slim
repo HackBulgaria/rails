@@ -313,10 +313,12 @@ section.center
   p Summer of '86
 
 section.center
-  p SQL = DDL + DML
+  p
+    '
+      SQL = DDL + DML
 
 section.center
-  h2 Data Definiton Language
+  h2 Data Definition Language
   p for defining data models and relations
 
 section.center
@@ -692,8 +694,8 @@ section.center
 
 section.center
   pre: code.sql
-  '
-    CREATE VIEW LegalStudents AS SELECT FirstName, LastName FROM Student WHERE Age > 18;
+    '
+      CREATE VIEW LegalStudents AS SELECT FirstName, LastName FROM Student WHERE Age > 18;
 
 section.center
   pre
@@ -710,13 +712,13 @@ section.center
 
 section.center
   pre: code.sql
-  '
-    SELECT * FROM LegalStudents;
+    '
+      SELECT * FROM LegalStudents;
 
 section.center
   pre: code.sql
-  '
-    CREATE OR REPLACE VIEW LegalStudents AS SELECT FirstName, Address FROM Student WHERE Age > 18;
+    '
+      CREATE OR REPLACE VIEW LegalStudents AS SELECT FirstName, Address FROM Student WHERE Age > 18;
 
 section.center
   pre
