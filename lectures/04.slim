@@ -85,6 +85,19 @@ section.center
 section.center
   h2 A table packs entities with common attributes
 
+section
+  pre
+    '
+      +------------------------------------------------+
+      |               Student                          |
+      +------------+-----------+-----+-----------------+
+      | FirstName  | LastName  | Age | Address         |
+      +------------+-----------+-----+-----------------+
+      | Joe        | Somebody  | 17  | Allen Street    |
+      | Darrel     | Addington | 15  | Bleecker Street |
+      | Dwenn      | Charlton  | 18  | Lenox Avenue    |
+      +------------+-----------+-----+-----------------+
+
 section.center
   h2 Attribute data types
   p TEXT, INTEGER, NUMERIC, REAL, NONE
@@ -146,19 +159,6 @@ section.center
       +-----------+-----------------------+
       | BLOB      | Equivalent to NONE    |
       +-----------+-----------------------+
-
-section
-  pre
-    '
-      +------------------------------------------------+
-      |               Student                          |
-      +------------+-----------+-----+-----------------+
-      | FirstName  | LastName  | Age | Address         |
-      +------------+-----------+-----+-----------------+
-      | Joe        | Somebody  | 17  | Allen Street    |
-      | Darrel     | Addington | 15  | Bleecker Street |
-      | Dwenn      | Charlton  | 18  | Lenox Avenue    |
-      +------------+-----------+-----+-----------------+
 
 section.center
   h2 Relating tables
@@ -316,7 +316,7 @@ section.center
 
 section.center
   h2 Creating a database
-  pre: code.sql
+  pre
   '
     CREATE DATABASE school;
 
@@ -328,7 +328,7 @@ section.center
 
 section.center
   h2 Creating a table
-  pree
+  pre
   '
     CREATE TABLE Student(Id INTEGER, FirstName VARCHAR(255), LastName VARCHAR(255), Address VARCHAR(255));
 
@@ -475,8 +475,8 @@ section.center
 section.center
   h2 Ordering results
   pre
-    '
-      SELECT * FROM Student ORDER BY Age DESC;
+  '
+    SELECT * FROM Student ORDER BY Age DESC;
 
 section.center
   pre
@@ -585,8 +585,8 @@ section.center
 section.center
   h2 Retrieve all student along with the school they go to
   pre
-    '
-      SELECT * FROM Student LEFT [OUTER] JOIN School ON Student.Id=School.StudentId
+  '
+    SELECT * FROM Student LEFT [OUTER] JOIN School ON Student.Id=School.StudentId
 
 section.center
   pre
@@ -602,8 +602,8 @@ section.center
 section.center
   h2 Retrieve all schools along with their students
   pre
-    '
-      SELECT * FROM Student RIGHT [OUTER] JOIN School ON Student.Id=School.StudentId
+  '
+    SELECT * FROM Student RIGHT [OUTER] JOIN School ON Student.Id=School.StudentId
 
 section.center
   pre
@@ -619,8 +619,8 @@ section.center
 section.center
   h2 Retrieve all students and matching schools
   pre
-    '
-      SELECT * FROM Student JOIN School ON Student.Id=School.StudentId
+  '
+    SELECT * FROM Student JOIN School ON Student.Id=School.StudentId
 
 section.center
   pre
@@ -635,8 +635,26 @@ section.center
 section.center
   h2 Retrieve all schools and all students, keeping relations
   pre
+  '
+    SELECT * FROM Student FULL [OUTER] JOIN School ON Student.Id=School.StudentId
+
+section.center
+  pre
     '
-      SELECT * FROM Student FULL [OUTER] JOIN School ON Student.Id=School.StudentId
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+      | 1    | Joe        | Somebody  | 17   | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
+      | 2    | Darrel     | Addington | 15   | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
+      | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 3        | NULL             | NULL             | NULL       |
+      | NULL | NULL       | NULL      | NULL | NULL            | 5        | Northview School | Fulton Street    | Primary    |
+      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
+
+section.center
+  h2 Retrieve cartesian product of all schools and all students
+  pre
+  '
+    SELECT * FROM Student CROSS JOIN School ON Student.Id=School.StudentId
 
 section.center
   pre
@@ -656,24 +674,6 @@ section.center
       +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
 
 section.center
-  h2 Retrieve cartesian product of all schools and all students
-  pre
-    '
-      SELECT * FROM Student CROSS JOIN School ON Student.Id=School.StudentId
-
-section.center
-  pre
-    '
-      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
-      | Id   | FirstName  | LastName  | Age  | Address         |StudentId | SchoolName       | SchoolAddress    | SchoolType |
-      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
-      | 1    | Joe        | Somebody  | 17   | Allen Street    | 1        | Southview School | Ludlow Street    | Secondary  |
-      | 2    | Darrel     | Addington | 15   | Bleecker Street | 2        | Westview School  | Rivington Street | Primary    |
-      | 3    | Dwenn      | Charlton  | 18   | Lenox Avenue    | 3        | NULL             | NULL             | NULL       |
-      | NULL | NULL       | NULL      | NULL | NULL            | 5        | Northview School | Fulton Street    | Primary    |
-      +------+------------+-----------+------+-----------------+----------+------------------+------------------+------------+
-
-section.center
   h2 Views
 
 section.center
@@ -681,8 +681,8 @@ section.center
 
 section.center
   pre
-    '
-      CREATE VIEW LegalStudents AS SELECT FirstName, LastName FROM Student WHERE Age > 18;
+  '
+    CREATE VIEW LegalStudents AS SELECT FirstName, LastName FROM Student WHERE Age > 18;
 
 section.center
   pre
@@ -699,13 +699,13 @@ section.center
 
 section.center
   pre
-    '
-      SELECT * FROM LegalStudents;
+  '
+    SELECT * FROM LegalStudents;
 
 section.center
   pre
-    '
-      CREATE OR REPLACE VIEW LegalStudents AS SELECT FirstName, Address FROM Student WHERE Age > 18;
+  '
+    CREATE OR REPLACE VIEW LegalStudents AS SELECT FirstName, Address FROM Student WHERE Age > 18;
 
 section.center
   pre
@@ -722,8 +722,8 @@ section.center
 
 section.center
   pre
-    '
-      DROP VIEW LegalStudents;
+  '
+    DROP VIEW LegalStudents;
 
 section.center
   h2 Agregates
@@ -746,8 +746,8 @@ section.center
 
 section.center
   pre
-    '
-      SELECT COUNT(*) FROM Student
+  '
+    SELECT COUNT(*) FROM Student
 
 section.center
   pre
@@ -758,8 +758,8 @@ section.center
 
 section.center
   pre
-    '
-      SELECT AVG (Age) as Average FROM Student
+  '
+    SELECT AVG (Age) as Average FROM Student
 
 section.center
   pre
@@ -787,7 +787,9 @@ section.center
       +------------+------------------+
 
 section.center
-  h2 SELECT COUNT(DISTINCT SchoolName) FROM School
+  pre
+  '
+    SELECT COUNT(DISTINCT SchoolName) FROM School
 
 section.center
   pre
@@ -813,7 +815,9 @@ section.center
       +----+------------+-----------+-----+-----------------+
 
 section.center
-  h2 SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address
+  pre
+  '
+    SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address
 
 section.center
   pre
@@ -835,7 +839,9 @@ section.center
   h2 We cannot use agregates in the WHERE clause, that's why we have HAVING
 
 section.center
-  h2 SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address HAVING CompositeAge > 30
+  pre
+  '
+    SELECT Address, SUM(Age) AS CompositeAge FROM Student GROUP BY Address HAVING CompositeAge > 30
 
 section.center
   pre
@@ -847,7 +853,9 @@ section.center
       +-----------------+--------------+
 
 section.center
-  h2 SELECT ... FROM ... JOIN ... ON ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...
+  pre
+  '
+    SELECT ... FROM ... JOIN ... ON ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...
 
 section.center
   h2 Back to our microblogs
