@@ -652,6 +652,77 @@ section.center
       DROP VIEW LegalStudents;
 
 section.center
+  h2 Agregating
+
+section.center
+  h2 SUM, AVG, MIN, MAX, COUNT
+
+section.center
+  pre
+    '
+      +-----------------------------------------------------+
+      |                      Student                        |
+      +----+------------+-----------+-----+-----------------+
+      | Id | FirstName  | LastName  | Age | Address         |
+      +----+------------+-----------+-----+-----------------+
+      | 1  | Joe        | Somebody  | 17  | Allen Street    |
+      | 2  | Darrel     | Addington | 15  | Bleecker Street |
+      | 3  | Dwenn      | Charlton  | 18  | Lenox Avenue    |
+      +----+------------+-----------+-----+-----------------+
+
+section.center
+  pre
+    '
+      SELECT COUNT(*) FROM Student
+
+section.center
+  pre
+    '
+      +---+
+      | 3 |
+      +---+
+
+section.center
+  pre
+    '
+      SELECT AVG (Age) as Average FROM Student
+
+section.center
+  pre
+    '
+      +---------+
+      | Average |
+      +---------+
+      | 16.6667 |
+      +---------+
+
+section.center
+  h2 DISTINCT
+
+section.center
+  pre
+    '
+      +-------------------------------+
+      |            School             |
+      +------------+------------------+
+      | StudentId  | SchoolName       |
+      +------------+------------------+
+      | 1          | Southview School |
+      | 2          | Westview School  |
+      | 3          | Southview School |
+      +------------+------------------+
+
+section.center
+  h2 SELECT COUNT(DISTINCT SchoolName) FROM School
+
+section.center
+  pre
+    '
+      +---+
+      | 2 |
+      +---+
+
+section.center
   h2 Back to our microblogs
 
 section.center
