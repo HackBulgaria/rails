@@ -5,7 +5,7 @@ category: posts
 ---
 
 Besides being the first Ruby killer app (well, library),
-Ruby on Rails was one of the first open-source project to
+Ruby on Rails was one of the first open-source projects to
 not consider marketing as a bad word.
 
 Checkout one of the first videos on Ruby on Rails from over
