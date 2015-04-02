@@ -1,6 +1,6 @@
 ---
 layout: post
-title: No Class on 11th of April
+title: No Classes During Easter
 category: posts
 ---
 
@@ -9,7 +9,7 @@ Hello my dearest friends. I'm writing here to inform you that I haven't read
 badly as I do. See all those extra words? They don't add any value.
 
 Anyway, what does add value in this post is that we'll celebrate Easter and
-there won't be any class on 11th of April.
+there won't be any classes on 9th and 11th of April.
 
 Please, spend some time with your loved ones and don't knock on our doors.
 We'll be pissed!
