@@ -212,3 +212,7 @@ body {
 
 .reveal .right {
   float: right; }
+
+.reveal .nonpixel {
+  font-family: "Lato", sans-serif;
+ }
