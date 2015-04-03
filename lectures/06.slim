@@ -4,43 +4,233 @@ title: Views
 ---
 
 section.center data-background="#000"
+  h1.white Presentation
+
+section.center data-background="#F00"
+  h1.white Architecture
+
+section.center data-background="#F00"
+  h1.white Three Layer Architecture
+
+section.center data-background="#F00"
+  h1.white 3-Tier Architecture
+
+section.center
+  pre
+    '
+      Data
+
+section.center
+  pre
+    '
+      Data => Application
+
+section.center
+  pre
+    '
+      Data => Application => Presentation
+
+section.center data-background="#000"
+  h1.white MVC
+
+section.center data-background="#000"
+  h1.white M   View   C
+
+section.center data-background="#000"
   h1.white Views
 
 section.center data-background="#000"
-  h1.white Presentation
+  h1.white The end product of your application
 
 section.center data-background="#000"
-  h1.white The client side of the street
+  h1.white Interface for the client
 
 section.center data-background="#000"
-  h1.white Response is HTML
+  h1.white Views != HTML
+
+section.center data-background="#000"
+  h1.white Views != Text
+
+section.center data-background="#000"
+  h1.white Let's talk about Rails
+
+section.center data-background="#000"
+  h1.white How does Rails respond to a HTTP request?
+
+section.center data-background="#000"
+  p.white gem 'actionpack', '~> 4.2.1'
+
+section.center data-background="#000"
+  p.white https://github.com/rails/rails/tree/master/actionpack
+
+section.center data-background="#000"
+  p.white Action Pack = Action [Dispatch|Controller|View]
+
+section.center data-background="#000"
+  h1.white Action View
+
+section.center data-background="#000"
+  h1.white Building a response for the client
 
 section.center data-background="#000"
   h1.white Response is generated from templates
 
 section.center data-background="#000"
-  h1.white ActionController::Base#render
+  p.white app/views
 
 section.center
-  h1 text, html, json, xml
+  pre
+    '
+      rails generate scaffold post
 
 section.center
-  h1 render nothing: true
+  pre
+    '
+      ...
+      invoke  scaffold_controller
+      create    app/controllers/posts_controller.rb
+      invoke    erb
+      create      app/views/posts
+      create      app/views/posts/index.html.erb
+      create      app/views/posts/edit.html.erb
+      create      app/views/posts/show.html.erb
+      create      app/views/posts/new.html.erb
+      create      app/views/posts/_form.html.erb
+      ...
+      create      app/views/posts/index.json.jbuilder
+      create      app/views/posts/show.json.jbuilder
+      ...
+
+section.center
+  h1 Controller actions and views share names
 
 section.center data-background="#000"
-  h1.white render with :inline
+  h1.white View composition
 
 section.center data-background="#000"
-  h1.white Conventions
+  h1.white Templates
+
+section.center
+  h1 erb
+
+section.center
+  h1 Alternatives
+
+section.center
+  pre: code.ruby
+    '
+      gem "haml-rails"
+
+section.center
+  pre: code.ruby
+    '
+      gem "slim-rails"
+
+section.center
+  h1 Compiled and cached
+
+section.center
+  h1 Recompiled on change
 
 section.center data-background="#000"
-  h1.white Rendering by default
+  h1.white Partials
+
+section.center
+  h1 Reusable templates templates
+
+section.center
+  pre: code.erb
+    <%= render "common/sidebar" %>
+
+section.center
+  p Will render view defined in "app/views/common/_sidebar.html.erb"
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "post", locals: {post: @post} %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "post", as: "article" %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "post", locals: {post: @article} %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "post", object: @article %>
+
+section.center
+  pre: code.erb
+    '
+      <% @posts.each do |post| %>
+        <%= render partial: "post", locals: {post: post} %>
+      <% end %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "post", collection: @posts %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render @posts %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: @posts, spacer_template: "post_separator" %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render "shared/header" %>
+
+      My awesome web page!
+
+      <%= render "shared/footer" %>
 
 section.center data-background="#000"
   h1.white Layouts
 
-section.center data-background="#000"
-  h1.white Partials
+section.center
+  p Like, if you consider the view displayed from a controller action a partial
+
+section.center
+  p One layout is common for many controller actions
+
+section.center
+  p Just like one partial is common for many views
+
+section.center
+  p Partials could be wrapped in a layout too
+
+section.center
+  pre: code.erb
+    '
+      <div id="title">...</div>
+
+      <%= yield %>
+
+      <div id="comments">
+        ...
+      </div>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: 'article', layout: 'post', locals: {article: @article} %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: 'video', layout: 'post', locals: {video: @video} %>
 
 section.center
   img.inline src="/images/hackman.png"
