@@ -10,10 +10,10 @@ section.center data-background="#F00"
   h1.white Architecture
 
 section.center data-background="#F00"
-  h1.white Three Layer Architecture
+  p.white Three Layer Architecture
 
 section.center data-background="#F00"
-  h1.white 3-Tier Architecture
+  p.white 3-Tier Architecture
 
 section.center
   pre
@@ -40,40 +40,45 @@ section.center data-background="#000"
   h1.white Views
 
 section.center data-background="#000"
-  h1.white The end product of your application
+  p.white The end product of your application
 
 section.center data-background="#000"
-  h1.white Interface for the client
+  p.white Interface for the client
 
 section.center data-background="#000"
-  h1.white Views != HTML
+  p.white Views are not HTML only
 
-section.center data-background="#000"
-  h1.white Views != Text
+section.center
+  p Views could be json, xml, plain text, etc...
+
+section.center
+  p They are the "face" of your application
 
 section.center data-background="#000"
   h1.white Let's talk about Rails
 
 section.center data-background="#000"
-  h1.white How does Rails respond to a HTTP request?
+  p.white How does Rails respond to an HTTP request?
 
-section.center data-background="#000"
-  p.white gem 'actionpack', '~> 4.2.1'
-
-section.center data-background="#000"
-  p.white https://github.com/rails/rails/tree/master/actionpack
-
-section.center data-background="#000"
-  p.white Action Pack = Action [Dispatch|Controller|View]
+section.center
+  p It routes the request to a specific chunk of code and lets it build the response
 
 section.center data-background="#000"
   h1.white Action View
 
-section.center data-background="#000"
-  h1.white Building a response for the client
+section.center data-background="/images/action_stallone.jpg"
 
 section.center data-background="#000"
-  h1.white Response is generated from templates
+  p.white gem 'actionview', '~> 4.2.1'
+
+section.center data-background="#000"
+  p.white https://github.com/rails/rails/tree/master/actionview
+
+section.center
+  p Building a response for the client
+
+section.center
+  p Response is generated from templates and builders
 
 section.center data-background="#000"
   p.white app/views
@@ -102,10 +107,16 @@ section.center
       ...
 
 section.center
-  h1 Controller actions and views share names
+  p Controller actions and views share names
+
+section.center
+  p Coincidence? Nope, convention.
 
 section.center data-background="#000"
   h1.white View composition
+
+section.center
+  p Building complex presentation without duplication
 
 section.center data-background="#000"
   h1.white Templates
@@ -126,24 +137,70 @@ section.center
     '
       gem "slim-rails"
 
-section.center
-  h1 Compiled and cached
-
-section.center
-  h1 Recompiled on change
-
 section.center data-background="#000"
   h1.white Partials
 
 section.center
-  h1 Reusable templates templates
+  p Reusable templates
+
+section.center
+  p If you call <%= render "info" %>
+
+section.center
+  p In "app/views/posts/index.html.erb"
+
+section.center
+  p This will render "app/views/posts/_info.html.erb"
 
 section.center
   pre: code.erb
     <%= render "common/sidebar" %>
 
 section.center
-  p Will render view defined in "app/views/common/_sidebar.html.erb"
+  p Will render the view defined in "app/views/common/_sidebar.html.erb"
+
+section.center
+  p If you want to render a partial from a sub-directory you have to reference it with its full path
+
+section.center
+  pre
+    '
+      ...
+      app:
+        views:
+          posts:
+            common:
+              _info.html.erb
+            index.html.erb
+            new.html.erb
+            ...
+          ...
+        ...
+      ...
+
+section.center
+  pre: code.erb
+    <%= render "posts/common/info" %>
+
+section.center
+  pre: code.erb
+    '
+      <%= render "shared/header" %>
+
+      <p>My awesome web page!</p>
+
+      <%= render "shared/footer" %>
+
+section.center
+  p Passing local variables
+
+section.center
+  pre: code.erb
+    '
+      <%= render "post", post: @post %>
+
+section.center
+  p A shorter form of
 
 section.center
   pre: code.erb
@@ -153,17 +210,39 @@ section.center
 section.center
   pre: code.erb
     '
+      <%= render @post %>
+
+section.center
+  p Is equivalent to
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "posts/post", locals: {post: @post} %>
+
+section.center
+  p Where @post.to_partial_path returns the path to the partial for the post object
+
+section.center
+  pre: code.erb
+    '
       <%= render partial: "post", as: "article" %>
 
 section.center
   pre: code.erb
     '
-      <%= render partial: "post", locals: {post: @article} %>
+      <%= render partial: "post", locals: {article: @article} %>
+
+section.center
+  p Is equivalent to
 
 section.center
   pre: code.erb
     '
       <%= render partial: "post", object: @article %>
+
+section.center
+  p When rendering collection of items
 
 section.center
   pre: code.erb
@@ -173,9 +252,15 @@ section.center
       <% end %>
 
 section.center
+  p Is the same as
+
+section.center
   pre: code.erb
     '
       <%= render partial: "post", collection: @posts %>
+
+section.center
+  p We could do
 
 section.center
   pre: code.erb
@@ -183,18 +268,31 @@ section.center
       <%= render @posts %>
 
 section.center
-  pre: code.erb
-    '
-      <%= render partial: @posts, spacer_template: "post_separator" %>
+  p Relying on #to_partial_path to find the partial for each object
+
+section.center
+  p And this works for heterogeneous collections
 
 section.center
   pre: code.erb
     '
-      <%= render "shared/header" %>
+      <h1>Posts of <%= @user.name %></h1>
+      <%= render @user.posts %>
 
-      My awesome web page!
+section.center
+  pre
+    '
+      app/views/articles/_article.html.erb
+      app/views/videos/_video.html.erb
+      app/views/images/_image.html.rb
 
-      <%= render "shared/footer" %>
+section.center
+  p We could insert something between two rendered partials with
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: @posts, spacer_template: "post_separator" %>
 
 section.center data-background="#000"
   h1.white Layouts
@@ -231,6 +329,11 @@ section.center
   pre: code.erb
     '
       <%= render partial: 'video', layout: 'post', locals: {video: @video} %>
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/action_view_overview.html") ActionView
+  p: a(href="http://guides.rubyonrails.org/layouts_and_rendering.html") Layouts and rendering
+  p: a(href="http://guides.rubyonrails.org/form_helpers.html") Form helpers
 
 section.center
   img.inline src="/images/hackman.png"
