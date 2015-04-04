@@ -1,6 +1,6 @@
 ---
 layout: lecture
-title: Views
+title: Presentation
 ---
 
 section.center data-background="#000"
@@ -29,6 +29,15 @@ section.center
   pre
     '
       Data => Application => Presentation
+
+section.center data-background="#AED6FF"
+  p.white Good code is clean code
+
+section.center data-background="#AED6FF"
+  p.white Good code is cleanable code
+
+section.center data-background="#AED6FF"
+  p.white Good code is code that adapts to change
 
 section.center data-background="#000"
   h1.white MVC
@@ -112,6 +121,131 @@ section.center
 section.center
   p Coincidence? Nope, convention.
 
+section.center data-background="#D6EEAE"
+  p And yes, "app/views/posts/show.json.jbuilder" is a view too...
+
+section.center
+  p Controller actions render by default
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+
+        # GET /posts
+        def index
+          @posts = Post.all
+        end
+      end
+
+section.center
+  pre: code.ruby
+    '
+      Rails.application.routes.draw do
+        resources :posts
+      end
+
+section.center
+  p GET /posts will result in rendering "app/views/posts/index.html.erb"
+
+section.center
+  pre: code.erb
+    '
+      <h1>Listing Posts</h1>
+
+      <% @posts.each do |post| %>
+        <p>
+          <%= post.content %>
+        </p>
+      <% end %>
+
+section.center data-background="#4986e7"
+  p.white Note that @instance variables are passed automagically to the view
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        def index
+          @posts = Post.all
+          render nothing: true
+        end
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        def index
+          @posts = Post.all
+          render nothing: true, status: 404
+        end
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        def index
+          @posts = Post.all
+          render nothing: true, status: :not_found
+        end
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        def update
+          @post = Post.find(params[:id])
+          if @post.update(post_params)
+            render "show"
+          else
+            render "edit"
+          end
+        end
+      end
+
+section.center
+  pre: code.ruby
+    '
+      render "articles/info"
+
+section.center
+  p Will render "app/views/articles/info"
+
+section.center
+  pre: code.ruby
+    '
+      render inline: "<% posts.each do |post| %><p><%= post.content %></p><% end %>"
+
+section.center data-background="#ff4c4f"
+  p.white Better use a template
+
+section.center
+  p Rendering plain text
+
+section.center
+  pre: code.ruby
+    '
+      render plain: "Just some text. Nothing special."
+
+section.center
+  p Rendering json
+
+section.center
+  pre: code.ruby
+    '
+      render json: @post
+
+section.center
+  p Relies on the #to_json methond of the object
+
+section.center
+  pre: code.ruby
+    '
+      render xml: @post
+
 section.center data-background="#000"
   h1.white View composition
 
@@ -142,6 +276,15 @@ section.center data-background="#000"
 
 section.center
   p Reusable templates
+
+section.center
+  pre: code.erb
+    '
+      <%= render "shared/header" %>
+
+      <p>My awesome web page!</p>
+
+      <%= render "shared/footer" %>
 
 section.center
   p If you call <%= render "info" %>
@@ -183,15 +326,6 @@ section.center
     <%= render "posts/common/info" %>
 
 section.center
-  pre: code.erb
-    '
-      <%= render "shared/header" %>
-
-      <p>My awesome web page!</p>
-
-      <%= render "shared/footer" %>
-
-section.center
   p Passing local variables
 
 section.center
@@ -226,12 +360,7 @@ section.center
 section.center
   pre: code.erb
     '
-      <%= render partial: "post", as: "article" %>
-
-section.center
-  pre: code.erb
-    '
-      <%= render partial: "post", locals: {article: @article} %>
+      <%= render partial: "post", locals: {post: @article} %>
 
 section.center
   p Is equivalent to
@@ -240,6 +369,14 @@ section.center
   pre: code.erb
     '
       <%= render partial: "post", object: @article %>
+
+section.center
+  p The name of the object could be changed this way
+
+section.center
+  pre: code.erb
+    '
+      <%= render partial: "post", as: "article" %>
 
 section.center
   p When rendering collection of items
@@ -329,6 +466,37 @@ section.center
   pre: code.erb
     '
       <%= render partial: 'video', layout: 'post', locals: {video: @video} %>
+
+section.center
+  p @instance variables vs. local variables
+
+section.center
+  p @instance variables are convinient for passing state from controller to the view
+
+section.center
+  p @instance variables in a partial will couple that partial with several controller actions
+
+section.center
+  p This reduces the reusability of the partial
+
+section.center
+  p I'd rather pass locals instead
+
+section.center
+  pre: code.ruby
+    '
+      <%= render 'post', post: embedded_player_for(@video) %>
+      <%= render 'post', post: @article.text %>
+      <%= render 'post', post: @image %>
+
+section.center data-background="#FF0"
+  p However
+
+section.center
+  p For controller specific partials @instance variables could turn out to be the better choice
+
+section.center
+  p render_to_string could be useful for debugging
 
 section.center
   p: a(href="http://guides.rubyonrails.org/action_view_overview.html") ActionView
