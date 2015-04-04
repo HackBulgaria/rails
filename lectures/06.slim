@@ -435,13 +435,117 @@ section.center data-background="#000"
   h1.white Layouts
 
 section.center
-  p Like, if you consider the view displayed from a controller action a partial
+  p Like, if you consider the view displayed from a controller action to be a partial
 
 section.center
   p One layout is common for many controller actions
 
 section.center
   p Just like one partial is common for many views
+
+section.center
+  p Views are rendered with some layout by default
+
+section.center
+  p app/views/layouts
+
+section.center
+  p It first looks for a controller-specific layout
+
+section.center
+  p app/views/layouts/posts.html.erb
+
+section.center
+  p If such is not present uses "app/views/layouts/application.html.erb"
+
+section.center
+  p Defaults could be changed
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        layout "article"
+        # ...
+      end
+
+section.center
+  p app/views/layouts/article.html.erb
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        layout "article", except: [:new, :edit]
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        layout false
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        layout proc { |controller| ... }
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class PostsController < ApplicationController
+        def new
+          render 'new', layout: 'article'
+        end
+      end
+
+section.center
+  pre: code.erb
+    '
+      <html>
+        <head>
+          ...
+        </head>
+        <body>
+          ...
+          <%= yield %>
+          ...
+        </body>
+      </html>
+
+section.center data-background="#4986e7"
+  p.white YIELD
+
+section.center
+  pre: code.erb
+    '
+      <html>
+        <head>
+          ...
+        </head>
+        <body>
+          <ul id="menu">
+            <%= yield :menu %>
+          </ul>
+          ...
+          <%= yield %>
+          ...
+        </body>
+      </html>
+
+section.center
+  pre: code.erb
+    '
+      <% content_for :menu do %>
+        <li>some</li>
+        <li>menu</li>
+        <li>items</li>
+      <% end %>
+
+      Main content goes here!
 
 section.center
   p Partials could be wrapped in a layout too
