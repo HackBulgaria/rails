@@ -63,7 +63,7 @@ section.center
 section.center
   p They are the "face" of your application
 
-section.center data-background="#000"
+section.center data-background="#F00"
   h1.white Let's talk about Rails
 
 section.center data-background="#000"
@@ -505,16 +505,16 @@ section.center
 section.center
   pre: code.erb
     '
-      <html>
-        <head>
+      < html>
+        < head>
           ...
         </head>
-        <body>
+        < body>
           ...
           <%= yield %>
           ...
-        </body>
-      </html>
+        < /body>
+      < /html>
 
 section.center data-background="#4986e7"
   p.white YIELD
@@ -522,19 +522,19 @@ section.center data-background="#4986e7"
 section.center
   pre: code.erb
     '
-      <html>
-        <head>
+      < html>
+        < head>
           ...
-        </head>
-        <body>
-          <ul id="menu">
+        < /head>
+        < body>
+          < ul id="menu">
             <%= yield :menu %>
-          </ul>
+          < /ul>
           ...
-          <%= yield %>
+          < %= yield %>
           ...
-        </body>
-      </html>
+        < /body>
+      < /html>
 
 section.center
   pre: code.erb
