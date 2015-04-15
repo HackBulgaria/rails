@@ -1,0 +1,111 @@
+---
+layout: lecture
+title: Presentation
+---
+
+section.center data-background="#000"
+  h1.white Piping
+
+section.center data-background="#F00"
+  h1.white Architecture
+
+section.center data-background="#F00"
+  p.white Three Layer Architecture
+
+section.center
+  pre
+    '
+      Data
+
+section.center
+  pre
+    '
+      Data => Application
+
+section.center
+  pre
+    '
+      Data => Application => Presentation
+
+section.center data-background="#000"
+  h1.white MVC
+
+section.center data-background="#000"
+  h1.white M   V   Controller
+
+section.center data-background="#000"
+  h1.white Controllers
+
+section.center data-background="#F00"
+  h1.white Let's talk about Rails
+
+section.center data-background="#000"
+  p.white How does Rails respond to an HTTP request?
+
+section.center
+  p It routes the request to a specific chunk of code and lets it build the response
+
+section.center
+  p What about that routing?
+
+section.center
+  pre
+    '
+      ###########
+      # Browser #
+      ###########
+           △
+           │
+           │
+           │
+           │
+           │
+           ▽
+      #############
+      # Rails app #
+      #############
+
+section.center
+  pre
+    '
+      ###########
+      # Browser #
+      ###########
+           △
+           │
+           │
+           │
+           │
+           │
+           ▽
+      #############         ##########
+      # Rails app # ◁────▷ # Router #
+      #############         ##########
+
+section.center
+  pre
+    '
+      ###########
+      # Browser #
+      ###########
+           △
+           │
+           │
+           │
+           │
+           │
+           ▽
+      #############         ##########
+      # Rails app # ◁────▷ # Router #
+      #############         ##########
+
+section.center data-background="#000"
+  h1.white Action Pack
+
+section.center data-background="/images/action_stallone.jpg"
+
+section.center data-background="#000"
+  p.white gem 'actionpack', '~> 4.2.1'
+
+section.center data-background="#000"
+  p.white https://github.com/rails/rails/tree/master/actionpack
