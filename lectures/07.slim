@@ -33,93 +33,249 @@ section.center data-background="#000"
 section.center data-background="#000"
   h1.white M   V   Controller
 
-section.center data-background="#000"
+section.center data-background="#D077ED"
   h1.white Controllers
 
 section.center data-background="#F00"
   h1.white Let's talk about Rails
 
-section.center data-background="#000"
+section.center data-background="#A1BED0"
   p.white How does Rails respond to an HTTP request?
 
 section.center
   p It routes the request to a specific chunk of code and lets it build the response
 
 section.center
-  p What about that routing?
+  p Wait, what about that routing?
 
 section.center
   pre
     '
-      ###########
-      # Browser #
-      ###########
+      #---------#
+      | Browser |
+      #---------#
 
 section.center
   pre
     '
-      ###########
-      # Browser #
-      ###########
+      #---------#
+      | Browser |
+      #---------#
            │
            │
            │
            │
            │
-      ############
-      #  Server  #
-      ############
+      #----------#
+      |  Server  |
+      #----------#
 
 section.center
   pre
     '
-      ###########
-      # Browser #
-      ###########
+      #---------#
+      | Browser |
+      #---------#
            │
            │
            │
            │
            │
-      #############
-      # Rails app #
-      #############
+      #-----------#
+      | Rails app |
+      #-----------#
 
 section.center
   pre
     '
-      ###########
-      # Browser #
-      ###########
+      #---------#
+      | Browser |
+      #---------#
            │
            │
            │
            │
            │
-      #############       ##########
-      # Rails app # ----- # Router #
-      #############       ##########
+      #-----------#       #--------#
+      | Rails app | ----- | Router |
+      #-----------#       #--------#
 
 section.center
   pre
     '
-      ###########
-      # Browser #
-      ###########                                ###########################
-           │                              ------ # Controller 1 > Action 1 #
-           │                             |       ###########################
+      #---------#
+      | Browser |
+      #---------#                                #-------------------------#
+           │                              ------ | Controller 1 # Action 1 |
+           │                             |       #-------------------------#
            │                             |
            │                             |
            │                             |
-      #############       ##########     |       ###########################
-      # Rails app # ----- # Router # ----------- # Controller 1 > Action 2 #
-      #############       ##########     |       ###########################
+      #-----------#       #--------#     |       #-------------------------#
+      | Rails app | ----- | Router | ----------- | Controller 1 # Action 2 |
+      #-----------#       #--------#     |       #-------------------------#
                                          |
                                          |
                                          |
-                                         |       ###########################
-                                          ------ # Controller 2 > Action 1 #
-                                                 ###########################
+                                         |       #-------------------------#
+                                          ------ | Controller 2 # Action 1 |
+                                                 #-------------------------#
+
+section.center data-background="#0B5E55"
+  h1.white routes.rb
+
+section.center
+  pre: code.ruby
+    '
+      get '/products/:id', to: 'products#show'
+
+section.center
+  p Invokes the show action of ProductsController
+
+section.center
+  p id goes to params
+
+section.center data-background="#1E55EE"
+  h1.white Resources
+
+section.center
+  p Super fast way for declaring actions on a web resource
+
+section.center
+  pre: code.ruby
+    '
+      resources :products
+
+section.center data-background="#FE110E"
+  h1.white Bang!!!
+
+section.center
+  pre
+    '
+      +------------------------------------------------------------------------------------------------------+
+      |                                     products resource                                                |
+      +------------+--------------------+-------------------+------------------------------------------------+
+      | HTTP VERB  | Path               | Controller#Action | Used for                                       |
+      +------------+--------------------+-------------------+------------------------------------------------+
+      | GET        | /products          | products#index    | display a list of all products                 |
+      | GET        | /products/new      | products#new      | return an HTML form for creating a new product |
+      | POST       | /products          | products#create   | create a new product                           |
+      | GET        | /products/:id      | products#show     | display a specific product                     |
+      | GET        | /products/:id/edit | products#edit     | return an HTML form for editing a product      |
+      | PATCH/PUT  | /products/:id      | products#update   | update a specific product                      |
+      | DELETE     | /products/:id      | products#destroy  | delete a specific product                      |
+      +------------+--------------------+-------------------+------------------------------------------------+
+
+section.center
+  p Routes are matched in the order they are defined
+
+section.center
+  pre: code.ruby
+    '
+      resources :products
+
+      get '/products/statistics', to: 'products#statistics'
+
+section.center
+  p GET '/products/statistics' is dispatched to `products#show`
+
+section.center
+  pre: code.ruby
+    '
+      resources :products, :categories
+
+section.center
+  p is the same as
+
+section.center
+  pre: code.ruby
+    '
+      resources :products
+      resources :categories
+
+section.center data-background="#7E57EE"
+  h1.white Single resource
+
+section.center
+  pre: code.ruby
+    '
+      resource :account
+
+section.center
+  pre
+    '
+      +-----------------------------------------------------------------------------------------------------+
+      |                                      account resource                                               |
+      +------------+--------------------+-------------------+-----------------------------------------------+
+      | HTTP VERB  | Path               | Controller#Action | Used for                                      |
+      +------------+--------------------+-------------------+-----------------------------------------------+
+      | GET        | /account/new       | accounts#new      | return an HTML form for creating the account  |
+      | POST       | /account           | accounts#create   | create the new account                        |
+      | GET        | /account           | accounts#show     | display the one and only account resource     |
+      | GET        | /account/edit      | accounts#edit     | return an HTML form for editing the account   |
+      | PATCH/PUT  | /account           | accounts#update   | update the one and only account resource      |
+      | DELETE     | /account           | accounts#destroy  | delete the account resource                   |
+      +------------+--------------------+-------------------+-----------------------------------------------+
+
+section.center data-background="#FEEB1E"
+  h1 Namespaces and scopes
+
+section.center
+  pre: code.ruby
+    '
+      scope 'url_path_prefix', module: 'module_prefix' do
+        resources :brands, :products, :categories
+      end
+
+section.center
+  pre: code.ruby
+    '
+      scope 'admin', module: 'admin' do
+        resources :brands, :products, :categories
+      end
+
+section.center
+  p Expects Admin::BrandsController, Admin::ProductsController and Admin::CategoriesController under app/controllers/admin
+
+section.center
+  p Creates resources routes with paths prefixed by /admin
+
+section.center
+  h1 It's the same as
+
+section.center
+  pre: code.ruby
+    '
+      namespace :admin do
+        resources :brands, :products, :categories
+      end
+
+section.center
+  p You can create these controllers without prefixing the resources' paths using a scope
+
+section.center
+  pre: code.ruby
+    '
+      scope module: 'admin' do
+        resources :brands, :products
+      end
+
+      resources :categories, module: 'admin'
+
+section.center
+  p Or without using a module (and nested directory under controllers)
+
+section.center
+  pre: code.ruby
+    '
+      scope 'admin' do
+        resources :brands, :products
+      end
+
+      resources :categories, path: 'admin'
+
+section.center
+  p The last one prefixes the URL path but does not expect a module for the controllers
 
 section.center data-background="#000"
   h1.white Action Pack
@@ -131,3 +287,9 @@ section.center data-background="#000"
 
 section.center data-background="#000"
   p.white https://github.com/rails/rails/tree/master/actionpack
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/routing.html") Routing
+
+section.center
+  img.inline src="/images/hackman.png"
