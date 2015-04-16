@@ -45,9 +45,6 @@ section.center data-background="#000"
 section.center data-background="#D077ED"
   h1.white Controllers
 
-section.center data-background="#F00"
-  h1.white Let's talk about Rails
-
 section.center data-background="#A1BED0"
   p.white How does Rails respond to an HTTP request?
 
@@ -60,16 +57,9 @@ section.center
 section.center
   pre
     '
-      #---------#
-      | Browser |
-      #---------#
-
-section.center
-  pre
-    '
-      #---------#
-      | Browser |
-      #---------#
+      #--------#
+      | Client |
+      #--------#
            │
            │
            │
@@ -136,27 +126,118 @@ section.center data-background="#0B5E55"
 section.center
   pre: code.ruby
     '
-      get '/products/:id', to: 'products#show'
+      Rails.application.routes.draw do
+        get 'products/:id', to: 'products#show'
+      end
 
+section.center
+  pre: code.ruby
+    '
+      get 'products/:id', to: 'products#show'
+
+section.center
+  p On GET request to /products/42
 section.center
   p Invokes the show action of ProductsController
 
 section.center
   p id goes to params
 
+section.center
+  p GET /products/42
+
+section.center
+  pre: code.ruby
+    '
+      get 'products/:category/:id' => 'products#show'
+
+section.center
+  p GET /products/electronics/42
+
+section.center
+  pre: code.ruby
+    '
+      get 'products/category/:category/item/:id', to: 'products#show'
+
+section.center
+  p GET /products/category/electronics/item/42
+
+section.center
+  p get, post, put, patch and delete
+
+section.center
+  pre: code.ruby
+    '
+      match 'products', to: 'products#statistics', via: [:get, :post]
+      match 'products', to: 'products#show',       via: :all
+
+section.center
+  p Handling more than one request type in a single controller action is probably not a good idea.
+
+section.center data-background="#B0BB1E"
+  h1.white Constraints
+
+section.center
+  pre: code.ruby
+    '
+      get 'products/:id', to: 'products#show', id: /\d*/
+      get 'products/:id', to: 'products#show', constraints: { id: /\d*/ }
+
+section.center
+  pre: code.ruby
+    '
+      get 'products/:id', to: 'products#show', constraints: lambda { |request| ... }
+
+section.center data-background="#DECADE"
+  h1 Wildcard segments
+
+section.center
+  pre: code.ruby
+    '
+      get 'products/*splat/:id', to: 'products#show'
+
+section.center
+  p GET /products/with/id/42
+
+section.center
+  pre: code.ruby
+    '
+      params[:splat] == 'with/id'
+
+section.center
+  pre: code.ruby
+    '
+      get 'products/*first/:id/*second', to: 'products#show'
+
+section.center data-background="#FE110E"
+  h1.white root
+
+section.center
+  pre: code.ruby
+    '
+      root 'products#index'
+
 section.center data-background="#1E55EE"
   h1.white Resources
 
 section.center
-  p Super fast way for declaring actions on a web resource
+  pre: code.ruby
+    '
+      get 'products', to: 'products#index'
+      get 'products/new', to: 'products#new'
+      post 'products', to: 'products#create'
+      get 'products/:id', to: 'products#show'
+      get 'products/:id/edit', to: 'products#edit'
+      patch 'products/:id', to: 'products#update'
+      delete 'products/:id', to 'products#destroy'
 
 section.center
   pre: code.ruby
     '
       resources :products
 
-section.center data-background="#FE110E"
-  h1.white Bang!!!
+section.center
+  p Super fast way for declaring actions on a web resource
 
 section.center
   pre
@@ -194,9 +275,6 @@ section.center
       resources :products, :categories
 
 section.center
-  p is the same as
-
-section.center
   pre: code.ruby
     '
       resources :products
@@ -209,6 +287,9 @@ section.center
   pre: code.ruby
     '
       resources :products, controller: 'items'
+
+section.center
+  p Requests to /products/* are now dispatched to ItemsController
 
 section.center data-background="#C0FFEE"
   h1 Restricting resources
@@ -237,6 +318,21 @@ section.center
   pre: code.ruby
     '
       resources :products, except: [:edit, :update]
+
+section.center
+  pre
+    '
+      +------------------------------------------------------------------------------------------------------+
+      |                                     products resource                                                |
+      +------------+--------------------+-------------------+------------------------------------------------+
+      | HTTP VERB  | Path               | Controller#Action | Used for                                       |
+      +------------+--------------------+-------------------+------------------------------------------------+
+      | GET        | /products          | products#index    | display a list of all products                 |
+      | GET        | /products/new      | products#new      | return an HTML form for creating a new product |
+      | POST       | /products          | products#create   | create a new product                           |
+      | GET        | /products/:id      | products#show     | display a specific product                     |
+      | DELETE     | /products/:id      | products#destroy  | delete a specific product                      |
+      +------------+--------------------+-------------------+------------------------------------------------+
 
 section.center data-background="#7E57EE"
   h1.white Single resource
@@ -278,6 +374,23 @@ section.center
       scope 'admin', module: 'admin' do
         resources :brands, :products, :categories
       end
+
+section.center
+  pre
+    '
+      +------------------------------------------------------------------------------------------------------------------+
+      |                                              products resource                                                   |
+      +------------+--------------------------+-------------------------+------------------------------------------------+
+      | HTTP VERB  | Path                     | Controller#Action       | Used for                                       |
+      +------------+--------------------------+-------------------------+------------------------------------------------+
+      | GET        | /admin/products          | admin/products#index    | display a list of all products                 |
+      | GET        | /admin/products/new      | admin/products#new      | return an HTML form for creating a new product |
+      | POST       | /admin/products          | admin/products#create   | create a new product                           |
+      | GET        | /admin/products/:id      | admin/products#show     | display a specific product                     |
+      | GET        | /admin/products/:id/edit | admin/products#edit     | return an HTML form for editing a product      |
+      | PATCH/PUT  | /admin/products/:id      | admin/products#update   | update a specific product                      |
+      | DELETE     | /admin/products/:id      | admin/products#destroy  | delete a specific product                      |
+      +------------+--------------------------+-------------------------+------------------------------------------------+
 
 section.center
   p Expects Admin::BrandsController, Admin::ProductsController and Admin::CategoriesController under app/controllers/admin
