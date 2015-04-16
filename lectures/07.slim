@@ -446,13 +446,13 @@ section.center
   p Orchestrating the creation of a response
 
 section.center
-  p Fetches data from model and displays it using a view
+  p Fetches data from models and displays it using a view
 
 section.center
   p Responsible for updating models with new user-generated data
 
-section.center
-  p app/controllers
+section.center data-background="#000"
+  p.white app/controllers
 
 section.center
   p Plural names
@@ -461,7 +461,7 @@ section.center
   p ProductsController
 
 section.center
-  p Public methods of a controller are valid actions
+  p We'll call the public methods of a controller actions
 
 section.center
   pre: code.ruby
@@ -484,10 +484,10 @@ section.center
   p An action is invoked on that instance
 
 section.center
-  p Again, the controller and action are selected based on the route definitions
+  p Again, both the controller and action are selected based on the route definitions
 
-section.center
-  p ApplicationController
+section.center data-background="#7E57EE"
+  h1.white ApplicationController
 
 section.center
   pre: code.ruby
@@ -508,6 +508,76 @@ section.center data-background="#000"
 
 section.center data-background="#000"
   p.white https://github.com/rails/rails/tree/master/actionpack
+
+section.center data-background="#CA1CE5"
+  h1 Parameters
+
+section.center
+  p Query string, routing, POST data
+
+section.center
+  p All available in params hash
+
+section.center
+  pre: code.ruby
+    '
+      class ProductsController < ApplicationController
+        def index
+          case params[:category]
+          when 'books'
+            # ...
+          when 'electronics'
+            # ...
+          when 'furniture'
+            # ...
+          else
+            # ...
+          end
+        end
+      end
+
+section.center
+  p GET /products?category=electronics
+
+section.center
+  pre: code.ruby
+    '
+      get '/products/:category' => 'products#index'
+
+section.center
+  p GET /products/electronics
+
+section.center
+  p Passing arrays and hashes as params
+
+section.center
+  p GET /products?categories[]=books&categories[]=electronics&categories[]=furniture
+
+section.center
+  pre: code.ruby
+    '
+      params[:categories] == ["books", "electronics", "furniture"]
+
+section.center
+  pre: code.ruby
+    '
+      <form accept-charset="UTF-8" action="/products" method="post">
+        <input type="text" name="product[name]" />
+        <input type="text" name="product[brand][name]" />
+        <input type="text" name="product[category][name]" />
+        <input type="text" name="product[price]" />
+      </form>
+
+section.center
+  pre: code.ruby
+    '
+      params[:product] == {"name"     => ...,
+                           "brand"    => { "name" => ...},
+                           "category" => {"name" => ...},
+                           "price"    => ...}
+
+section.center
+  p In case of application/json Content-Type for the request, params will contain the data from the JSON content.
 
 section.center data-background="#A11E1E"
   p.white Why have ApplicationController instead of inheriting directly from ActionController::Base?
