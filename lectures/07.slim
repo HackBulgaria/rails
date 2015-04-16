@@ -1,6 +1,6 @@
 ---
 layout: lecture
-title: Presentation
+title: Piping
 ---
 
 section.center data-background="#000"
@@ -122,7 +122,7 @@ section.center
                                                  #-------------------------#
 
 section.center data-background="#0B5E55"
-  h1.white routes.rb
+  h1.white config/routes.rb
 
 section.center
   pre: code.ruby
@@ -192,6 +192,42 @@ section.center
     '
       resources :products
       resources :categories
+
+section.center
+  p You can change the controller responsible for a resource
+
+section.center
+  pre: code.ruby
+    '
+      resources :products, controller: 'items'
+
+section.center data-background="#C0FFEE"
+  h1 Restricting resources
+
+section.center
+  p index, show, new, create, edit, update, and destroy
+
+section.center
+  pre: code.ruby
+    '
+      resources :products, only: [:index, :show]
+
+section.center
+  pre
+    '
+      +------------------------------------------------------------------------------------------------------+
+      |                                restricted products resource                                          |
+      +------------+--------------------+-------------------+------------------------------------------------+
+      | HTTP VERB  | Path               | Controller#Action | Used for                                       |
+      +------------+--------------------+-------------------+------------------------------------------------+
+      | GET        | /products          | products#index    | display a list of all products                 |
+      | GET        | /products/:id      | products#show     | display a specific product                     |
+      +------------+--------------------+-------------------+------------------------------------------------+
+
+section.center
+  pre: code.ruby
+    '
+      resources :products, except: [:edit, :update]
 
 section.center data-background="#7E57EE"
   h1.white Single resource
@@ -277,6 +313,114 @@ section.center
 section.center
   p The last one prefixes the URL path but does not expect a module for the controllers
 
+section.center data-background="#EFFE7E"
+  h1 Nested resources
+
+section.center
+  pre: code.ruby
+    '
+      resources :products do
+        resources :comments
+      end
+
+section.center
+  pre
+    '
+      +---------------------------------------------------------------------------------------------------------------------------+
+      |                                            nested comments resource                                                       |
+      +------------+-----------------------------------------+-------------------+------------------------------------------------+
+      | HTTP VERB  | Path                                    | Controller#Action | Used for                                       |
+      +------------+-----------------------------------------+-------------------+------------------------------------------------+
+      | GET        | /products/:product_id/comments          | comments#index    | display a list of all comments                 |
+      | GET        | /products/:product_id/comments/new      | comments#new      | return an HTML form for creating a new product |
+      | POST       | /products/:product_id/comments          | comments#create   | create a new product                           |
+      | GET        | /products/:product_id/comments/:id      | comments#show     | display a specific product                     |
+      | GET        | /products/:product_id/comments/:id/edit | comments#edit     | return an HTML form for editing a product      |
+      | PATCH/PUT  | /products/:product_id/comments/:id      | comments#update   | update a specific product                      |
+      | DELETE     | /products/:product_id/comments/:id      | comments#destroy  | delete a specific product                      |
+      +------------+-----------------------------------------+-------------------+------------------------------------------------+
+
+section.center
+  p GET /products/13/comments/42
+
+section.center data-background="#DE1E7E"
+  h1.white Resources shall never be nested more than 1 level deep!
+
+section.center data-background="#CAB1E7"
+  h1.white Shallow nesting
+
+section.center
+  pre: code.ruby
+    '
+      resources :products do
+        resources :comments, only: [:index, :new, :create]
+      end
+      resources :comments, only: [:show, :edit, :update, :destroy]
+
+section.center
+  pre
+    '
+      +----------------------------------------------------------------------------------------------------------------------+
+      |                                     shallowly nested comments resource                                               |
+      +------------+------------------------------------+-------------------+------------------------------------------------+
+      | HTTP VERB  | Path                               | Controller#Action | Used for                                       |
+      +------------+------------------------------------+-------------------+------------------------------------------------+
+      | GET        | /products/:product_id/comments     | comments#index    | display a list of all comments                 |
+      | GET        | /products/:product_id/comments/new | comments#new      | return an HTML form for creating a new product |
+      | POST       | /products/:product_id/comments     | comments#create   | create a new product                           |
+      | GET        | /comments/:id                      | comments#show     | display a specific product                     |
+      | GET        | /comments/:id/edit                 | comments#edit     | return an HTML form for editing a product      |
+      | PATCH/PUT  | /comments/:id                      | comments#update   | update a specific product                      |
+      | DELETE     | /comments/:id                      | comments#destroy  | delete a specific product                      |
+      +------------+------------------------------------+-------------------+------------------------------------------------+
+
+section.center
+  pre: code.ruby
+    '
+      resources :products do
+        resources :comments, shallow: true
+      end
+
+section.center
+  pre: code.ruby
+    '
+      resources :products, shallow: true do
+        resources :comments
+        resources :quantities
+      end
+
+section.center data-background="#1AB1AB"
+  h1.white Concerns
+
+section.center
+  h1 Extracting duplicate resources
+
+section.center
+  pre: code.ruby
+    '
+      resources :products do
+        resources :comments
+      end
+
+      resources :brands do
+        resources :comments
+      end
+
+      resources :categories do
+        resources :comments
+      end
+
+section.center
+  pre: code.ruby
+    '
+      concern :commentable do
+        resources :comments
+      end
+
+      resources :products,   concerns: :commentable
+      resources :brands,     concerns: :commentable
+      resources :categories, concerns: :commentable
+
 section.center data-background="#000"
   h1.white Action Pack
 
@@ -290,6 +434,7 @@ section.center data-background="#000"
 
 section.center
   p: a(href="http://guides.rubyonrails.org/routing.html") Routing
+  p: a(href="http://guides.rubyonrails.org/action_controller_overview.html") Controllers
 
 section.center
   img.inline src="/images/hackman.png"
