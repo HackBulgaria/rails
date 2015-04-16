@@ -27,6 +27,15 @@ section.center
     '
       Data => Application => Presentation
 
+section.center data-background="#A11E1E"
+  p.white How do we build the content of the response to an HTTP request?
+
+section.center data-background="#A11E1E"
+  p.white What content are we allowed to render?
+
+section.center data-background="#A11E1E"
+  p.white What techniques do we use for reusing views?
+
 section.center data-background="#000"
   h1.white MVC
 
@@ -421,16 +430,90 @@ section.center
       resources :brands,     concerns: :commentable
       resources :categories, concerns: :commentable
 
+section.center data-background="#A11E1E"
+  p.white Why have a single file for holding the route definitions?
+
+section.center data-background="#A11E1E"
+  p.white Are there any downs to this approach?
+
+section.center data-background="#10CA1E"
+  h1.white What happens then?
+
+section.center data-background="#D077ED"
+  h1.white Controllers
+
+section.center
+  p Orchestrating the creation of a response
+
+section.center
+  p Fetches data from model and displays it using a view
+
+section.center
+  p Responsible for updating models with new user-generated data
+
+section.center
+  p app/controllers
+
+section.center
+  p Plural names
+
+section.center
+  p ProductsController
+
+section.center
+  p Public methods of a controller are valid actions
+
+section.center
+  pre: code.ruby
+    '
+      class ProductsController < ApplicationController
+        def index
+        end
+
+        def new
+        end
+
+        def edit
+        end
+      end
+
+section.center
+  p An instance of a controller class is created on every request
+
+section.center
+  p An action is invoked on that instance
+
+section.center
+  p Again, the controller and action are selected based on the route definitions
+
+section.center
+  p ApplicationController
+
+section.center
+  pre: code.ruby
+    '
+      class ApplicationController < ActionController::Base
+      end
+
+section.center data-background="#BADA55"
+  h1 ActionController
+
 section.center data-background="#000"
   h1.white Action Pack
 
-section.center data-background="/images/action_stallone.jpg"
+section.center data-background="/images/action_schwarzenegger.jpg"
 
 section.center data-background="#000"
   p.white gem 'actionpack', '~> 4.2.1'
 
 section.center data-background="#000"
   p.white https://github.com/rails/rails/tree/master/actionpack
+
+section.center data-background="#A11E1E"
+  p.white Why have ApplicationController instead of inheriting directly from ActionController::Base?
+
+section.center
+  p: a(href="http://martinfowler.com/eaaCatalog/applicationController.html") PoEAA: Application Controller
 
 section.center
   p: a(href="http://guides.rubyonrails.org/routing.html") Routing
