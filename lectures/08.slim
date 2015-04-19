@@ -49,10 +49,28 @@ section.center
   h1 ActiveRecord
 
 section.center
-  h1 Models
+  p: a(href="http://www.martinfowler.com/eaaCatalog/activeRecord.html") PoEAA: Active Record
 
 section.center
-  h1 Singular names
+  p gem 'activerecord', '~> 4.2.1'
+
+section.center
+  p https://github.com/rails/rails/tree/master/activerecord
+
+section.center
+  p ORM implementation for Ruby
+
+section.center
+  p Alternative to DataMapper
+
+section.center
+  p Conventional choice for Rails
+
+section.center
+  p Responsible for working with data, validating it and presenting a convinient interface to its user
+
+section.center
+  h1 Models
 
 section.center
   pre: code.ruby
@@ -61,10 +79,188 @@ section.center
       end
 
 section.center
+  p Singular names
+
+section.center
+  p Tables have plural names
+
+section.center
+  pre
+    '
+      +------------------------------------------------+
+      |                    products                    |
+      +------------+-----------+----------+------------+
+      | Name       | Brand     | Category | Price      |
+      +------------+-----------+----------+------------+
+      |            |           |          |            |
+      |            |           |          |            |
+      +------------+-----------+----------+------------+
+
+section.center
+  pre
+    '
+      Product  -> products
+      LineItem -> line_items
+      Person   -> people
+
+section.center
+  h1 ActiveSupport::Inflector
+
+section.center
+  pre: code.ruby
+    '
+      #--
+      # Defines the standard inflection rules. These are the starting point for
+      # new projects and are not considered complete. The current set of inflection
+      # rules is frozen. This means, we do not change them to become more complete.
+      # This is a safety measure to keep existing applications from breaking.
+      #++
+      module ActiveSupport
+        Inflector.inflections(:en) do |inflect|
+          inflect.plural(/$/, 's')
+          inflect.plural(/s$/i, 's')
+          inflect.plural(/^(ax|test)is$/i, '\1es')
+          inflect.plural(/(octop|vir)us$/i, '\1i')
+          inflect.plural(/(octop|vir)i$/i, '\1i')
+          inflect.plural(/(alias|status)$/i, '\1es')
+          inflect.plural(/(bu)s$/i, '\1ses')
+          inflect.plural(/(buffal|tomat)o$/i, '\1oes')
+          # ...
+
+section.center
+  p CamelCase vs snake_case
+
+section.center
+  h1 Column names
+
+section.center
+  p Conventions
+  pre
+    '
+     primary key -> id
+     foreign key -> <singular table name>_id (brand_id)
+
+section.center
+  p Attributes of the table are available as fields of the object
+
+section.center
+  pre: code.ruby
+    '
+      product = Product.new
+      product.name = "Chair"
+
+section.center
+  p Changing the conventions
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        self.table_name = "items"
+        self.primary_key = "item_id"
+      end
+
+section.center
+  h1 CRUD
+
+section.center
+  p Create
+  pre: code.ruby
+    '
+      product = Product.create(name: "Chair")
+
+section.center
+  p Create
+  pre: code.ruby
+    '
+      product = Product.create do |p|
+        p.name = "Chair"
+      end
+
+section.center
+  p Create
+  pre: code.ruby
+    '
+      product = Product.new
+      product.name = "Chair"
+      product.save
+
+section.center
+  p Create
+  pre: code.ruby
+    '
+      product = Product.new do |p|
+        p.name = "Chair"
+      end
+      product.save
+
+section.center
+  p Create
+  pre: code.ruby
+    '
+      product = Product.new do |p|
+        p.name = "Chair"
+      end
+      product.save
+
+section.center
+  p Read all persisted entries
+  pre: code.ruby
+    '
+      all_products = Product.all
+
+section.center
+  p Read the first persisted entry
+  pre: code.ruby
+    '
+      first_product = Product.first
+
+section.center
+  p Read the first persisted entry meeting a specific criteria
+  pre: code.ruby
+    '
+      first_product_named_chair = Product.find_by(name: 'Chair')
+
+section.center
+  p Read all persisted entries meeting a specific criteria
+  pre: code.ruby
+    '
+      products_named_chair = Product.where(name: 'Chair')
+
+section.center
+  p Update a specific entry
+  pre: code.ruby
+    '
+      product = Product.find_by(name: 'Chair')
+      product.name = 'Table'
+      product.save
+
+section.center
+  p Update a specific entry
+  pre: code.ruby
+    '
+      product = Product.find_by(name: 'Chair')
+      product.update(name: 'Table')
+
+section.center
+  p Update all entries
+  pre: code.ruby
+    '
+      Product.update_all "brand = Sony, price = 0"
+
+section.center
+  p Delete a specific entry
+  pre: code.ruby
+    '
+      product = Product.find_by(name: 'Chair')
+      product.destroy
+
+section.center
   h1 Migrations
 
 section.center
   h1 Validations
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/active_record_basics.html") ActiveRecord
 
 section.center
   img.inline src="/images/hackman.png"
