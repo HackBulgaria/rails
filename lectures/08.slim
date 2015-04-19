@@ -260,6 +260,141 @@ section.center
   h1 Validations
 
 section.center
+  p Validate data before it gets persisted
+
+section.center
+  p save and update return false if any validation fails
+
+section.center
+  p save! and update! raise ActiveRecord::RecordInvalid exception if any validation fails
+
+section.center
+  p #valid? checks if a model passes all of its validations
+
+section.center
+  p #invalid? checks if a model does not pass some of its validations
+
+section.center
+  p Validating attribute presence
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :name, presence: true
+      end
+
+      Product.create(name: 'Chair').valid? # => true
+      Product.create.valid?                # => false
+
+section.center
+  p Validating attribute presence
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates_presence_of :name
+      end
+
+      Product.create(name: 'Chair').valid? # => true
+      Product.create.valid?                # => false
+
+section.center
+  p Validating attribute acceptance
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :eula, acceptance: true
+      end
+      Product.create(eula: :accept).valid? # => true
+      Product.create.valid?                # => false
+
+section.center
+  p Validating attribute acceptance
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates_acceptance_of :eula
+      end
+      Product.create(eula: :accept).valid? # => true
+      Product.create.valid?                # => false
+
+section.center
+  p Validating attribute confirmation
+  pre: code.ruby
+    '
+      class User < ActiveRecord::Base
+        validates :email, confirmation: true
+      end
+      User.create(email: 'user@example.org', email_confirmation: 'user@example.org').valid? # => true
+      User.create(email: 'user@example.org', email_confirmation: 'test@example.org').valid? # => false
+      User.create(email: 'user@example.org').valid?                                         # => true
+
+section.center
+  p Validating attribute confirmation
+  pre: code.ruby
+    '
+      class User < ActiveRecord::Base
+        validates :email, confirmation: true, presence: true
+      end
+      User.create(email: 'user@example.org', email_confirmation: 'user@example.org').valid? # => true
+      User.create(email: 'user@example.org', email_confirmation: 'test@example.org').valid? # => false
+      User.create(email: 'user@example.org').valid?                                         # => false
+
+section.center
+  p Validating attribute confirmation
+  pre: code.ruby
+    '
+      class User < ActiveRecord::Base
+        validates_confirmation_of :email
+        validates :email, presence: true
+      end
+      User.create(email: 'user@example.org', email_confirmation: 'user@example.org').valid? # => true
+      User.create(email: 'user@example.org', email_confirmation: 'test@example.org').valid? # => false
+      User.create(email: 'user@example.org').valid?                                         # => false
+
+section.center
+  p Validating attribute value exclusion
+  pre: code.ruby
+    '
+      class User < ActiveRecord::Base
+        validates :username, exclusion: { in: ['admin', 'test'], message: 'This username is not allowed.' }
+      end
+
+section.center
+  p Validating attribute value exclusion
+  pre: code.ruby
+    '
+      class User < ActiveRecord::Base
+        validates_exclusion_of :age, within: 0..18, message: 'Only adults are allowed.'
+      end
+
+section.center
+  p Validating attribute value inclusion
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :category, inclusion: { in: ['books', 'electronics', 'furniture'], message: "%{value} is not a valid category." }
+      end
+
+section.center
+  p Validating attribute value inclusion
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates_inclusion_of :category, within: ['books', 'electronics', 'furniture'], message: "%{value} is not a valid category."
+      end
+
+section.center
+  p Validating associated models
+  pre: code.ruby
+    '
+      class Brand < ActiveRecord::Base
+        has_many :products
+        validates_associated :products
+      end
+
+section.center
+  p Use validates_associated in one of the associated models only!
+
+section.center
   p: a(href="http://guides.rubyonrails.org/active_record_basics.html") ActiveRecord
 
 section.center
