@@ -297,6 +297,28 @@ section.center
       Product.create.valid?                # => false
 
 section.center
+  p Validating attribute absence
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :category, absence: true
+      end
+
+      Product.create(category: 'Furniture').valid? # => false
+      Product.create.valid?                        # => true
+
+section.center
+  p Validating attribute absence
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates_absence_of :category
+      end
+
+      Product.create(category: 'Furniture').valid? # => false
+      Product.create.valid?                        # => true
+
+section.center
   p Validating attribute acceptance
   pre: code.ruby
     '
@@ -380,6 +402,54 @@ section.center
     '
       class Product < ActiveRecord::Base
         validates_inclusion_of :category, within: ['books', 'electronics', 'furniture'], message: "%{value} is not a valid category."
+      end
+
+section.center
+  p Validating attribute length
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :name, length: { minimum: 3, maximum: 15 }
+      end
+
+section.center
+  p Validating attribute length
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates_length_of :name, in: 3..15
+      end
+
+section.center
+  p Validating attribute numericality
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :price, numericality: true
+      end
+
+section.center
+  p Validating attribute numericality
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates_numericality_of :quantity, only_integer: true
+      end
+
+section.center
+  p Validating attribute format
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        validates :name, format: { with: /\A[\d]+-[a-z]+\z/, message: "Name should start with a number followed by letters only." }
+      end
+
+section.center
+  p Validating attribute format
+  pre: code.ruby
+    '
+      class User < ActiveRecord::Base
+        validates_format_of :email, without: /\A.+?@abv\.bg\z/, message: "No abv mails here."
       end
 
 section.center
