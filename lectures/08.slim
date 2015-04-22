@@ -257,6 +257,46 @@ section.center
   h1 Migrations
 
 section.center
+  p Encapsulate changes to the database schema
+
+section.center
+  p A migration captures the difference between two versions of the database schema
+
+section.center
+  p An easy way to build the database from ground up
+
+section.center
+  p Migrations could be applied in two directions
+
+section.center
+  pre: code.ruby
+    '
+      class CreateProducts < ActiveRecord::Migration
+        def change
+          create_table :products do |t|
+            t.string :name
+          end
+        end
+      end
+
+section.center
+  pre: code.ruby
+    '
+      class ChangeProductsPrice < ActiveRecord::Migration
+        def up
+          change_table :products do |t|
+            t.change :price, :string
+          end
+        end
+
+        def down
+          change_table :products do |t|
+            t.change :price, :integer
+          end
+        end
+      end
+
+section.center
   h1 Validations
 
 section.center
