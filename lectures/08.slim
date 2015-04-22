@@ -147,7 +147,7 @@ section.center
   pre: code.ruby
     '
       product = Product.new
-      product.name = "Chair"
+      product.name = "The Pragmatic Programmer"
 
 section.center
   p Changing the conventions
@@ -165,14 +165,14 @@ section.center
   p Create
   pre: code.ruby
     '
-      product = Product.create(name: "Chair")
+      product = Product.create(name: "Refactoring: Improving the Design of Existing Code")
 
 section.center
   p Create
   pre: code.ruby
     '
       product = Product.create do |p|
-        p.name = "Chair"
+        p.name = "Code Complete"
       end
 
 section.center
@@ -180,7 +180,7 @@ section.center
   pre: code.ruby
     '
       product = Product.new
-      product.name = "Chair"
+      product.name = "CODE"
       product.save
 
 section.center
@@ -188,7 +188,7 @@ section.center
   pre: code.ruby
     '
       product = Product.new do |p|
-        p.name = "Chair"
+        p.name = "Test-Driven Development: By Example"
       end
       product.save
 
@@ -197,7 +197,7 @@ section.center
   pre: code.ruby
     '
       product = Product.new do |p|
-        p.name = "Chair"
+        p.name = "Structure and Interpretation of Computer Programs"
       end
       product.save
 
@@ -217,28 +217,28 @@ section.center
   p Read the first persisted entry meeting a specific criteria
   pre: code.ruby
     '
-      first_product_named_chair = Product.find_by(name: 'Chair')
+      first_product_named_refactoring_to_patterns = Product.find_by(name: 'Refactoring to Patterns')
 
 section.center
   p Read all persisted entries meeting a specific criteria
   pre: code.ruby
     '
-      products_named_chair = Product.where(name: 'Chair')
+      products_whys_guide_to_ruby = Product.where(name: "Why's (Poignant) Guide to Ruby")
 
 section.center
   p Update a specific entry
   pre: code.ruby
     '
-      product = Product.find_by(name: 'Chair')
-      product.name = 'Table'
+      product = Product.find_by(name: 'The Art of Computer Programming')
+      product.name = 'Design Patterns'
       product.save
 
 section.center
   p Update a specific entry
   pre: code.ruby
     '
-      product = Product.find_by(name: 'Chair')
-      product.update(name: 'Table')
+      product = Product.find_by(name: 'Concepts, Techniques, and Models of Computer Programming')
+      product.update(name: 'Growing Object-Oriented Software, Guided by Tests')
 
 section.center
   p Update all entries
@@ -250,7 +250,7 @@ section.center
   p Delete a specific entry
   pre: code.ruby
     '
-      product = Product.find_by(name: 'Chair')
+      product = Product.find_by(name: 'The Timeless Way of Building')
       product.destroy
 
 section.center
@@ -322,8 +322,8 @@ section.center
         validates :name, presence: true
       end
 
-      Product.create(name: 'Chair').valid? # => true
-      Product.create.valid?                # => false
+      Product.create(name: 'Object Oriented Software Engineering: A Use Case Driven Approach').valid? # => true
+      Product.create.valid?                                                                           # => false
 
 section.center
   p Validating attribute presence
@@ -333,8 +333,8 @@ section.center
         validates_presence_of :name
       end
 
-      Product.create(name: 'Chair').valid? # => true
-      Product.create.valid?                # => false
+      Product.create(name: 'Practical Object-Oriented Design in Ruby').valid? # => true
+      Product.create.valid?                                                   # => false
 
 section.center
   p Validating attribute absence
