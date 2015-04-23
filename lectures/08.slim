@@ -479,6 +479,51 @@ section.center
       end
 
 section.center data-background="#000"
+  p Migrating to latest version
+
+section.center
+  p rake db:migrate
+
+section.center data-background="#000"
+  p.white Migrating to specific version
+
+section.center
+  p rake db:migrate VERSION=20150403174731
+
+section.center data-background="#000"
+  p.white Reverting the last migration
+
+section.center
+  p rake db:rollback
+
+section.center data-background="#000"
+  p.white Reverting the last N migrations
+
+section.center
+  p rake db:rollback STEP=3
+
+section.center data-background="#000"
+  p.white Reverting the last N migrations and reapplying them again
+
+section.center
+  p rake db:migrate:redo STEP=3
+
+section.center data-background="#000"
+  p.white Creating the entire database
+
+section.center
+  p db:setup
+
+section.center data-background="#000"
+  p.white Re-creating the entire database
+
+section.center
+  p db:reset
+
+section.center data-background="#A11E1E"
+  p.white What is the benefit of using migrations?
+
+section.center data-background="#000"
   h2.white Validations
 
 section.center
@@ -698,17 +743,8 @@ section.center
         validates_format_of :email, without: /\A.+?@abv\.bg\z/, message: "No abv mails here."
       end
 
-section.center
-  p Validating associated models
-  pre: code.ruby
-    '
-      class Brand < ActiveRecord::Base
-        has_many :products
-        validates_associated :products
-      end
-
-section.center
-  p Use validates_associated in one of the associated models only!
+section.center data-background="#A11E1E"
+  p.white Why do we perform data validation in models?
 
 section.center
   p: a(href="http://guides.rubyonrails.org/active_record_basics.html") Active Record Basics
