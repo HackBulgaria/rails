@@ -1,0 +1,14 @@
+---
+layout: post
+title: Rails Conf 2015
+category: posts
+---
+
+Rails Conf 2015 is on! If you wanna catch what's new and
+shiny in Ruby on Rails 5, check it out.
+
+The website is [railsconf.com]. You can find videos over
+[Confreaks].
+
+[railsconf.com]: http://railsconf.com/
+[Confreaks]: https://www.youtube.com/channel/UCWnPjmqvljcafA0z2U1fwKQ
