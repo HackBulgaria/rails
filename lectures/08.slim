@@ -273,9 +273,6 @@ section.center
     '
       class CreateProducts < ActiveRecord::Migration
         def change
-          create_table :products do |t|
-            t.string :name
-          end
         end
       end
 
@@ -284,14 +281,80 @@ section.center
     '
       class ChangeProductsPrice < ActiveRecord::Migration
         def up
-          change_table :products do |t|
-            t.change :price, :string
-          end
         end
 
         def down
-          change_table :products do |t|
-            t.change :price, :integer
+        end
+      end
+
+section.center
+  p 20150403174731_create_products.rb
+
+section.center
+  p Timestamps define the order in which migrations are executed
+
+section.center
+  p rails generate migration CreateProducts name:string description:string
+
+section.center
+  pre: code.ruby
+    '
+      class CreateProducts < ActiveRecord::Migration
+        def change
+          create_table :products do |t|
+            t.string :name
+            t.string :description
+          end
+        end
+      end
+
+section.center
+  p rails generate migration AddPriceToProducts price:decimal
+
+section.center
+  pre: code.ruby
+    '
+      class AddPartNumberToProducts < ActiveRecord::Migration
+        def change
+          add_column :products, :price, :decimal
+        end
+      end
+
+section.center
+  p rails generate migration RemovePriceFromProducts price:decimal
+
+section.center
+  pre: code.ruby
+    '
+      class RemovePartNumberFromProducts < ActiveRecord::Migration
+        def change
+          remove_column :products, :price, :decimal
+        end
+      end
+
+section.center
+  p rails generate migration AddBrandToProducts brand:belongs_to
+
+section.center
+  pre: code.ruby
+    '
+      class AddBrandToProducts < ActiveRecord::Migration
+        def change
+          add_reference :products, :brand, index: true, foreign_key: true
+        end
+      end
+
+section.center
+  p rails generate migration CreateJoinTableProductShoppingCart product shopping_cart
+
+section.center
+  pre: code.ruby
+    '
+      class CreateJoinTableProductShoppingCart < ActiveRecord::Migration
+        def change
+          create_join_table :products, :shopping_carts do |t|
+            # t.index [:product_id, :shopping_cart_id]
+            # t.index [:shopping_cart_id, :product_id]
           end
         end
       end
