@@ -69,12 +69,12 @@ section.center
   p Model database relations using object-oriented concepts.
 
 section.center data-background="#000"
-  p.white Active Record
+  h2.white Active Record
 
 section.center
   blockquote cite="http://www.martinfowler.com/eaaCatalog/activeRecord.html"
     ' An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.
-  a href="http://www.martinfowler.com/eaaCatalog/activeRecord.html" Martin Folwer
+  a href="http://www.martinfowler.com/eaaCatalog/activeRecord.html" Martin Fowler
 
 section.center
   p An object carries both data and behavior.
@@ -92,10 +92,13 @@ section.center data-background="#000"
   p.white Tables become classes.
 
 section.center data-background="#000"
+  p.white Tables become domain objects.
+
+section.center data-background="#000"
   p.white Columns become fields.
 
 section.center data-background="#000"
-  p.white Rows become instances.
+  p.white Rows become instances of domain objects.
 
 section.center
   p We don't write SQL anymore.
@@ -133,11 +136,9 @@ section.center data-background="#000"
 section.center data-background="#000"
   p.white We won't talk about it.
 
-section.center data-background="#000"
-  p.white
-    ' :-)
+section.center data-background="/images/yolo.png"
 
-section.center data-background="#000"
+section.center data-background="#F00"
   h2.white Active Record <span class="fragment">in Rails</span>
 
 section.center
@@ -147,7 +148,7 @@ section.center
   p gem 'activerecord', '~> 4.2.1'
 
 section.center
-  a href="https://github.com/rails/rails/tree/master/activerecord" rails/lib/activerecord
+  a href="https://github.com/rails/rails/tree/master/activerecord" rails/activerecord
 
 section.center
   p Active Record implementation in Ruby.
