@@ -6,47 +6,139 @@ title: Persistence
 section.center data-background="#000"
   h1.white Persistence
 
-section.center
-  h1 Object Relational Mapping
+section data-background="http://replygif.net/i/411.gif"
+section data-background="https://m1.behance.net/rendition/modules/65216951/disp/3a5948b5e73dff1e4b791d9cf806710e.jpg"
+section data-background="http://i2.kym-cdn.com/entries/icons/original/000/008/356/moray.jpg"
+section data-background="http://media.giphy.com/media/Ed46JnKn4dwY0/giphy.gif"
+section data-background="#F00"
+section data-background="#0F0"
+section data-background="#00F"
+section data-background="#FF0"
+section data-background="#F0F"
+section data-background="#FF0"
+section data-background="#0F0"
+section data-background="#0FF"
+section data-background="#FFF"
 
 section.center
-  p Key idea: The languages for manipulating databases from different vendors vary so we have to abstract them
+  img.inline src="/images/troll.png"
+
+section.center data-background="#F0F"
+  p.white Anyway
+
+section.center data-background="#FF0"
+  p Let's get serious
 
 section.center
-  p Key idea: Very good mapping between OO and relational databases
+  p We missed a lecture last Saturday.
 
 section.center
-  p Key idea: Model database relations using object-oriented concepts
+  p We can do it one of those Mondays or Wednesdays.
+
+section.center data-background="#000"
+  p.white The Saturday lecture.
+
+section.center data-background="#000"
+  p.white It can be the Monday lecture.
+
+section.center data-background="#000"
+  p.white It can be the Wednesday lecture.
+
+section.center data-background="#000"
+  p.white It can be the Saturday lecture.
 
 section.center
-  p Tables become classes
+  img.inline src="/images/troll.png"
 
 section.center
-  p Columns become fields
+  p You decide.
+
+section.center data-background="#000"
+  h2.white Object Relational Mapping
+
+section.center data-background="#000"
+  p.white Why?
 
 section.center
-  p Rows become instances
+  p The languages for manipulating databases differ between vendors.
 
 section.center
-  p We don't write SQL anymore
+  p We have to map objects to relational databases.
 
 section.center
-  p We create instances, assign fields and invoke methods
+  p Model database relations using object-oriented concepts.
+
+section.center data-background="#000"
+  p.white Active Record
 
 section.center
-  p Just like the rest of our OO code
+  blockquote cite="http://www.martinfowler.com/eaaCatalog/activeRecord.html"
+    ' An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.
+  a href="http://www.martinfowler.com/eaaCatalog/activeRecord.html" Martin Folwer
 
 section.center
-  p Code written this way has no database-specific dependencies
+  p An object carries both data and behavior.
 
 section.center
-  p It could as well be working with something different than a traditional database store
+  p Much of this data is persistent and needs to be stored in a database.
 
 section.center
-  p The ORM generates and invokes the right commands for each operation we perform so that the underlying adapter could understand it
+  p Active Record uses the most obvious approach, putting data access logic in the domain object.
 
 section.center
-  h1 ActiveRecord
+  p This way all people know how to read and write their data to and from the database.
+
+section.center data-background="#000"
+  p.white Tables become classes.
+
+section.center data-background="#000"
+  p.white Columns become fields.
+
+section.center data-background="#000"
+  p.white Rows become instances.
+
+section.center
+  p We don't write SQL anymore.
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p We create instances, assign fields and invoke methods.
+
+section.center
+  p Just like the rest of our OO code.
+
+section.center
+  p Code written this way has no database-specific dependencies.
+
+section.center
+  p It could be working with something different than a traditional database store.
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p The ORM communicates with the underlying adapter, so we don't have to.
+
+section.center data-background="#000"
+  p.white Active Record is just an idea.
+
+section.center data-background="#000"
+  p.white There are other ways to turn objects into something databases understand.
+
+section.center data-background="#000"
+  p.white Data Mapper is another idea.
+
+section.center data-background="#000"
+  p.white We won't talk about it.
+
+section.center data-background="#000"
+  p.white
+    ' :-)
+
+section.center data-background="#000"
+  h2.white Active Record <span class="fragment">in Rails</span>
 
 section.center
   p: a(href="http://www.martinfowler.com/eaaCatalog/activeRecord.html") PoEAA: Active Record
@@ -55,22 +147,25 @@ section.center
   p gem 'activerecord', '~> 4.2.1'
 
 section.center
-  p https://github.com/rails/rails/tree/master/activerecord
+  a href="https://github.com/rails/rails/tree/master/activerecord" rails/lib/activerecord
 
 section.center
-  p ORM implementation for Ruby
+  p Active Record implementation in Ruby.
 
 section.center
-  p Alternative to DataMapper
+  p Part of the omakase for Rails.
 
 section.center
-  p Conventional choice for Rails
+  p Responsible for working with data.
 
 section.center
-  p Responsible for working with data, validating it and presenting a convinient interface to its user
+  p Validating data.
 
 section.center
-  h1 Models
+  p Presenting a convenient interface to its user.
+
+section.center data-background="#000"
+  h2.white Models
 
 section.center
   pre: code.ruby
@@ -79,10 +174,10 @@ section.center
       end
 
 section.center
-  p Singular names
+  p Classes have singular names.
 
 section.center
-  p Tables have plural names
+  p Tables have plural names.
 
 section.center
   pre
@@ -102,9 +197,27 @@ section.center
       Product  -> products
       LineItem -> line_items
       Person   -> people
+      .
 
 section.center
-  h1 ActiveSupport::Inflector
+  pre
+    '
+      Product  -> products
+      LineItem -> line_items
+      Person   -> people
+      Octopus  -> Octopi
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p Convention over configuration in action!
+
+section.center data-background="#000"
+  h2.white Inflections
+
+section.center
+  p ActiveSupport::Inflector
 
 section.center
   pre: code.ruby
@@ -130,8 +243,8 @@ section.center
 section.center
   p CamelCase vs snake_case
 
-section.center
-  h1 Column names
+section.center data-background="#000"
+  h2.white Columns
 
 section.center
   p Conventions
@@ -141,7 +254,7 @@ section.center
      foreign key -> <singular table name>_id (brand_id)
 
 section.center
-  p Attributes of the table are available as fields of the object
+  p Attributes of the table are available as fields on the object.
 
 section.center
   pre: code.ruby
@@ -150,7 +263,12 @@ section.center
       product.name = "The Pragmatic Programmer"
 
 section.center
-  p Changing the conventions
+  p Rules are to be broken.
+
+section.center
+  p Conventions are to be broken.
+
+section.center
   pre: code.ruby
     '
       class Product < ActiveRecord::Base
@@ -158,8 +276,8 @@ section.center
         self.primary_key = "item_id"
       end
 
-section.center
-  h1 CRUD
+section.center data-background="#000"
+  h2.white CRUD
 
 section.center
   p Create
@@ -253,20 +371,20 @@ section.center
       product = Product.find_by(name: 'The Timeless Way of Building')
       product.destroy
 
-section.center
-  h1 Migrations
+section.center data-background="#000"
+  h2.white Migrations
 
 section.center
-  p Encapsulate changes to the database schema
+  p Encapsulate changes to the database schema.
 
 section.center
-  p A migration captures the difference between two versions of the database schema
+  p Captures the difference between two versions of the database schema.
 
 section.center
-  p An easy way to build the database from ground up
+  p An easy way to build the database from ground up.
 
 section.center
-  p Migrations could be applied in two directions
+  p Migrations could be applied in two directions.
 
 section.center
   pre: code.ruby
@@ -291,7 +409,7 @@ section.center
   p 20150403174731_create_products.rb
 
 section.center
-  p Timestamps define the order in which migrations are executed
+  p Timestamps define the order in which migrations are executed.
 
 section.center
   p rails generate migration CreateProducts name:string description:string
@@ -359,23 +477,47 @@ section.center
         end
       end
 
-section.center
-  h1 Validations
+section.center data-background="#000"
+  h2.white Validations
 
 section.center
-  p Validate data before it gets persisted
+  p Validate data before it gets persisted.
 
 section.center
-  p save and update return false if any validation fails
+  p #save and #update return false if any validation fails.
 
 section.center
-  p save! and update! raise ActiveRecord::RecordInvalid exception if any validation fails
+  p #save! and #update! raise ActiveRecord::RecordInvalid exception if any validation fails.
+
+section.center data-background="#000"
+  p.white Use #save and #update only in conditions!
+
+section.center data-background="#000"
+  p.white #save and #update may not stop your program from working with bad data.
+
+section.center data-background="#000"
+  p.white Use #save! and #update! everywhere else.
 
 section.center
-  p #valid? checks if a model passes all of its validations
+  p #valid? checks if a model passes all of its validations.
 
 section.center
-  p #invalid? checks if a model does not pass some of its validations
+  p #invalid? checks if a model does not pass some of its validations.
+
+section.center data-background="#000"
+  p.white #valid? also runs all the validations beforehand.
+
+section.center data-background="#000"
+  h2.white Questions
+
+section.center
+  p Is #valid? a query?
+
+section.center
+  p Is #valid? a command?
+
+section.center
+  img.inline src="/images/troll.png"
 
 section.center
   p Validating attribute presence
@@ -568,7 +710,7 @@ section.center
   p Use validates_associated in one of the associated models only!
 
 section.center
-  p: a(href="http://guides.rubyonrails.org/active_record_basics.html") ActiveRecord
+  p: a(href="http://guides.rubyonrails.org/active_record_basics.html") Active Record Basics
 
 section.center
   img.inline src="/images/hackman.png"
