@@ -181,6 +181,46 @@ section.center
 section.center data-background="#F00"
   p.white Must use singular term.
 
+section.center data-background="#000"
+  h2.white has_one
+
+section.center
+  p Indicates that each instance of a model contains or possesses one instance of another model.
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Supplier < ActiveRecord::Base
+        has_one :account
+      end
+
+section.center
+  img.inline src="http://guides.rubyonrails.org/images/has_one.png"
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class CreateSuppliers < ActiveRecord::Migration
+        def change
+          create_table :suppliers do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :accounts do |t|
+            t.belongs_to :supplier, index: true
+            t.string :account_number
+            t.timestamps null: false
+          end
+        end
+      end
+
+section.center data-background="#F00"
+  p.white The difference with belongs_to is the side of the relationship.
+
+section.center data-background="#F00"
+  p.white The one that belongs_to is the one with the foreign key.
+
 section.center
   p: a(href="http://guides.rubyonrails.org/association_basics.html") Active Record Associations
 
