@@ -141,6 +141,46 @@ section.center
 section.center data-background="#F00"
   p.white A connection between two Active Record models.
 
+section.center data-background="#000"
+  h2.white belongs_to
+
+section.center
+  p Sets up a one-to-one connection with another model.
+
+section.center
+ p Each instance of the declaring model belongs to one instance of the other model.
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Order < ActiveRecord::Base
+        belongs_to :customer
+      end
+
+section.center
+  img.inline src="http://guides.rubyonrails.org/images/belongs_to.png"
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class CreateOrders < ActiveRecord::Migration
+        def change
+          create_table :customers do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :orders do |t|
+            t.belongs_to :customer, index: true
+            t.datetime :order_date
+            t.timestamps null: false
+          end
+        end
+      end
+
+section.center data-background="#F00"
+  p.white Must use singular term.
+
 section.center
   p: a(href="http://guides.rubyonrails.org/association_basics.html") Active Record Associations
 
