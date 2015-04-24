@@ -1,0 +1,148 @@
+---
+layout: lecture
+title: Active Record Associations
+---
+
+section.center data-background="#000"
+  h1.white Active Record Associations
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p This is getting annoying, right?
+
+section.center data-background="#F0F"
+  p.white Right?
+section.center data-background="#FF0"
+  p Right?
+section.center data-background="#0F0"
+  p.white Right?
+section.center
+  p Right?
+section.center data-background="#000"
+  p.white Right?
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  a href="http://hackfmi.com/hackfmi5-hack-for-future/"
+    img.inline src="http://hackfmi.com/wp-content/uploads/2015/03/cropped-Logo_HackFMI5.png"
+
+section.center data-background="#F00"
+  p.white This is the last Saturday lecture!
+
+section.center data-background="#000"
+  p.white Monday is the new Saturday!
+
+section.center data-background="#000"
+  p.white 18:15 is the new 11:00!
+
+section.center data-background="#000"
+  p.white 18:15 is the new 11:15!
+
+section.center data-background="#000"
+  p.white 18:15 is the new 11:30!
+
+section.center data-background="#000"
+  h2.white Associations
+
+section.center data-background="#000"
+  p.white Why?
+
+section.center data-background="#F0F"
+  p.white Objects are social beings.
+
+section.center data-background="#F0F"
+  p.white They like talking to each other.
+
+section.center data-background="#F0F"
+  p.white They like invoking to each other's methods.
+
+section.center data-background="#F0F"
+  p.white They like touching each other's memory.
+
+section.center data-background="#F0F"
+  p.white They like sharing memory.
+
+section.center data-background="#F0F"
+  p.white They like forming relationships.
+
+section.center data-background="#F0F"
+  p.white They like forming associations.
+
+section.center data-background="#F0F"
+  p.white They like fooling around with other objects.
+
+section.center data-background="#F0F"
+  p.white They like destroying each other's memory.
+
+section.center data-background="#F0F"
+  p.white They like destroying the associations.
+
+section.center data-background="#000"
+  p.white Who are we to judge them, right?
+section.center data-background="http://i2.kym-cdn.com/entries/icons/original/000/008/356/moray.jpg"
+  p.white Who are we to judge them, right?
+section.center data-background="http://i2.kym-cdn.com/entries/icons/original/000/008/356/moray.jpg"
+
+section.center
+  p.white This metaphor is so bad, I just love it :-)
+
+section.center
+  p Make common operations simpler and easier in your code.
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Customer < ActiveRecord::Base
+      end
+
+      class Order < ActiveRecord::Base
+      end
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      @order = Order.create(order_date: Time.now, customer_id: @customer.id)
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      @orders = Order.where(customer_id: @customer.id)
+      @orders.each do |order|
+        order.destroy
+      end
+
+      @customer.destroy
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Customer < ActiveRecord::Base
+        has_many :orders, dependent: :destroy
+      end
+
+      class Order < ActiveRecord::Base
+        belongs_to :customer
+      end
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      @order = @customer.orders.create(order_date: Time.now)
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      @order.destroy
+
+section.center data-background="#F00"
+  p.white A connection between two Active Record models.
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/association_basics.html") Active Record Associations
+
+section.center
+  img.inline src="/images/hackman.png"
