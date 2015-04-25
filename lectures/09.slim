@@ -221,6 +221,303 @@ section.center data-background="#F00"
 section.center data-background="#F00"
   p.white The one that belongs_to is the one with the foreign key.
 
+section.center data-background="#000"
+  h2.white has_many
+
+section.center
+  p Indicates a one-to-many connection with another model.
+
+section.center
+  p The other side of a belongs_to association.
+
+section.center
+  p Each instance of the model has zero or more instances of another model.
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Customer < ActiveRecord::Base
+        has_many :orders
+      end
+
+
+section.center
+  img.inline src="http://guides.rubyonrails.org/images/has_many.png"
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class CreateCustomers < ActiveRecord::Migration
+        def change
+          create_table :customers do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :orders do |t|
+            t.belongs_to :customer, index:true
+            t.datetime :order_date
+            t.timestamps null: false
+          end
+        end
+      end
+
+section.center data-background="#F00"
+  p.white The name of the other model is pluralized.
+
+section.center data-background="#F00"
+  p.white The migration is the same as on the belongs_to example.
+
+section.center data-background="#000"
+  h2.white has_many :through
+
+section.center
+  p Sets up a many-to-many connection with another model.
+
+section.center
+  p Indicates that the model can be matched with zero or more instances of another model.
+
+section.center
+  p Proceeding through a third model.
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Physician < ActiveRecord::Base
+        has_many :appointments
+        has_many :patients, through: :appointments
+      end
+
+      class Appointment < ActiveRecord::Base
+        belongs_to :physician
+        belongs_to :patient
+      end
+
+      class Patient < ActiveRecord::Base
+        has_many :appointments
+        has_many :physicians, through: :appointments
+      end
+
+section.center
+  img.inline src="http://guides.rubyonrails.org/images/has_many_through.png"
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class CreateAppointments < ActiveRecord::Migration
+        def change
+          create_table :physicians do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :patients do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :appointments do |t|
+            t.belongs_to :physician, index: true
+            t.belongs_to :patient, index: true
+            t.datetime :appointment_date
+            t.timestamps null: false
+          end
+        end
+      end
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      physician.patients = patients
+
+section.center
+  p New join models are created for newly associated objects.
+
+section.center
+  p If some are gone their rows are deleted.
+
+section.center data-background="#F00"
+  p.white Automatic deletion of join models is direct, no destroy callbacks are triggered.
+
+section.center data-background="#000"
+  h2.white #delete vs #destroy
+
+section.center data-background="#F00"
+  p.white #delete
+
+section.center
+  p Deletes the record in the database and freezes this instance.
+
+section.center
+  p No changes should be made, since they can't be persisted.
+
+section.center
+  p The row is removed with an SQL DELETE statement on the record's primary key.
+
+section.center
+  p No callbacks are executed.
+
+section.center
+  p To enforce the object's before_destroy and after_destroy callbacks or any :dependent association options, use #destroy.
+
+section.center data-background="#000"
+  p.white #destroy
+
+section.center
+  p There's a series of callbacks associated with destroy.
+
+section.center
+  p If the before_destroy callback return false the action is cancelled and destroy returns false.
+
+section.center data-background="#000"
+  h2.white Questions
+
+section.center
+  p What is a query method?
+
+section.center
+  p What is a command method?
+
+section.center
+  p What happens when you type 'www.hackbulgaria.com/courses' in a browser and hit enter? (The Rails part of the picture)
+
+section.center
+  p Is get 'products/*splat/:id', to: 'products#show' a valid route definition?
+
+section.center
+  p Is get 'products/*splat/id', to: 'products#show' a valid route definition?
+
+section.center
+  p What are the responsibilities of a Rails controller?
+
+section.center
+  p What are the responsibilities of a Rails model?
+
+section.center
+  p What does ActiveRecord::Base#valid? does?
+
+section.center
+  p What does ActiveRecord::Base#save does?
+
+section.center
+  p What does ActiveRecord::Base#save! does?
+
+section.center
+  p What does ActiveRecord::Base#update does?
+
+section.center
+  p What does ActiveRecord::Base#update! does?
+
+section.center
+  p What does ActiveRecord::Base#update_attributes does?
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center data-background="#000"
+  h2.white has_one :through
+
+section.center
+  p Sets up a one-to-one connection with another model.
+
+section.center
+  p Indicates that model can be matched with one instance of another model.
+
+section.center
+  p Proceeding through a third model.
+
+section.center
+  pre: code.ruby contenteditable=true
+   '
+     class Supplier < ActiveRecord::Base
+       has_one :account
+       has_one :account_history, through: :account
+     end
+
+     class Account < ActiveRecord::Base
+       belongs_to :supplier
+       has_one :account_history
+     end
+
+     class AccountHistory < ActiveRecord::Base
+       belongs_to :account
+     end
+
+section.center
+  img.inline src="http://guides.rubyonrails.org/images/has_one_through.png"
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class CreateAccountHistories < ActiveRecord::Migration
+        def change
+          create_table :suppliers do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :accounts do |t|
+            t.belongs_to :supplier, index: true
+            t.string :account_number
+            t.timestamps null: false
+          end
+
+          create_table :account_histories do |t|
+            t.belongs_to :account, index: true
+            t.integer :credit_rating
+            t.timestamps null: false
+          end
+        end
+      end
+
+section.center data-background="#000"
+  h2.white has_and_belongs_to_many
+
+section.center
+  p Direct many-to-many connection with another model, with no intervening model.
+
+section.center
+  p Direct many-to-many connection with another model, with no explicit intervening model.
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class Assembly < ActiveRecord::Base
+        has_and_belongs_to_many :parts
+      end
+
+      class Part < ActiveRecord::Base
+        has_and_belongs_to_many :assemblies
+      end
+
+section.center
+  img.inline src="http://guides.rubyonrails.org/images/habtm.png"
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      class CreateAssembliesAndParts < ActiveRecord::Migration
+        def change
+          create_table :assemblies do |t|
+            t.string :name
+            t.timestamps null: false
+          end
+
+          create_table :parts do |t|
+            t.string :part_number
+            t.timestamps null: false
+          end
+
+          create_table :assemblies_parts, id: false do |t|
+            t.belongs_to :assembly, index: true
+            t.belongs_to :part, index: true
+          end
+        end
+      end
+
+section.center data-background="#F00"
+  p.white You still have to create the join table!
+
 section.center
   p: a(href="http://guides.rubyonrails.org/association_basics.html") Active Record Associations
 

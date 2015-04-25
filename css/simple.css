@@ -214,5 +214,8 @@ body {
   float: right; }
 
 .reveal .nonpixel {
-  font-family: "Lato", sans-serif;
- }
+  font-family: "Lato", sans-serif; }
+
+
+.reveal pre code {
+  max-height: none; }
