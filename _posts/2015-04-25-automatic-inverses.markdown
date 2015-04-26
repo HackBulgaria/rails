@@ -4,10 +4,10 @@ title: Automatic Inverses
 category: posts
 ---
 
-Have you ever wondered whether Rails does anything smart when
-you have two associations which are inverses of each other? Does
-an ActiveRecord object get loaded twice if it comes from two
-different associations?
+> Have you ever wondered whether Rails does anything smart when
+> you have two associations which are inverses of each other? Does
+> an ActiveRecord object get loaded twice if it comes from two
+> different associations?
 
 You can read more about it at this great [post] by [John J. Wang].
 
