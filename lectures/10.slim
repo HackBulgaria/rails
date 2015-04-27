@@ -618,6 +618,95 @@ section.center
       | others.uniq                      |   X   |    X     |    X
       | others.reset                     |   X   |    X     |    X
 
+
+section.center data-background="#000"
+  h2.white add_foreign_key
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      def add_foreign_key(from_table, to_table, options = {})
+        # ...
+      end
+
+section
+  h2 add_foreign_key
+  p Adds a new foreign key database constraint.
+
+section
+  h2 add_foreign_key
+  p from_table is the table with the key column, to_table contains the referenced primary key.
+
+section
+  h2 add_foreign_key
+  p The foreign key will be named after the following pattern: fk_rails_<identifier>.
+
+section
+  h2 add_foreign_key
+  p Identifier is a 10 character long random string.
+
+section
+  h2 add_foreign_key
+  p A custom name can be specified with the :name option.
+
+section.center
+  pre: code.ruby contenteditable=true
+    ' add_foreign_key :articles, :authors
+  pre: code.sql contenteditable=true
+    ' ALTER TABLE "articles" ADD CONSTRAINT articles_author_id_fk FOREIGN KEY ("author_id") REFERENCES "authors" ("id")
+
+section.center
+  pre: code.ruby contenteditable=true
+    ' add_foreign_key :articles, :users, column: :author_id, primary_key: "lng_id"
+  pre: code.sql contenteditable=true
+    ' ALTER TABLE "articles" ADD CONSTRAINT fk_rails_58ca3d3a82 FOREIGN KEY ("author_id") REFERENCES "users" ("lng_id")
+
+section.center
+  pre: code.ruby contenteditable=true
+    ' add_foreign_key :articles, :authors, on_delete: :cascade
+  pre: code.sql contenteditable=true
+    ' ALTER TABLE "articles" ADD CONSTRAINT articles_author_id_fk FOREIGN KEY ("author_id") REFERENCES "authors" ("id") ON DELETE CASCADE
+
+section
+  h2 add_foreign_key, :column
+  p The foreign key column name on from_table.
+
+section
+  h2 add_foreign_key, :column
+  p Defaults to to_table.singularize + "_id"
+
+section
+  h2 add_foreign_key, :primary_key
+  p The primary key column name on to_table.
+
+section
+  h2 add_foreign_key, :primary_key
+  p Defaults to id.
+
+section
+  h2 add_foreign_key, :name
+  p The constraint name.
+
+section
+  h2 add_foreign_key, :name
+  p Defaults to fk_rails_<identifier>.
+
+section
+  h2 add_foreign_key, :on_delete
+  p Action that happens ON DELETE.
+
+section
+  h2 add_foreign_key, :on_delete
+  p Valid values are :nullify, :cascade: and :restrict
+
+section
+  h2 add_foreign_key, :on_update
+  p Action that happens ON UPDATE.
+
+section
+  h2 add_foreign_key, :on_update
+  p Valid values are :nullify, :cascade: and :restrict
+
 section.center
   p: a(href="http://guides.rubyonrails.org/association_basics.html") Active Record Associations
 
