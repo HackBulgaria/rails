@@ -33,6 +33,12 @@ section.center data-background="https://avatars2.githubusercontent.com/u/103882?
 section.center
   img.inline src="https://avatars1.githubusercontent.com/u/8987550?v=3&s=200"
 
+section.center
+  img.inline src="/images/rubyconfbulgaria.png"
+
+section.center
+  p: a(href="https://docs.google.com/forms/d/1hJlsLZ1PspR0yA8Pt3Hq8hMsXpm2NPgNqCPt5XBM3B4/viewform?c=0&w=1") RubyConf Bulgaria
+
 section.center data-background="#F00"
   h2.white Questions
 
@@ -140,6 +146,8 @@ section.center
 
 section.center
   p What is the connection between ActiveRecord validators and database constraints?
+
+section data-background="http://media.giphy.com/media/qHl1u2oppzOVi/giphy.gif"
 
 section.center data-background="#000"
   h2.white Retrieving Records
@@ -433,6 +441,8 @@ section.center
 section.center data-background="#F00"
   p.white Building conditions as pure strings can leave you vulnerable to SQL injections.
 
+section data-background="http://media.giphy.com/media/H1lX50ZBbPTyM/giphy.gif"
+
 section.center
   p: a(href="http://guides.rubyonrails.org/security.html#sql-injection") SQL Injection Explained
 
@@ -683,6 +693,60 @@ section.center
       SELECT COUNT (*) AS count_all, status AS status
       FROM "orders"
       GROUP BY status
+
+section.center data-background="#000"
+  h2.white Having
+
+section.center
+  p Remember when to use having?
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      Order.select("date(created_at) as ordered_date, sum(price) as total_price").
+            group("date(created_at)").
+            having("sum(price) > ?", 100)
+
+section.center
+  pre: code.sql contenteditable=true
+    '
+      SELECT date(created_at) as ordered_date, sum(price) as total_price
+      FROM orders
+      GROUP BY date(created_at)
+      HAVING sum(price) > 100
+
+section.center data-background="#000"
+  h2.white Overriding Conditions
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      Article.where('id > 10').limit(20).order('id asc')
+
+section.center
+  pre: code.sql contenteditable=true
+    '
+      SELECT * FROM articles WHERE id > 10 LIMIT 20
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      Article.where('id > 10').limit(20).order('id asc').unscope(:order)
+
+section.center
+  pre: code.sql contenteditable=true
+    '
+      SELECT * FROM articles WHERE id > 10 ORDER BY id asc LIMIT 20
+
+section.center
+  pre: code.ruby contenteditable=true
+    '
+      Article.where(id: 10, trashed: false).unscope(where: :id)
+
+section.center
+  pre: code.rubyt contenteditable=true
+    '
+      Article.where('id > 10').limit(20).order('id desc').only(:order, :where) # No limit
 
 section.center
   p: a(href="http://guides.rubyonrails.org/active_record_querying.html") Active Record Query Interface
