@@ -1,0 +1,90 @@
+---
+layout: lecture
+title: Callbacks and Active Model
+---
+
+section.center data-background="#000"
+  h1.white Callbacks
+
+section.center
+  p Active Record presents us with lots of functionality
+
+section.center
+  p Beyond persisting data it provides helpers for constructing forms, ...
+
+section.center
+  p What if you want all those benefits but you don't need to persist the model?
+
+section.center data-background="#000"
+  h1.white ActiveModel
+
+section.center data-background="#000"
+  h1.white Dirty
+
+section.center
+  p If you change an attribute of your model it becomes dirty
+
+section.center
+  p You clean it by calling changes_applied
+
+section.center
+  p #changed? tells us if the object's attributes have changed
+
+section.center
+  p #changed_attributes returns the names of the attributes that changed along with their old values
+
+section.center
+  p { "name" => :old }
+
+section.center
+  p #changes returns the names of the attributes that changed along with their old and new values
+
+section.center
+  p { "name" => [:old, :new }
+
+section.center
+  p #<attribute>_changed? tells us if a specific attribute has changed its value
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class Product
+        include ActiveModel::Dirty
+
+        define_attribute_methods :name
+      end
+
+      product = Product.new
+      product.name = "Something"
+      product.name_changed? #=> true
+
+section.center
+  p #<attribute>_was returns the old value of the attribute
+
+section.center
+  p #<attribute>_change returns the old and new values of the attribute
+
+
+section.center
+  p ActiveModel::Validations brings validations to non-persisted models
+
+
+section.center
+  pre: code.ruby
+    '
+      class Product < ActiveRecord::Base
+        include ActiveModel::Validations
+
+        attr_accessor :name
+
+        validates :name, presence: true
+      end
+
+      product = Product.new
+      product.create.valid?
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/active_model_basics.html") Active Model Basics
+
+section.center
+  img.inline src="/images/hackman.png"
