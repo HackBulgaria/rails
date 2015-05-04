@@ -69,10 +69,10 @@ section.center
   p How do we define scopes?
 
 section.center data-background="http://i2.kym-cdn.com/entries/icons/original/000/008/356/moray.jpg"
-  p.fragment What did the blanked said when it failed off the bed?
+  p.white.fragment What did the blanket said when it failed off the bed?
 
 section.center data-background="http://i2.kym-cdn.com/entries/icons/original/000/008/356/moray.jpg"
-  p Oh sheeet!
+  p.white Oh sheeet!
 
 section.center data-background="http://media.giphy.com/media/nkLB4Gp8H6hFe/giphy.gif"
 
@@ -348,7 +348,7 @@ section.center
 section.center
   pre: code.ruby contenteditable=true
     '
-      class Product < ActiveRecord::Base
+      class Product
         include ActiveModel::Validations
 
         attr_accessor :name
@@ -357,7 +357,7 @@ section.center
       end
 
       product = Product.new
-      product.create.valid?
+      product.valid?
 
 section.center data-background="#000"
   h2.white Naming
@@ -473,7 +473,7 @@ section.center
   pre: code.ruby contenteditable=true
     '
       class Person
-        include ActiveModel::Serialization::JSON
+        include ActiveModel::Serializers::JSON
 
         attr_accessor :name
 
@@ -494,7 +494,7 @@ section.center
   pre: code.ruby contenteditable=true
     '
       class Person
-        include ActiveModel::Serialization::JSON
+        include ActiveModel::Serializers::JSON
 
         attr_accessor :name
 
