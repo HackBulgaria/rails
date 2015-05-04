@@ -11,5 +11,5 @@ shoot us up an email that you have it.
 We'll give them up as a recognition to your 1337 Ruby on Rails skills, so stay
 alert till the end of the class.
 
-[Stefan Kanev]: https://github.com/skanev
+[ConIT]: http://conit-bg.com/
 [Practical Object-Oriented Design in Ruby]: http://www.poodr.com/
