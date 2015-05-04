@@ -22,15 +22,15 @@
   link: /lectures/05
   date: April 2, 2015
 
-- title: Lecture 06 – Presentation
+- title: Lecture 06 – Basic Rendering
   link: /lectures/06
   date: April 4, 2015
 
-- title: Lecture 07 – Piping
+- title: Lecture 07 – Rails Routing Inside Out
   link: /lectures/07
   date: April 16, 2015
 
-- title: Lecture 08 – Persistence
+- title: Lecture 08 – Active Record Introduction
   link: /lectures/08
   date: April 23, 2015
 
@@ -42,7 +42,7 @@
   link: /lectures/10
   date: April 27, 2015
 
-- title: Lecture 11 – Active Record Advanced Associations
+- title: Lecture 11 – Active Record Query Interface
   link: /lectures/11
   date: April 30, 2015
 
