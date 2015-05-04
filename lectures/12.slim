@@ -7,6 +7,42 @@ section.center data-background="#000"
   h1.white Active Record Callbacks & Active Model
 
 section.center data-background="#000"
+  h2.white Questions
+
+section.center
+  p REST?
+
+section.center
+  pre: code.ruby
+    '
+      Product.find(5, 9)
+
+section.center
+  p How to get a random product?
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class Post < ActiveRecord::Base
+        has_many :comments
+      end
+
+      class Comment < ActiveRecord::Base
+        belongs_to :post
+      end
+
+      # ...
+      comment = post.comments.first
+      comment.post = nil
+      post.comments.include?(comments)
+
+section.center
+  p What is a scope?
+
+section.center
+  p How do we define scopes?
+
+section.center data-background="#000"
   h2.white Active Record Callbacks
 
 section.center
