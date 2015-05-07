@@ -1,10 +1,10 @@
 ---
 layout: lecture
-title: Form helpers, path helpers and view helpers
+title: Path and form helpers
 ---
 
 section.center data-background="#000"
-  h1.white Form helpers, path helpers and view helpers
+  h1.white Path and form helpers
 
 section.center
   p Next time our guest is Stefan Kanev
@@ -271,6 +271,12 @@ section.center
       time_field(:task, :started_at)                           #=> <input id="task_started_at" name="task[started_at]" type="time" />
       number_field(:product, :price, in: 1.0..20.0, step: 0.5) #=> <input id="product_price" max="20.0" min="1.0" name="product[price]" step="0.5" type="number" />
       range_field(:product, :discount, in: 1..100)             #=> <input id="product_discount" max="100" min="1" name="product[discount]" type="range" />
+      select_tag(:city_id, '<option value="1">Sofia</option>') #=> <select name="city_id" id="city_id"><option value="1">Sofia</option></select>
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= select_tag(:city_id, options_for_select([["Sofia", 1]], 1)) %>
 
 section.center
   p Forms are often used for manipulating models
@@ -298,9 +304,133 @@ section.center
       <input id="product_name" name="product[name]" type="text" value="POODR" />
       <!-- ... -->
 
+section.center
+  p Binding a form to a model object
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      # ...
+      def new
+        @product = Product.new
+      end
+      # ...
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= form_for @product, url: {action: "create"}, html: {class: "pretty"} do |product_form| %>
+        <%= product_form.text_field :title %>
+        <%= product_form.text_area :body, size: "60x12" %>
+        <%= product_form.submit "Create" %>
+      <% end %>
+
+section.center
+  pre: code.html contenteditable="true"
+    '
+      <form accept-charset="UTF-8" action="/articles/create" method="post" class="nifty_form">
+        <input id="article_title" name="article[title]" type="text" />
+        <textarea id="article_body" name="article[body]" cols="60" rows="12"></textarea>
+        <input name="commit" type="submit" value="Create" />
+      </form>
+
+section.center
+  p Building inputs without the form
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= fields_for @product.brand do |brand_form| %>
+        <%= brand_form.text_field :name %>
+      <% end %>
+
+section.center
+  pre: code.html contenteditable="true"
+    '
+      <input id="brand_name" name="brand[name]" type="text" />
+
+section.center
+  p Both form_for and fields_for yield the same form builder
+
+section.center
+  p Form for resources
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= form_for(@product) %>
+
+section.center
+  p Form for resources in a namespace
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= form_for([:admin, @product]) %>
+
+section.center
+  p Form methods other than GET and POST
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= form_tag("/product/delete", method: "delete") do %>
+        <%# ... %>
+      <% end %>
+
+section.center
+  pre: code.html contenteditable="true"
+    '
+      <form accept-charset="UTF-8" action="/product/delete" method="get">
+        <input name="_method" type="hidden" value="delete" />
+        <!-- ... -->
+      </form>
+
+section.center
+  p Uploading files
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= form_tag({controller: :product, action: :upload}, multipart: true) do %>
+        <%= file_field_tag 'image' %>
+      <% end %>
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <%= form_for @product do |f| %>
+        <%= f.file_field :image %>
+      <% end %>
+
+section.center
+  p Displaying validation errors
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      @product.errors
+
+section.center
+  p ActiveModel::Errors
+
+section.center
+  pre: code.erb contenteditable="true"
+    '
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/routing.html") Routing
 
 section.center
   p: a(href="http://guides.rubyonrails.org/form_helpers.html") Form helpers
+
+section.center
+  p: a(href="http://api.rubyonrails.org/") ActiveModel::Errors
 
 section.center
   img.inline src="/images/hackman.png"
