@@ -61,3 +61,7 @@
 - title: Lecture 15 – Rails Asset Pipeline
   link: /lectures/15
   date: May 14, 2015
+
+- title: Lecture 16 – Starving Active Record (Guest Lecture by @rstankov)
+  link: https://speakerdeck.com/rstankov/starving-activerecord
+  date: May 21, 2015
