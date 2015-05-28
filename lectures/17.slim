@@ -1,10 +1,10 @@
 ---
 layout: lecture
-title: Constant Autoloading & ActionMailer
+title: Constant Autoloading & Action Mailer
 ---
 
 section.center data-background="#000"
-  h1.white Constant Autoloading & ActionMailer
+  h1.white Constant Autoloading & Action Mailer
 
 section.center data-background="#F00"
   h2.white Questions
@@ -489,6 +489,207 @@ section.center
 
 section.center
   <iframe width="560" height="315" src="//www.youtube.com/embed/8lYR9WxIRH0" frameborder="0" allowfullscreen></iframe>
+
+section.center data-background="#000"
+  h2.white Action Mailer
+
+section.center
+  p Action Mailer allows you to send emails from your application using mailer classes and views.
+
+section.center
+  p Mailers work very similarly to controllers.
+
+section.center
+  p Mailers inherit from ActionMailer::Base.
+
+section.center
+  p Mailers live in app/mailers and have associated views in app/views.
+
+section.center
+  pre
+    '
+      $ bin/rails generate mailer UserMailer
+      create  app/mailers/user_mailer.rb
+      create  app/mailers/application_mailer.rb
+      invoke  erb
+      create    app/views/user_mailer
+      create    app/views/layouts/mailer.text.erb
+      create    app/views/layouts/mailer.html.erb
+      invoke  test_unit
+      create    test/mailers/user_mailer_test.rb
+      create    test/mailers/previews/user_mailer_preview.rb
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      # app/mailers/application_mailer.rb
+      class ApplicationMailer < ActionMailer::Base
+        default from: "from@example.com"
+        layout 'mailer'
+      end
+ 
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      # app/mailers/user_mailer.rb
+      class UserMailer < ApplicationMailer
+      end
+
+section.center
+  p Mailers are similar to controllers.
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class UserMailer < ApplicationMailer
+        default from: 'notifications@example.com'
+
+        def welcome_email(user)
+          @user = user
+          @url  = 'http://example.com/login'
+          mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+        end
+      end
+
+section
+  h2 .default
+  p A hash of default values for any email you send from this mailer.
+
+section
+  h2 .default
+  p In this case we are setting the :from header to a value for all messages in this class.
+
+section
+  h2 .default
+  p Can be overridden on a per-email basis.
+
+section
+  h2 #mail
+  p The actual email message, we are passing the :to and :subject headers in.
+
+section
+  h2 #mail
+  p The email message content is rendered from a view.
+
+section
+  h2 #mail
+  p By convention, the view is app/views/user_mailer/welcome_email.html.erb.
+
+section
+  h2 #mail
+  p By convention, the view is app/views/user_mailer/welcome_email.text.erb.
+
+section.center
+  pre: code.html contenteditable="true"
+    '
+      &lt;!DOCTYPE html&gt;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;meta content='text/html; charset=UTF-8' http-equiv='Content-Type' /&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;h1&gt;Welcome to example.com, &lt;%= @user.name %&gt;&lt;/h1&gt;
+          &lt;p&gt;
+            You have successfully signed up to example.com,
+            your username is: &lt;%= @user.login %&gt;.&lt;br&gt;
+          &lt;/p&gt;
+          &lt;p&gt;
+            To login to the site, just follow this link: &lt;%= @url %&gt;.
+          &lt;/p&gt;
+          &lt;p&gt;Thanks for joining and have a great day!&lt;/p&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+
+section.center
+  pre contenteditable="true"
+    '
+      Welcome to example.com, <%= @user.name %>
+      ===============================================
+
+      You have successfully signed up to example.com,
+      your username is: <%= @user.login %>.
+
+      To login to the site, just follow this link: <%= @url %>.
+
+      Thanks for joining and have a great day!
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class UsersController < ApplicationController
+        def create
+          @user = User.new(params[:user])
+          if @user.save
+            # Tell the UserMailer to send a welcome email after save
+            UserMailer.welcome_email(@user).deliver_now
+            redirect_to(@user, notice: 'User was successfully created.')
+          else
+            render action: 'new'
+          end
+        end
+      end
+
+section.center data-background="#000"
+  p.white How to generate URLs in Action Mailer views?
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      config.action_mailer.default_url_options = { host: 'rails.hackbulgaria.com' }
+
+section.center
+  pre: code.html contenteditable="true"
+    '
+      <%= link_to 'welcome', welcome_path %>
+
+section.center
+  img.fragmet.inline src="/images/troll.png"
+
+section.center
+  pre: code.html contenteditable="true"
+    '
+      <%= link_to 'welcome', welcome_url %>
+
+section.center data-background="#F00"
+  p.white Use URL links in mails as relative paths mean nothing in them.
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      config.action_mailer.delivery_method = :sendmail
+      # Defaults to:
+      # config.action_mailer.sendmail_settings = {
+      #   location: '/usr/sbin/sendmail',
+      #   arguments: '-i -t'
+      # }
+      config.action_mailer.perform_deliveries = true
+      config.action_mailer.raise_delivery_errors = true
+      config.action_mailer.default_options = {from: 'no-reply@example.com'}
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class UsersController < ApplicationController
+        def create
+          @user = User.new(params[:user])
+          if @user.save
+            # Tell the UserMailer to send a welcome email after save
+            UserMailer.welcome_email(@user).deliver_later
+            redirect_to(@user, notice: 'User was successfully created.')
+          else
+            render action: 'new'
+          end
+        end
+      end
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/action_mailer_basics.html") Action Mailer Basics
+
+section.center
+  p: a(href="http://api.rubyonrails.org/classes/ActionMailer/Base.html") ActionMailer::Base
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/autoloading_and_reloading_constants.html") Autoloading & Reloading Constants
 
 section.center
   img.inline src="/images/hackman.png"
