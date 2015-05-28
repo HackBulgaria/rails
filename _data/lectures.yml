@@ -65,3 +65,7 @@
 - title: Lecture 16 – Starving Active Record (Guest Lecture by @rstankov)
   link: https://speakerdeck.com/rstankov/starving-activerecord
   date: May 21, 2015
+
+- title: Lecture 17 – Constant Autoloading & Action Mailer
+  link: /lectures/17
+  date: May 28, 2015
