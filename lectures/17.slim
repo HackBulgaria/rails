@@ -1,33 +1,49 @@
 ---
 layout: lecture
-title: Autoloading, ActionMailer and ActiveJob
+title: Constant Autoloading & ActionMailer
 ---
 
 section.center data-background="#000"
+  h1.white Constant Autoloading & ActionMailer
+
+section.center data-background="#F00"
+  h2.white Questions
 
 section.center
-  h1 Assets?
+  p.fragment Assets?
 
 section.center
-  h1 Why assets?
+  p Why assets?
 
 section.center
-  h1 How assets?
+  p How assets?
 
 section.center
-  h1 What problems do we face with assets?
+  p What problems do we face with assets?
 
 section.center
-  h1 How are these problems solved in Rails?
+  p How are these problems solved in Rails?
 
 section.center
-  h1 What is fingerprinting?
+  p What is fingerprinting?
 
 section.center
-  h1 app/lib/vendor assets?
+  img.inline src="http://letsmakerobots.com/files/userpics/u1069/fingerprint_bitmap.gif"
 
 section.center
-  h1 Asset pipeline in development/production?
+  p What should app/assets contains?
+
+section.center
+  p What should lib/assets contains?
+
+section.center
+  p What should vendor/assets contains?
+
+section.center
+  p Asset pipeline in development?
+
+section.center
+  p Asset pipeline in production?
 
 section.center
   p What are the primitives of Ruby?
@@ -37,9 +53,6 @@ section.center
 
 section.center
   p How do we access objects?
-
-section.center
-  h1 Constants?
 
 section.center
   pre: code.ruby
@@ -69,8 +82,413 @@ section.center
 section.center
   p How does Ruby interpret constants?
 
+section.center data-background="#000"
+  h2.white Constant Autoloading
+
+section.center data-background="#000"
+  h2.white Constants Refresher
+
+section
+  h2 Constants
+  p Constants start with a capital letter
+  pre: code.ruby contenteditable="true"
+    '
+      ANSWER = 42            # This is a constant!
+      Europe = Continent.new # So is this!
+
+section
+  h2 Constants
+  p Constants are not strictly enforced
+  pre: code.ruby contenteditable="true"
+    '
+      >> Foo = 42
+      => 42
+      >> Foo = 43
+      (irb):40: warning: already initialized constant Foo
+      (irb):39: warning: previous definition of Foo was here
+      => 43
+
+section
+  h2 Constants
+  p Modules are mostly used as constants
+  pre: code.ruby contenteditable="true"
+    '
+      module Awesome
+        # The best module ever, cause you can query:
+        #
+        #   object.is_a? Awesome
+        #
+        # Mind = blown, bro!
+      end
+
+section
+  h2 Namespace
+  p Modules are used as namespaces
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        INSIDE = :foo
+        module Bar
+          INSIDE = :bar
+          module Quux
+            INSIDE = :quux
+          end
+        end
+      end
+
 section.center
-  p: a(href="http://guides.rubyonrails.org/autoloading_and_reloading_constants.html") Autoloading and Reloading Constants
+  pre: code.ruby contenteditable="true"
+    '
+      Foo::INISDE            #=> :foo
+      Foo::Bar::INISDE       #=> :bar
+      Foo::Bar::Quux::INSIDE #=> :quux
+
+section
+  h2 Namespace
+  p Access constants with implicit prefix
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        INSIDE = :foo
+        module Bar
+          INSIDE = :bar
+          module Quux
+            INSIDE = :quux
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p Access constants with explicit prefix
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p INSIDE      #=> :quux
+            p Bar::INSIDE #=> :bar
+            p Foo::INSIDE #=> :foo
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p You can access top-level constants with ::
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p ::Foo::Bar::Quux::INSIDE #=> :quux
+            p ::Foo::Bar::INSIDE       #=> :bar
+            p ::Foo::INSIDE            #=> :foo
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p Constants form a tree
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p Object::Foo::Bar::Quux::INSIDE #=> :quux
+            p Object::Foo::Bar::INSIDE       #=> :bar
+            p Object::Foo::INSIDE            #=> :foo
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p The root of it is Object
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p Object::Foo::Bar::Quux::INSIDE #=> :quux
+            p Object::Foo::Bar::INSIDE       #=> :bar
+            p Object::Foo::INSIDE            #=> :foo
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p The root of it is Object
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            module Object
+              INSIDE = :object
+            end
+            p Object::INSIDE                 #=> :foo
+            p Object::Foo::Bar::Quux::INSIDE #=> NameError
+            p Object::Foo::Bar::INSIDE       #=> NameError
+            p Object::Foo::INSIDE            #=> NameError
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p The root of it is ::Object
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            module Object
+              INSIDE = :object
+            end
+            p Object::INSIDE                   #=> :foo
+            p ::Object::Foo::Bar::Quux::INSIDE #=> :quux
+            p ::Object::Foo::Bar::INSIDE       #=> :bar
+            p ::Object::Foo::Bar::INSIDE       #=> NameError
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p Only module constants can be nodes
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            module Object
+              INSIDE = :object
+            end
+            p Object::INSIDE                   #=> :foo
+            p ::Object::Foo::Bar::Quux::INSIDE #=> NameError
+            p ::Object::Foo::Bar::INSIDE       #=> NameError
+            p ::Object::Foo::Bar::INSIDE       #=> NameError
+          end
+        end
+      end
+
+section
+  h2 Namespace
+  p Non modules can only be leafs
+  pre: code.ruby contenteditable="true"
+    '
+      A = 42
+      A::C     # TypeError: 42 is not a class/module
+      Foo::Egg # NameError: uninitialized constant Foo::Egg
+
+section
+  h2 Module.nesting
+  p The list of Modules nested at the point of call
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo::Bar::Quux
+        p Module.nesting #=> [Foo::Bar::Quux]
+      end
+
+section
+  h2 Module.nesting
+  p The list of Modules nested at the point of call
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo::Bar::Quux
+        p Bar::INSIDE #=> NameError: uninitialized constant Foo::Bar::Quux::Bar
+      end
+
+section.center data-background="#000"
+  p.white Module.nesting is where Ruby looks to find a constant
+
+section.center data-background="#000"
+  p.white Think of it as something lexical
+
+section.center data-background="#000"
+  p.white If you don't lexically nest, you won't get parent constants
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p Module.nesting #=> [Foo::Bar::Quux, Foo::Bar, Foo]
+          end
+        end
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo::Bar::Quux
+        p Module.nesting     #=> [Foo::Bar::Quux]
+      end
+
+section
+  h2 Module#const_defined?
+  p Checks for a constant with the given name in mod
+
+section
+  h2 Module#const_defined?
+  p If inherit is set, the lookup will also search the ancestors (and Object if mod is a Module)
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      Math.const_defined? "PI"         #=> true
+      IO.const_defined? :SYNC          #=> true
+      IO.const_defined? :SYNC, false   #=> false
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      Hash.const_defined? 'foobar' #=> NameError: wrong constant name foobar
+
+section data-background="http://media.giphy.com/media/U7l2ANkN9gl9e/giphy.gif"
+
+section
+  h2 Module#const_get
+  p Checks for a constant with the given name in mod
+
+section
+  h2 Module#const_get
+  p If inherit is set, the lookup will also search the ancestors (and Object if mod is a Module)
+
+section
+  h2 Module#const_get
+  p The value of the constant is returned if a definition is found, otherwise a NameError is raised
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        class Bar
+        end
+      end
+
+      Object.const_get 'Foo::Bar'
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        class Bar
+          VAL = 10
+        end
+
+        class Baz < Bar; end
+      end
+
+      Object.const_get 'Foo::Baz::VAL'         # => 10
+      Object.const_get 'Foo::Baz::VAL', false  # => NameError
+
+section
+  h2 Module#const_set
+  p Sets the named constant to the given object, returning that object
+
+section
+  h2 Module#const_set
+  p Creates a new constant if no constant with the given name previously existed
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      Math.const_set("HIGH_SCHOOL_PI", 22.0/7.0)   #=> 3.14285714285714
+      Math::HIGH_SCHOOL_PI - Math::PI              #=> 0.00126448926734968
+
+section
+  h2 Module#const_missing
+  p Called whenever a constant isn't found in mod.
+
+section.center data-background="#000"
+  h2.white Constant Autoloading
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      require 'application_controller'
+      require 'post'
+
+      class PostsController < ApplicationController
+        def index
+          @posts = Post.all
+        end
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class PostsController < ApplicationController
+        def index
+          @posts = Post.all
+        end
+      end
+
+section.center data-background="#000"
+  p.white No need to have require sections in files.
+
+section.center
+  img.fragmet.inline src="/images/troll.png"
+
+section.center data-background="#000"
+  p.white Require loads the file only once.
+
+section.center data-background="#000"
+  p.white When we make a change to the file, we have to restart the server.
+
+section.center data-background="#000"
+  p.white With constant autoloading and reloading, we don't.
+
+section
+  h2 config.autoload_paths
+  p All subdirectories of the app directory in the application and engines.
+  
+section
+  h2 config.autoload_paths
+  p Any custom app directory is in autoload_paths, not just the default ones.
+
+section
+  h2 config.autoload_paths
+  p Second level directories app/{controllers,models}/concerns in the application and engines.
+
+section
+  h2 config.autoload_paths
+  p The directory test/mailers/previews.
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      config.autoload_paths += Rails.root.join('lib').to_s
+
+section.center
+  pre
+    '
+      $ bin/rails r 'puts ActiveSupport::Dependencies.autoload_paths'
+      .../app/assets
+      .../app/controllers
+      .../app/helpers
+      .../app/mailers
+      .../app/models
+      .../app/controllers/concerns
+      .../app/models/concerns
+      .../test/mailers/previews
+
+section
+  p Constant autoloading can't emulate Ruby's default behavior.
+
+section
+  p Because of a lot of technicalities.
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/autoloading_and_reloading_constants.html") Autoloading & Reloading Constants
+
+section.center
+  <iframe width="560" height="315" src="//www.youtube.com/embed/8lYR9WxIRH0" frameborder="0" allowfullscreen></iframe>
 
 section.center
   img.inline src="/images/hackman.png"
