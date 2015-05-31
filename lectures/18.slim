@@ -1,10 +1,10 @@
 ---
 layout: lecture
-title: ActionJob
+title: Action Job
 ---
 
 section.center data-background="#000"
-  h1.white ActionJob
+  h1.white Action Job
 
 section.center
   p Some operations are slow
@@ -58,7 +58,107 @@ section.center
   p Implementations come from gems
 
 section.center
-  p: a(href="http://guides.rubyonrails.org/action_mailer_basics.html") Action Mailer Basics
+  p Changing implementations is free
+
+section.center
+  p app/jobs
+
+section.center
+  p rails generate job solutions_checker
+
+section.center
+  p ActiveJob::Base
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class SolutionCheckerJob < ActiveJob::Base
+        queue_as :default
+
+        def perform(*args)
+          # Implement heavy operation here.
+        end
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      SolutionCheckerJob.perform_later solution
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      SolutionCheckerJob.set(wait_until: Date.tomorrow.noon).perform_later(solution)
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      SolutionCheckerJob.set(wait: 1.week).perform_later(record)
+
+section.center
+  p: a(href="http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html") Queue adapters
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      config.active_job.queue_adapter = :sidekiq
+
+section.center
+  p Callbacks
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class SolutionCheckerJob < ActiveJob::Base
+        queue_as :default
+
+        before_enqueue do |job|
+          # ...
+        end
+
+        def perform
+          # ...
+        end
+      end
+
+section.center
+  pre:
+    '
+      before_enqueue
+      around_enqueue
+      after_enqueue
+      before_perform
+      around_perform
+      after_perform
+
+section.center
+  p Action Mailer
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      TaskMailer.checked(@task, @user).deliver_now
+
+section.center
+   p Exceptions
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class SolutionCheckerJob < ActiveJob::Base
+        queue_as :default
+
+        rescue_from(ActiveRecord::RecordNotFound) do |exception|
+         # ...
+        end
+
+        def perform
+          # ...
+        end
+      end
+
+section.center
+  p: a(href="http://edgeguides.rubyonrails.org/active_job_basics.html") Action Job Basics
 
 section.center
   img.inline src="/images/hackman.png"
