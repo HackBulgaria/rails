@@ -158,6 +158,39 @@ section.center
       end
 
 section.center
+  p Queues
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class SolutionCheckerJob < ActiveJob::Base
+        queue_as :low_priority
+        #....
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      class SolutionCheckerJob < ActiveJob::Base
+        queue_as do
+          solution = self.arguments.first
+          case solution.language
+          when :ruby   then :ruby_checker_job
+          when :python then :python_checker_job
+          end
+        end
+
+        def perform(video)
+          # ...
+        end
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      SolutionCheckerJob.set(queue: :high_priority).perform_later(solution)
+
+section.center
   p: a(href="http://edgeguides.rubyonrails.org/active_job_basics.html") Action Job Basics
 
 section.center
