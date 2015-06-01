@@ -6,6 +6,52 @@ title: Action Job
 section.center data-background="#000"
   h1.white Action Job
 
+section.center data-background="#f00"
+  p.white Questions
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        INSIDE = :foo
+        module Bar
+          INSIDE = :bar
+          module Quux
+            INSIDE = :quux
+          end
+        end
+      end
+
+      module Foo::Bar::Quux
+        p Bar::INSIDE
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p Module.nesting
+          end
+        end
+      end
+
+section.center
+  p Which parts of a Rails app are autoloaded?
+
+section.center
+  p Which is the base class for Rails mailers?
+
+section.center
+  p Where do mailers live?
+
+section.center
+  p What view formats do mailers support?
+
+section.center
+  p Is using URL helpers in mail views a good idea?
+
 section.center
   p Some operations are slow
 
