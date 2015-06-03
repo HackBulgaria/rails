@@ -1,0 +1,122 @@
+---
+layout: lecture
+title: Testing Rails Applications
+---
+
+section.center data-background="#000"
+  h2.white Testing Rails Applications
+
+section.center data-background="#000"
+  p.white ;(
+
+section.center
+  p Tomorrow is our last lecture.
+
+section.center
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/ji5_MqicxSo" frameborder="0" allowfullscreen></iframe>
+
+section.center
+  p Its not gonna be that epic. :-)
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center data-background="https://i.imgflip.com/gvtbu.jpg"
+
+section.center data-background="#F00"
+  h2.white Questions
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        INSIDE = :foo
+        module Bar
+          INSIDE = :bar
+          module Quux
+            INSIDE = :quux
+          end
+        end
+      end
+
+      module Foo::Bar::Quux
+        p Bar::INSIDE
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p Module.nesting
+          end
+        end
+      end
+
+section.center
+  p Which parts of a Rails app are autoloaded by default?
+
+section.center
+  p Which is the base class for Rails mailers?
+
+section.center
+  p Where do mailers live?
+
+section.center
+  p What is a background process?
+
+section.center
+  p Why do we want to run them?
+
+section.center
+  p What is Action Job?
+
+section.center
+  p Where do jobs live?
+
+section.center
+  p Who runs them?
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center data-background="#000"
+  h2.white Testing
+
+section.center
+  p Testing is important.
+
+section.center
+  p That's it, that's my argument.
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p Rails was built with testing in mind.
+
+section.center data-background="#F00"
+  p.white Why is testing so important?
+
+section.center
+  p Regressions!
+
+section.center
+  p Documentation!
+
+section.center
+  p Ease of development!
+
+section.center data-background="#FF0"
+  p
+    ' (FANCY WORDS SPOILER ALERT)
+
+section.center
+  p Confidence!
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/testing.html") Testing Guide
+
+section.center
+  img.inline src="/images/hackman.png"
