@@ -1,0 +1,321 @@
+---
+layout: lecture
+title: Testing Rails Applications
+---
+
+section.center data-background="#000"
+  h2.white Testing Rails Applications
+
+section.center data-background="#000"
+  p.white ;(
+
+section.center
+  p Tomorrow is our last lecture.
+
+section.center
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/ji5_MqicxSo" frameborder="0" allowfullscreen></iframe>
+
+section.center
+  p Its not gonna be that epic. :-)
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center data-background="https://i.imgflip.com/gvtbu.jpg"
+
+section.center data-background="#F00"
+  h2.white Questions
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        INSIDE = :foo
+        module Bar
+          INSIDE = :bar
+          module Quux
+            INSIDE = :quux
+          end
+        end
+      end
+
+      module Foo::Bar::Quux
+        p Bar::INSIDE
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      module Foo
+        module Bar
+          module Quux
+            p Module.nesting
+          end
+        end
+      end
+
+section.center
+  p Which parts of a Rails app are autoloaded by default?
+
+section.center
+  p Which is the base class for Rails mailers?
+
+section.center
+  p Where do mailers live?
+
+section.center
+  p What is a background process?
+
+section.center
+  p Why do we want to run them?
+
+section.center
+  p What is Action Job?
+
+section.center
+  p Where do jobs live?
+
+section.center
+  p Who runs them?
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center data-background="#000"
+  h2.white Testing
+
+section.center
+  p Testing is important.
+
+section.center
+  p That's it, that's my argument.
+
+section.center
+  img.inline src="/images/troll.png"
+
+section.center
+  p Rails was built with testing in mind.
+
+section.center data-background="#F00"
+  p.white Why is testing so important?
+
+section.center
+  p Regressions!
+
+section.center
+  p Documentation!
+
+section.center
+  p Ease of development!
+
+section.center data-background="#FF0"
+  p
+    ' (FANCY WORDS SPOILER ALERT)
+
+section.center
+  p Confidence!
+
+section.center data-background="#000"
+  h2.white Unit Testing
+
+section.center data-background="#000"
+  h2.white Model Testing
+
+section.center
+  p 
+    ' TL;DR
+
+section.center
+  p Isolation!
+
+section.center.white data-background="#F00"
+  p Isolation!
+
+section.center data-background="#FF0"
+  p Isolation!
+
+section.center.white data-background="#F0F"
+  p Isolation!
+
+section.center.white data-background="#0FF"
+  p Isolation!
+
+section.center
+  p: a(href="http://xunitpatterns.com/Four%20Phase%20Test.html") Four-Phase Tests
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      test do
+        setup
+        action
+        assertion
+        teardown
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      setup
+
+      test do
+        action
+        assertion
+      end
+
+      teardown
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      setup
+
+      test do
+        setup
+        action
+        assertion
+      end
+
+      teardown
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      test "encrypts password" do
+        user = User.new(password: 'password')
+
+        user.save!
+
+        assert_not_nil user.encrypted_password
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      test "encrypts password" do
+        user = User.new(password: 'password')
+
+        user.save!
+
+        assert_not_nil user.encrypted_password
+
+        user.destroy!
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      setup do
+        @user = User.new(password: 'password')
+      end
+
+      test "encrypts password" do
+        @user.save!
+
+        assert_not_nil @user.encrypted_password
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      test "encrypts password" do
+        user_with_password.save!
+
+        assert_not_nil user_with_password.encrypted_password
+      end
+
+      private
+
+      def user_with_password(password = 'password')
+        @user_with_password ||= User.new(password: password)
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      test "encrypts password" do
+        assert_not_nil user_with_password.encrypted_password
+      end
+
+      private
+
+      def user_with_password(password = 'password')
+        @user_with_password ||= begin
+          User.new(password: password).tap(&:save!)
+        end
+      end
+
+section.center
+  pre: code.ruby contenteditable="true"
+    '
+      test "encrypts password" do
+        assert_not_nil user_with_password.encrypted_password
+      end
+
+      teardown do
+        clean_table_records
+      end
+
+      private
+
+      def user_with_password(password = 'password')
+        @user_with_password ||= begin
+          User.new(password: password).tap(&:save!)
+        end
+      end
+
+section.center data-background="#F00"
+  p.white Which database does this drops?
+
+section.center
+  p Rails have a test environment.
+
+section.center
+  p Tests run on their own database.
+
+section.center
+  p Tables are pruned between runs.
+
+section.center
+  p Fast tests are good.
+
+section.center
+  p Predictable tests are better.
+
+section.center
+  p Good tests are the best.
+
+section.center
+  p Good test > Fast test
+
+section.center
+  p Rails runs the tests in random order.
+
+section.center data-background="#F00"
+  p.white Why would one do such a foolish thing?
+
+section.center
+  p Helps you identify order dependant tests!
+
+section.center
+  pre.fragment: code.ruby contenteditable="true"
+    '
+      require 'test_helper'
+
+      class ArticleTest < ActiveSupport::TestCase
+        test 'the truth' do
+          assert true
+        end
+      end
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/testing.html#available-assertions") Available Assertions
+
+section.center
+  p: a(href="http://guides.rubyonrails.org/testing.html") Testing Guide
+
+section.center
+  p: a(href="http://docs.seattlerb.org/minitest/") Minitest Documentation
+
+section.center
+  img.inline src="/images/hackman.png"
