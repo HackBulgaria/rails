@@ -1,0 +1,28 @@
+---
+layout: post
+title: Thank You
+category: posts
+---
+
+After two amazing months, this class is over. It was pleasure for us to met so
+enthusiastic and curious students.
+
+## The Partners
+
+Thanks to our partners, who supported this course - Software Society and
+[Toptal](http://www.toptal.com/)! Our classes couldn't be free without them and
+we really appreciate their support.
+
+## The Lecturers
+
+Special thanks go to [Radoslav Stankov], [Bozhidar Batsov] & [Dimitar Dimitrov]
+for their interesting guest lectures and support for the class.
+
+## The Students
+
+We were a small, but really consistent and fun class. Thank you all for
+participating and I hope you had as much fun as we did.
+
+[Radoslav Stankov]: http://rstankov.com/
+[Bozhidar Batsov]: http://batsov.com/
+[Dimitar Dimitrov]: http://ddimitrov.name/http://ddimitrov.name/
